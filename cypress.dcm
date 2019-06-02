@@ -1,0 +1,21 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP Conn_ARM_SWD_NXP
+D Standard IDC20 Male Connector, ARM legacy JTAG and SWD interface
+K IDC20 Male Connector ARM JTAG SWD
+F http://infocenter.arm.com/help/topic/com.arm.doc.dui0499b/DUI0499B_system_design_reference.pdf
+$ENDCMP
+#
+$CMP DLW43MH201XK2L
+D Coupled inductor
+K inductor choke coil reactor magnetic coupled
+F ~
+$ENDCMP
+#
+$CMP L_Coupled
+D Coupled inductor
+K inductor choke coil reactor magnetic coupled
+F ~
+$ENDCMP
+#
+#End Doc Library

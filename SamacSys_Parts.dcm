@@ -1,0 +1,13 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP 5179031-2
+D 60 way 0.8mm pitch SMT header,8mm H TE Connectivity Free Height Series 0.8mm Pitch 60 Way Straight SMT Male PCB Header
+F https://componentsearchengine.com/Datasheets/1/5179031-2.pdf
+$ENDCMP
+#
+$CMP NE555D
+D NE555DG4, Timer, 4.5 To 16V, 8-Pin SOIC-8
+F http://www.ti.com/lit/ds/symlink/ne555.pdf
+$ENDCMP
+#
+#End Doc Library

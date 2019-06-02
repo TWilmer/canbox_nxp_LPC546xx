@@ -1,0 +1,921 @@
+EESchema Schematic File Version 4
+LIBS:canbox-cache
+EELAYER 29 0
+EELAYER END
+$Descr A3 16535 11693
+encoding utf-8
+Sheet 3 6
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+Text Label 2750 2550 0    50   ~ 0
+3V3
+$Comp
+L canbox-rescue:C-Device C18
+U 1 1 5C0F8CFE
+P 2950 2750
+F 0 "C18" H 3065 2796 50  0000 L CNN
+F 1 "100n" H 3065 2705 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 2988 2600 50  0001 C CNN
+F 3 "~" H 2950 2750 50  0001 C CNN
+F 4 "C0805C103K1RACTU" H 0   0   50  0001 C CNN "OP"
+F 5 "ali" H 0   0   50  0001 C CNN "notes"
+	1    2950 2750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2950 2600 2950 2550
+Connection ~ 2950 2550
+Wire Wire Line
+	2950 3000 2950 2900
+$Comp
+L canbox-rescue:GND-power #PWR015
+U 1 1 5C0FE3C6
+P 2700 3000
+F 0 "#PWR015" H 2700 2750 50  0001 C CNN
+F 1 "GND" H 2705 2827 50  0000 C CNN
+F 2 "" H 2700 3000 50  0001 C CNN
+F 3 "" H 2700 3000 50  0001 C CNN
+	1    2700 3000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2700 3000 2950 3000
+$Comp
+L canbox-rescue:Crystal-Device Y3
+U 1 1 5C10CB20
+P 9550 4250
+F 0 "Y3" V 9504 4381 50  0000 L CNN
+F 1 "25Mhz" V 9750 3950 50  0000 L CNN
+F 2 "Crystal:Crystal_HC49-4H_Vertical" H 9550 4250 50  0001 C CNN
+F 3 "~" H 9550 4250 50  0001 C CNN
+F 4 "ABL-25.000MHZ-B2F" H 0   0   50  0001 C CNN "OP"
+F 5 "ali" H 0   0   50  0001 C CNN "notes"
+	1    9550 4250
+	0    1    1    0   
+$EndComp
+$Comp
+L canbox-rescue:C-Device C30
+U 1 1 5C10E831
+P 9950 4050
+F 0 "C30" V 10202 4050 50  0000 C CNN
+F 1 "22p" V 10111 4050 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 9988 3900 50  0001 C CNN
+F 3 "~" H 9950 4050 50  0001 C CNN
+F 4 "C0805C220J1GACTU" H 0   0   50  0001 C CNN "OP"
+F 5 "ali" H 0   0   50  0001 C CNN "notes"
+	1    9950 4050
+	0    -1   -1   0   
+$EndComp
+$Comp
+L canbox-rescue:C-Device C31
+U 1 1 5C10F54A
+P 9950 4550
+F 0 "C31" V 10202 4550 50  0000 C CNN
+F 1 "22p" V 10111 4550 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 9988 4400 50  0001 C CNN
+F 3 "~" H 9950 4550 50  0001 C CNN
+F 4 "C0805C220J1GACTU" H 0   0   50  0001 C CNN "OP"
+F 5 "ali" H 0   0   50  0001 C CNN "notes"
+	1    9950 4550
+	0    -1   -1   0   
+$EndComp
+$Comp
+L canbox-rescue:GND-power #PWR022
+U 1 1 5C10FC11
+P 10200 4300
+F 0 "#PWR022" H 10200 4050 50  0001 C CNN
+F 1 "GND" V 10205 4172 50  0000 R CNN
+F 2 "" H 10200 4300 50  0001 C CNN
+F 3 "" H 10200 4300 50  0001 C CNN
+	1    10200 4300
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	9800 4050 9550 4050
+Wire Wire Line
+	9550 4050 9550 4100
+Connection ~ 9550 4100
+Wire Wire Line
+	9800 4550 9550 4550
+Wire Wire Line
+	9550 4550 9550 4400
+Connection ~ 9550 4400
+Wire Wire Line
+	10100 4550 10100 4300
+Wire Wire Line
+	10100 4300 10200 4300
+Wire Wire Line
+	10100 4050 10100 4300
+Connection ~ 10100 4300
+Text HLabel 1400 2550 0    50   Input ~ 0
+3V3
+Text GLabel 7000 6550 0    50   Input ~ 0
+RX_DV
+Wire Wire Line
+	9000 4100 9550 4100
+Wire Wire Line
+	9000 4400 9550 4400
+$Comp
+L canbox-rescue:R-Device R4
+U 1 1 5C1E255F
+P 7550 5500
+F 0 "R4" H 7620 5546 50  0000 L CNN
+F 1 "10k" H 7620 5455 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 7480 5500 50  0001 C CNN
+F 3 "~" H 7550 5500 50  0001 C CNN
+F 4 "CR0805-JW-103ELF" H 3700 -1950 50  0001 C CNN "OP"
+F 5 "ok" H 0   0   50  0001 C CNN "Mouser"
+F 6 "ok" H 0   0   50  0001 C CNN "notes"
+	1    7550 5500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2950 2550 3850 2550
+Wire Wire Line
+	3850 2550 3850 3200
+$Comp
+L canbox-rescue:L_Core_Iron_Coupled_Small-Device L3
+U 1 1 5C1EB7AE
+P 9600 3800
+F 0 "L3" H 9600 4031 50  0000 C CNN
+F 1 "AE2002" H 9600 3940 50  0000 C CNN
+F 2 "Inductor_SMD:L_CMC_1812" H 9600 3800 50  0001 C CNN
+F 3 "~" H 9600 3800 50  0001 C CNN
+F 4 "1840-1044-1-ND" H 0   0   50  0001 C CNN "OP"
+F 5 "AE2002" H 0   0   50  0001 C CNN "Arrow"
+F 6 "1840-1044-1-ND" H 0   0   50  0001 C CNN "DigiKez"
+	1    9600 3800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9050 3750 9500 3750
+Wire Wire Line
+	9700 3750 10350 3750
+Wire Wire Line
+	9700 3850 10350 3850
+$Comp
+L canbox-rescue:C-Device C32
+U 1 1 5C1F3D83
+P 10500 3750
+F 0 "C32" V 10248 3750 50  0000 C CNN
+F 1 "100n" V 10339 3750 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 10538 3600 50  0001 C CNN
+F 3 "~" H 10500 3750 50  0001 C CNN
+F 4 "C0805C103K1RACTU" H 0   0   50  0001 C CNN "OP"
+F 5 "ali" H 0   0   50  0001 C CNN "notes"
+	1    10500 3750
+	0    1    1    0   
+$EndComp
+$Comp
+L canbox-rescue:C-Device C33
+U 1 1 5C1F4773
+P 10500 4150
+F 0 "C33" V 10248 4150 50  0000 C CNN
+F 1 "100n" V 10339 4150 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 10538 4000 50  0001 C CNN
+F 3 "~" H 10500 4150 50  0001 C CNN
+F 4 "C0805C103K1RACTU" H 0   0   50  0001 C CNN "OP"
+F 5 "ali" H 0   0   50  0001 C CNN "notes"
+	1    10500 4150
+	0    -1   1    0   
+$EndComp
+Wire Wire Line
+	10350 3850 10350 4150
+Wire Wire Line
+	10650 4150 10800 4150
+Wire Wire Line
+	10800 4150 10800 3850
+Wire Wire Line
+	10800 3850 10950 3850
+Wire Wire Line
+	10650 3750 11300 3750
+$Comp
+L canbox-rescue:R-Device R6
+U 1 1 5C1FEEF5
+P 10950 4300
+F 0 "R6" H 11020 4346 50  0000 L CNN
+F 1 "1k" H 11020 4255 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 10880 4300 50  0001 C CNN
+F 3 "~" H 10950 4300 50  0001 C CNN
+F 4 "CRCW08051K00JNEAC" H 0   0   50  0001 C CNN "OP"
+F 5 "ok" H 0   0   50  0001 C CNN "Mouser"
+F 6 "ok" H 0   0   50  0001 C CNN "notes"
+	1    10950 4300
+	1    0    0    -1  
+$EndComp
+$Comp
+L canbox-rescue:R-Device R7
+U 1 1 5C20047C
+P 11300 4300
+F 0 "R7" H 11370 4346 50  0000 L CNN
+F 1 "1k" H 11370 4255 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 11230 4300 50  0001 C CNN
+F 3 "~" H 11300 4300 50  0001 C CNN
+F 4 "CRCW08051K00JNEAC" H 0   0   50  0001 C CNN "OP"
+F 5 "ok" H 0   0   50  0001 C CNN "Mouser"
+F 6 "ok" H 0   0   50  0001 C CNN "notes"
+	1    11300 4300
+	1    0    0    -1  
+$EndComp
+$Comp
+L canbox-rescue:Screw_Terminal_01x02-Connector J3
+U 1 1 5C2025A7
+P 11650 3850
+AR Path="/5C2025A7" Ref="J3"  Part="1" 
+AR Path="/5BDA0002/5C2025A7" Ref="J3"  Part="1" 
+F 0 "J3" H 11730 3842 50  0000 L CNN
+F 1 "Screw_Terminal_01x02" H 11730 3751 50  0000 L CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MPT-0,5-2-2.54_1x02_P2.54mm_Horizontal" H 11650 3850 50  0001 C CNN
+F 3 "~" H 11650 3850 50  0001 C CNN
+F 4 "282834-2" H 0   100 50  0001 C CNN "OP"
+F 5 "282834-2" H 0   0   50  0001 C CNN "Arrow"
+F 6 "282834-2" H 0   0   50  0001 C CNN "DigiKez"
+	1    11650 3850
+	1    0    0    1   
+$EndComp
+$Comp
+L canbox-rescue:R-Device R8
+U 1 1 5C2061D8
+P 11300 4700
+F 0 "R8" H 11370 4746 50  0000 L CNN
+F 1 "100k" H 11370 4655 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 11230 4700 50  0001 C CNN
+F 3 "~" H 11300 4700 50  0001 C CNN
+F 4 "CR0805-JW-104ELFCT-ND" H 0   0   50  0001 C CNN "OP"
+F 5 "stock" H 0   0   50  0001 C CNN "Arrow"
+F 6 "stok" H 0   0   50  0001 C CNN "notes"
+	1    11300 4700
+	1    0    0    -1  
+$EndComp
+$Comp
+L canbox-rescue:C-Device C34
+U 1 1 5C206956
+P 10950 4700
+F 0 "C34" H 10835 4654 50  0000 R CNN
+F 1 "4n7" H 10835 4745 50  0000 R CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 10988 4550 50  0001 C CNN
+F 3 "~" H 10950 4700 50  0001 C CNN
+F 4 "885012207090" H 0   0   50  0001 C CNN "OP"
+	1    10950 4700
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	10950 4850 10950 5000
+Wire Wire Line
+	10950 5000 11100 5000
+Wire Wire Line
+	11300 5000 11300 4850
+$Comp
+L canbox-rescue:GND-power #PWR023
+U 1 1 5C209C3C
+P 11100 5000
+F 0 "#PWR023" H 11100 4750 50  0001 C CNN
+F 1 "GND" V 11105 4872 50  0000 R CNN
+F 2 "" H 11100 5000 50  0001 C CNN
+F 3 "" H 11100 5000 50  0001 C CNN
+	1    11100 5000
+	1    0    0    -1  
+$EndComp
+Connection ~ 11100 5000
+Wire Wire Line
+	11100 5000 11300 5000
+Wire Wire Line
+	10950 4550 10950 4450
+Connection ~ 10950 4550
+Wire Wire Line
+	11300 4450 11300 4550
+Wire Wire Line
+	10950 4550 11300 4550
+Connection ~ 11300 4550
+Wire Wire Line
+	11300 4150 11300 3750
+Connection ~ 11300 3750
+Wire Wire Line
+	11300 3750 11450 3750
+Wire Wire Line
+	10950 3850 10950 4150
+Connection ~ 10950 3850
+Wire Wire Line
+	10950 3850 11450 3850
+Text Label 11000 3750 0    50   ~ 0
+TRX_CON0_P
+Text Label 11000 3850 0    50   ~ 0
+TRX_CON0_N
+Text Label 9900 3750 0    50   ~ 0
+TRX_0_P
+Text Label 9900 3850 0    50   ~ 0
+TRX_0_N
+Text Label 9100 3750 0    50   ~ 0
+TRX_0_T_P
+Text Label 9100 3850 0    50   ~ 0
+TRX_0_T_N
+$Comp
+L canbox-rescue:L-Device L1
+U 1 1 5C215CCE
+P 4600 3200
+F 0 "L1" V 4790 3200 50  0000 C CNN
+F 1 "BLM18AG601SN1" V 4699 3200 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 4600 3200 50  0001 C CNN
+F 3 "~" H 4600 3200 50  0001 C CNN
+F 4 "BLM18AG601SN1D" H 0   0   50  0001 C CNN "OP"
+F 5 "BLM18AG601SN1D" H 0   0   50  0001 C CNN "Arrow"
+F 6 "490-1014-1-ND" H 0   0   50  0001 C CNN "DigiKez"
+	1    4600 3200
+	0    -1   -1   0   
+$EndComp
+$Comp
+L canbox-rescue:CP-Device C22
+U 1 1 5C216E60
+P 4850 3350
+F 0 "C22" H 4968 3396 50  0000 L CNN
+F 1 "22u" H 4968 3305 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 4888 3200 50  0001 C CNN
+F 3 "~" H 4850 3350 50  0001 C CNN
+F 4 "C0805C224Z3VACTU" H 0   0   50  0001 C CNN "OP"
+F 5 "ali" H 0   0   50  0001 C CNN "notes"
+	1    4850 3350
+	1    0    0    -1  
+$EndComp
+$Comp
+L canbox-rescue:C-Device C24
+U 1 1 5C217CB7
+P 5200 3350
+F 0 "C24" H 5315 3396 50  0000 L CNN
+F 1 "100n" H 5315 3305 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 5238 3200 50  0001 C CNN
+F 3 "~" H 5200 3350 50  0001 C CNN
+F 4 "C0805C103K1RACTU" H 0   0   50  0001 C CNN "OP"
+F 5 "ali" H 0   0   50  0001 C CNN "notes"
+	1    5200 3350
+	1    0    0    -1  
+$EndComp
+$Comp
+L canbox-rescue:C-Device C27
+U 1 1 5C218821
+P 5600 3350
+F 0 "C27" H 5715 3396 50  0000 L CNN
+F 1 "100n" H 5715 3305 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 5638 3200 50  0001 C CNN
+F 3 "~" H 5600 3350 50  0001 C CNN
+F 4 "C0805C103K1RACTU" H 0   0   50  0001 C CNN "OP"
+F 5 "ali" H 0   0   50  0001 C CNN "notes"
+	1    5600 3350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4750 3200 4850 3200
+Connection ~ 4850 3200
+Wire Wire Line
+	4850 3200 5200 3200
+Connection ~ 5200 3200
+Wire Wire Line
+	5200 3200 5600 3200
+Connection ~ 5600 3200
+Wire Wire Line
+	5600 3200 6200 3200
+Wire Wire Line
+	4850 3500 4850 3750
+Wire Wire Line
+	4850 3750 5200 3750
+Wire Wire Line
+	5600 3750 5600 3500
+Wire Wire Line
+	5200 3500 5200 3750
+Connection ~ 5200 3750
+Wire Wire Line
+	5200 3750 5600 3750
+$Comp
+L canbox-rescue:GND-power #PWR018
+U 1 1 5C243792
+P 5200 3750
+F 0 "#PWR018" H 5200 3500 50  0001 C CNN
+F 1 "GND" H 5205 3577 50  0000 C CNN
+F 2 "" H 5200 3750 50  0001 C CNN
+F 3 "" H 5200 3750 50  0001 C CNN
+	1    5200 3750
+	1    0    0    -1  
+$EndComp
+$Comp
+L canbox-rescue:C-Device C25
+U 1 1 5C2487FC
+P 5250 2700
+F 0 "C25" H 5365 2746 50  0000 L CNN
+F 1 "100n" H 5365 2655 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 5288 2550 50  0001 C CNN
+F 3 "~" H 5250 2700 50  0001 C CNN
+F 4 "C0805C103K1RACTU" H 0   0   50  0001 C CNN "OP"
+F 5 "ali" H 0   0   50  0001 C CNN "notes"
+	1    5250 2700
+	1    0    0    -1  
+$EndComp
+$Comp
+L canbox-rescue:C-Device C21
+U 1 1 5C24A7BE
+P 4850 2700
+F 0 "C21" H 4965 2746 50  0000 L CNN
+F 1 "100n" H 4965 2655 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 4888 2550 50  0001 C CNN
+F 3 "~" H 4850 2700 50  0001 C CNN
+F 4 "C0805C103K1RACTU" H 0   0   50  0001 C CNN "OP"
+F 5 "ali" H 0   0   50  0001 C CNN "notes"
+	1    4850 2700
+	1    0    0    -1  
+$EndComp
+$Comp
+L canbox-rescue:C-Device C20
+U 1 1 5C24B5AC
+P 4500 2700
+F 0 "C20" H 4615 2746 50  0000 L CNN
+F 1 "100n" H 4615 2655 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 4538 2550 50  0001 C CNN
+F 3 "~" H 4500 2700 50  0001 C CNN
+F 4 "C0805C103K1RACTU" H 0   0   50  0001 C CNN "OP"
+F 5 "ali" H 0   0   50  0001 C CNN "notes"
+	1    4500 2700
+	1    0    0    -1  
+$EndComp
+$Comp
+L canbox-rescue:C-Device C19
+U 1 1 5C24C4F3
+P 4100 2700
+F 0 "C19" H 4215 2746 50  0000 L CNN
+F 1 "100n" H 4215 2655 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 4138 2550 50  0001 C CNN
+F 3 "~" H 4100 2700 50  0001 C CNN
+F 4 "C0805C103K1RACTU" H 0   0   50  0001 C CNN "OP"
+F 5 "ali" H 0   0   50  0001 C CNN "notes"
+	1    4100 2700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6200 2550 5450 2550
+Connection ~ 3850 2550
+Connection ~ 4100 2550
+Wire Wire Line
+	4100 2550 3850 2550
+Connection ~ 4500 2550
+Wire Wire Line
+	4500 2550 4100 2550
+Connection ~ 4850 2550
+Wire Wire Line
+	4850 2550 4500 2550
+Connection ~ 5250 2550
+Wire Wire Line
+	5250 2550 4850 2550
+Wire Wire Line
+	4450 3200 3850 3200
+Wire Wire Line
+	4100 2850 4100 2950
+Wire Wire Line
+	4100 2950 4500 2950
+Wire Wire Line
+	5250 2950 5250 2850
+$Comp
+L canbox-rescue:GND-power #PWR017
+U 1 1 5C2674ED
+P 5000 2950
+F 0 "#PWR017" H 5000 2700 50  0001 C CNN
+F 1 "GND" H 5005 2777 50  0000 C CNN
+F 2 "" H 5000 2950 50  0001 C CNN
+F 3 "" H 5000 2950 50  0001 C CNN
+	1    5000 2950
+	1    0    0    -1  
+$EndComp
+Connection ~ 5000 2950
+Wire Wire Line
+	5000 2950 5250 2950
+Wire Wire Line
+	4850 2850 4850 2950
+Connection ~ 4850 2950
+Wire Wire Line
+	4850 2950 5000 2950
+Wire Wire Line
+	4500 2850 4500 2950
+Connection ~ 4500 2950
+Wire Wire Line
+	4500 2950 4850 2950
+$Comp
+L canbox-rescue:C-Device C23
+U 1 1 5C270BFE
+P 4900 4150
+F 0 "C23" H 5015 4196 50  0000 L CNN
+F 1 "470n" H 5015 4105 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 4938 4000 50  0001 C CNN
+F 3 "~" H 4900 4150 50  0001 C CNN
+F 4 "885012207049" H 0   0   50  0001 C CNN "OP"
+F 5 "ali" H 0   0   50  0001 C CNN "notes"
+	1    4900 4150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6200 3650 5800 3650
+$Comp
+L canbox-rescue:GND-power #PWR016
+U 1 1 5C275E65
+P 4900 4400
+F 0 "#PWR016" H 4900 4150 50  0001 C CNN
+F 1 "GND" H 4905 4227 50  0000 C CNN
+F 2 "" H 4900 4400 50  0001 C CNN
+F 3 "" H 4900 4400 50  0001 C CNN
+	1    4900 4400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4900 4400 4900 4350
+NoConn ~ 6200 3750
+Wire Wire Line
+	7200 2350 7200 2100
+Wire Wire Line
+	7200 2100 6200 2100
+Wire Wire Line
+	5250 2100 5250 2550
+Wire Wire Line
+	7400 4700 7400 4900
+Wire Wire Line
+	7400 5000 7500 5000
+Wire Wire Line
+	7600 5000 7600 4900
+$Comp
+L canbox-rescue:GND-power #PWR021
+U 1 1 5C288C4C
+P 7500 5000
+F 0 "#PWR021" H 7500 4750 50  0001 C CNN
+F 1 "GND" V 7505 4872 50  0000 R CNN
+F 2 "" H 7500 5000 50  0001 C CNN
+F 3 "" H 7500 5000 50  0001 C CNN
+	1    7500 5000
+	1    0    0    -1  
+$EndComp
+Connection ~ 7500 5000
+Wire Wire Line
+	7500 5000 7600 5000
+$Comp
+L canbox-rescue:C-Device C26
+U 1 1 5C2A0202
+P 5350 4150
+F 0 "C26" H 5465 4196 50  0000 L CNN
+F 1 "10n" H 5465 4105 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 5388 4000 50  0001 C CNN
+F 3 "~" H 5350 4150 50  0001 C CNN
+F 4 "C0805C103KCRACAUTO" H 0   0   50  0001 C CNN "OP"
+F 5 "ali" H 0   0   50  0001 C CNN "notes"
+	1    5350 4150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4900 4350 5350 4350
+Wire Wire Line
+	5350 4350 5350 4300
+Connection ~ 4900 4350
+Wire Wire Line
+	4900 4350 4900 4300
+Wire Wire Line
+	4900 4000 5350 4000
+Wire Wire Line
+	5800 4000 5800 3650
+Connection ~ 5350 4000
+Wire Wire Line
+	5350 4000 5800 4000
+$Comp
+L canbox-rescue:C-Device C29
+U 1 1 5C2B128A
+P 6000 2250
+F 0 "C29" H 6115 2296 50  0000 L CNN
+F 1 "100n" H 6115 2205 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 6038 2100 50  0001 C CNN
+F 3 "~" H 6000 2250 50  0001 C CNN
+F 4 "C0805C103K1RACTU" H 0   0   50  0001 C CNN "OP"
+F 5 "ali" H 0   0   50  0001 C CNN "notes"
+	1    6000 2250
+	1    0    0    -1  
+$EndComp
+$Comp
+L canbox-rescue:R-Device R5
+U 1 1 5C2B21A3
+P 5500 2100
+F 0 "R5" V 5293 2100 50  0000 C CNN
+F 1 "1k" V 5384 2100 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 5430 2100 50  0001 C CNN
+F 3 "~" H 5500 2100 50  0001 C CNN
+F 4 "CRCW08051K00JNEAC" H 0   0   50  0001 C CNN "OP"
+F 5 "ok" H 0   0   50  0001 C CNN "Mouser"
+F 6 "ok" H 0   0   50  0001 C CNN "notes"
+	1    5500 2100
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	6000 2100 5650 2100
+Connection ~ 6000 2100
+Wire Wire Line
+	5250 2100 5350 2100
+$Comp
+L canbox-rescue:GND-power #PWR020
+U 1 1 5C2BB591
+P 6000 2400
+F 0 "#PWR020" H 6000 2150 50  0001 C CNN
+F 1 "GND" H 6005 2227 50  0000 C CNN
+F 2 "" H 6000 2400 50  0001 C CNN
+F 3 "" H 6000 2400 50  0001 C CNN
+	1    6000 2400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6000 2350 6000 2400
+Connection ~ 6000 2400
+$Comp
+L canbox-rescue:L-Device L2
+U 1 1 5C2CB497
+P 5600 2850
+F 0 "L2" V 5790 2850 50  0000 C CNN
+F 1 "BLM18AG601SN1" V 5699 2850 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 5600 2850 50  0001 C CNN
+F 3 "~" H 5600 2850 50  0001 C CNN
+F 4 "BLM18AG601SN1D" H 0   0   50  0001 C CNN "OP"
+F 5 "BLM18AG601SN1D" H 0   0   50  0001 C CNN "Arrow"
+F 6 "490-1014-1-ND" H 0   0   50  0001 C CNN "DigiKez"
+	1    5600 2850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L canbox-rescue:C-Device C28
+U 1 1 5C2CF73E
+P 5850 3000
+F 0 "C28" H 5965 3046 50  0000 L CNN
+F 1 "100n" H 5965 2955 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 5888 2850 50  0001 C CNN
+F 3 "~" H 5850 3000 50  0001 C CNN
+F 4 "C0805C103K1RACTU" H 0   0   50  0001 C CNN "OP"
+F 5 "ali" H 0   0   50  0001 C CNN "notes"
+	1    5850 3000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6200 2950 6100 2950
+Wire Wire Line
+	6100 2950 6100 2850
+Wire Wire Line
+	6100 2850 5850 2850
+Connection ~ 5850 2850
+Wire Wire Line
+	5850 2850 5750 2850
+Wire Wire Line
+	5450 2850 5450 2550
+Connection ~ 5450 2550
+Wire Wire Line
+	5450 2550 5250 2550
+$Comp
+L canbox-rescue:GND-power #PWR019
+U 1 1 5C2DFAC9
+P 5850 3150
+F 0 "#PWR019" H 5850 2900 50  0001 C CNN
+F 1 "GND" H 5855 2977 50  0000 C CNN
+F 2 "" H 5850 3150 50  0001 C CNN
+F 3 "" H 5850 3150 50  0001 C CNN
+	1    5850 3150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9000 3850 9500 3850
+Wire Wire Line
+	9050 3750 9050 3700
+Wire Wire Line
+	9050 3700 9000 3700
+$Comp
+L lpc_LPC54616J512:LPC54616J512 U1
+U 4 1 5BE55D75
+P 1800 4000
+F 0 "U1" H 2708 4165 50  0000 C CNN
+F 1 "LPC54616J512" H 2708 4074 50  0000 C CNN
+F 2 "Package_QFP:LQFP-100_14x14mm_P0.5mm" H 1850 3850 50  0001 C CNN
+F 3 "" H 1850 3850 50  0001 C CNN
+F 4 "LPC54616J512BD100E" H 1800 4000 50  0001 C CNN "OP"
+F 5 "nm" H 0   0   50  0001 C CNN "Arrow"
+	4    1800 4000
+	1    0    0    -1  
+$EndComp
+$Comp
+L lpc_LPC54616J512:TJA1102SHN U3
+U 2 1 5BE849D3
+P 7750 5650
+F 0 "U3" H 8962 5931 50  0000 C CNN
+F 1 "TJA1102SHN" H 8962 5840 50  0000 C CNN
+F 2 "canbox_nxp_LPC546xx:QFN-56_EP_8.5x8.5_Pitch0.5mm" H 7750 5650 50  0001 C CNN
+F 3 "" H 7750 5650 50  0001 C CNN
+F 4 "TJA1102SHN/0Z" H 3500 -150 50  0001 C CNN "OP"
+F 5 "TJA1102HN/0Z" H 0   0   50  0001 C CNN "Arrow"
+F 6 " 568-13847-1-ND  " H 0   0   50  0001 C CNN "DigiKez"
+	2    7750 5650
+	1    0    0    -1  
+$EndComp
+Connection ~ 7400 4900
+Wire Wire Line
+	7400 4900 7400 5000
+Connection ~ 7600 4900
+Wire Wire Line
+	7600 4900 7600 4700
+$Comp
+L lpc_LPC54616J512:TJA1102SHN U3
+U 1 1 5BEB0815
+P 6300 2450
+F 0 "U3" H 7600 2731 50  0000 C CNN
+F 1 "TJA1102SHN" H 7600 2640 50  0000 C CNN
+F 2 "canbox_nxp_LPC546xx:QFN-56_EP_8.5x8.5_Pitch0.5mm" H 6300 2450 50  0001 C CNN
+F 3 "" H 6300 2450 50  0001 C CNN
+F 4 "TJA1102SHN/0Z" H 6300 2450 50  0001 C CNN "OP"
+F 5 "TJA1102HN/0Z" H 0   0   50  0001 C CNN "Arrow"
+F 6 " 568-13847-1-ND  " H 0   0   50  0001 C CNN "DigiKez"
+	1    6300 2450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6200 2650 6200 2550
+Connection ~ 6200 2550
+Wire Wire Line
+	6200 2650 6200 2750
+Connection ~ 6200 2650
+Connection ~ 6200 2750
+Wire Wire Line
+	6200 2750 6200 2850
+Wire Wire Line
+	6200 3100 6200 3200
+Connection ~ 6200 3200
+Wire Wire Line
+	6200 3200 6200 3300
+Connection ~ 6200 3300
+Wire Wire Line
+	6200 3300 6200 3450
+$Comp
+L canbox-rescue:PWR_FLAG-power #FLG0101
+U 1 1 5BEDCB63
+P 6200 2100
+AR Path="/5BEDCB63" Ref="#FLG0101"  Part="1" 
+AR Path="/5BDA0002/5BEDCB63" Ref="#FLG0101"  Part="1" 
+F 0 "#FLG0101" H 6200 2175 50  0001 C CNN
+F 1 "PWR_FLAG" H 6200 2273 50  0000 C CNN
+F 2 "" H 6200 2100 50  0001 C CNN
+F 3 "~" H 6200 2100 50  0001 C CNN
+	1    6200 2100
+	1    0    0    -1  
+$EndComp
+Connection ~ 6200 2100
+Wire Wire Line
+	6200 2100 6000 2100
+NoConn ~ 7400 2350
+NoConn ~ 9000 2750
+NoConn ~ 14350 6100
+NoConn ~ 9000 3000
+NoConn ~ 9000 3150
+Wire Wire Line
+	1400 2550 2950 2550
+$Comp
+L lpc_LPC54616J512:LPC54616J512 U1
+U 9 1 5C1702B1
+P 4900 5550
+F 0 "U1" H 5808 5715 50  0000 C CNN
+F 1 "LPC54616J512" H 5808 5624 50  0000 C CNN
+F 2 "Package_QFP:LQFP-100_14x14mm_P0.5mm" H 4950 5400 50  0001 C CNN
+F 3 "" H 4950 5400 50  0001 C CNN
+F 4 "LPC54616J512BD100E" H 3050 -150 50  0001 C CNN "OP"
+F 5 "nm" H 0   0   50  0001 C CNN "Arrow"
+	9    4900 5550
+	1    0    0    -1  
+$EndComp
+NoConn ~ 7650 6100
+NoConn ~ 7650 6200
+NoConn ~ 7650 6950
+NoConn ~ 7650 7050
+NoConn ~ 7650 7150
+Wire Wire Line
+	7550 5350 7550 5300
+Wire Wire Line
+	7550 5300 3850 5300
+Wire Wire Line
+	3850 5300 3850 3200
+Connection ~ 3850 3200
+Connection ~ 7550 7550
+Wire Wire Line
+	7550 7550 7650 7550
+Wire Wire Line
+	6800 8000 6800 8300
+Wire Wire Line
+	6800 8300 3700 8300
+Wire Wire Line
+	6200 3900 5850 3900
+Wire Wire Line
+	5850 3900 5850 4700
+Wire Wire Line
+	4100 4700 4100 4250
+Wire Wire Line
+	4100 4250 3600 4250
+Wire Wire Line
+	6200 4050 5900 4050
+Wire Wire Line
+	4050 4400 3600 4400
+Wire Wire Line
+	5950 4250 6200 4250
+Wire Wire Line
+	6200 4650 6000 4650
+Wire Wire Line
+	3950 4700 3600 4700
+Wire Wire Line
+	3600 4550 3700 4550
+Wire Wire Line
+	3700 4550 3700 8300
+Text Label 6750 5800 0    50   ~ 0
+RX_CLK_L
+Text Label 6750 5900 0    50   ~ 0
+RXD0_L
+Text Label 6750 6000 0    50   ~ 0
+RXD1_L
+Text Label 6750 6750 0    50   ~ 0
+TXD0_L
+Text Label 6750 6850 0    50   ~ 0
+TXD1_L
+Wire Wire Line
+	5950 4250 5950 5000
+Wire Wire Line
+	6000 4650 6000 4900
+Wire Wire Line
+	5900 4050 5900 4800
+Wire Wire Line
+	4050 4400 4050 4800
+Wire Wire Line
+	3950 4700 3950 4900
+Wire Wire Line
+	3600 4850 3600 5000
+Wire Wire Line
+	6700 5800 7650 5800
+Wire Wire Line
+	6700 5900 7550 5900
+Wire Wire Line
+	7550 5900 7650 5900
+Wire Wire Line
+	6700 6000 7650 6000
+Wire Wire Line
+	7550 5650 7550 7550
+Wire Wire Line
+	6700 7550 7550 7550
+Wire Wire Line
+	6700 7650 7650 7650
+Wire Wire Line
+	6800 8000 7650 8000
+Wire Wire Line
+	6700 6850 7650 6850
+Wire Wire Line
+	6700 7300 7650 7300
+Wire Wire Line
+	6700 6750 7650 6750
+Wire Wire Line
+	7000 6550 7650 6550
+Wire Wire Line
+	6700 6450 7650 6450
+Wire Wire Line
+	4100 4700 5850 4700
+Wire Wire Line
+	4050 4800 5900 4800
+Wire Wire Line
+	3600 5000 5950 5000
+Wire Wire Line
+	3950 4900 4350 4900
+$Comp
+L canbox-rescue:R-Device R10
+U 1 1 5C488588
+P 4350 5600
+F 0 "R10" H 4420 5646 50  0000 L CNN
+F 1 "10k" H 4420 5555 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 4280 5600 50  0001 C CNN
+F 3 "~" H 4350 5600 50  0001 C CNN
+F 4 "CRCW08051K00JNEAC" H -6600 1300 50  0001 C CNN "OP"
+F 5 "ok" H -6600 1300 50  0001 C CNN "Mouser"
+F 6 "ok" H -6600 1300 50  0001 C CNN "notes"
+	1    4350 5600
+	1    0    0    -1  
+$EndComp
+$Comp
+L canbox-rescue:GND-power #PWR012
+U 1 1 5C48AE62
+P 4350 5900
+F 0 "#PWR012" H 4350 5650 50  0001 C CNN
+F 1 "GND" H 4355 5727 50  0000 C CNN
+F 2 "" H 4350 5900 50  0001 C CNN
+F 3 "" H 4350 5900 50  0001 C CNN
+	1    4350 5900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4350 5900 4350 5750
+Wire Wire Line
+	4350 5450 4350 4900
+Connection ~ 4350 4900
+Wire Wire Line
+	4350 4900 6000 4900
+Text Notes 1150 5650 0    50   ~ 0
+10k Pull down on reset, to keep the Ethernet in reset until the MCU is booted
+$EndSCHEMATC
