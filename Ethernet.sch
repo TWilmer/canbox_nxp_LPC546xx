@@ -5,10 +5,10 @@ EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
 Sheet 3 6
-Title ""
-Date ""
-Rev ""
-Comp ""
+Title "CANBOX LPC546xx - Ethernet"
+Date "2019-06-02"
+Rev "1"
+Comp "Thorsten Wilmer"
 Comment1 ""
 Comment2 ""
 Comment3 ""
@@ -819,9 +819,7 @@ Wire Wire Line
 Wire Wire Line
 	4050 4400 3600 4400
 Wire Wire Line
-	5950 4250 6200 4250
-Wire Wire Line
-	6200 4650 6000 4650
+	5950 4200 6200 4200
 Wire Wire Line
 	3950 4700 3600 4700
 Wire Wire Line
@@ -839,9 +837,9 @@ TXD0_L
 Text Label 6750 6850 0    50   ~ 0
 TXD1_L
 Wire Wire Line
-	5950 4250 5950 5000
+	5950 4200 5950 5000
 Wire Wire Line
-	6000 4650 6000 4900
+	6000 4500 6000 4900
 Wire Wire Line
 	5900 4050 5900 4800
 Wire Wire Line
@@ -918,4 +916,14 @@ Wire Wire Line
 	4350 4900 6000 4900
 Text Notes 1150 5650 0    50   ~ 0
 10k Pull down on reset, to keep the Ethernet in reset until the MCU is booted
+Text Notes 9450 3400 0    50   ~ 0
+Note the C  andR  have to be chosen according to the application note for EMI 
+Wire Wire Line
+	6200 3050 6000 3050
+Wire Wire Line
+	6000 3050 6000 2750
+Wire Wire Line
+	6000 2750 6200 2750
+Wire Wire Line
+	6000 4500 6200 4500
 $EndSCHEMATC

@@ -5,10 +5,10 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 5 6
-Title ""
-Date ""
-Rev ""
-Comp ""
+Title "CANBOX LPC546xx - Power"
+Date "2019-06-02"
+Rev "1"
+Comp "Thorsten Wilmer"
 Comment1 ""
 Comment2 ""
 Comment3 ""
@@ -107,7 +107,7 @@ AR Path="/5BE2B663" Ref="D1"  Part="1"
 AR Path="/5BDA6772/5BE2B663" Ref="D1"  Part="1" 
 F 0 "D1" H 5694 2246 50  0000 L CNN
 F 1 "PRTR5V0U2X" H 5694 2155 50  0000 L CNN
-F 2 "Package_TO_SOT_SMD:SOT-143" H 5210 2200 50  0001 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-143_Handsoldering" H 5210 2200 50  0001 C CNN
 F 3 "https://assets.nexperia.com/documents/data-sheet/PRTR5V0U2X.pdf" H 5210 2200 50  0001 C CNN
 F 4 "PRTR5V0U2X,215" H 5150 2200 50  0001 C CNN "OP"
 F 5 "ali" H 0   0   50  0001 C CNN "notes"
@@ -204,7 +204,7 @@ F 4 "B340AE-13" H 0   0   50  0001 C CNN "OP"
 F 5 "B340AE-13" H 0   0   50  0001 C CNN "Arrow"
 F 6 "B340AE-13" H 0   0   50  0001 C CNN "DigiKez"
 	1    5650 3600
-	0    -1   -1   0   
+	0    1    1    0   
 $EndComp
 Wire Wire Line
 	6000 4150 5800 4150
@@ -214,7 +214,6 @@ Wire Wire Line
 	6000 3800 6000 4150
 Wire Wire Line
 	5150 3450 5300 3450
-Connection ~ 5650 3450
 $Comp
 L canbox-rescue:R-Device R30
 U 1 1 5BE4C7F1
@@ -758,4 +757,5 @@ Wire Wire Line
 Wire Wire Line
 	7250 4350 7250 3950
 Connection ~ 6700 4350
+Connection ~ 5650 3450
 $EndSCHEMATC

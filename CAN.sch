@@ -5,10 +5,10 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 4 6
-Title ""
-Date ""
-Rev ""
-Comp ""
+Title "CANBOX LPC546xx - CAN"
+Date "2019-06-02"
+Rev "1"
+Comp "Thorsten Wilmer"
 Comment1 ""
 Comment2 ""
 Comment3 ""
@@ -128,7 +128,7 @@ F 3 "" H 6350 1600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	6350 2050 6350 1600
+	6350 2050 6350 1700
 Text HLabel 850  1500 0    50   Input ~ 0
 5V
 $Comp
@@ -293,14 +293,6 @@ F 4 "ali" H 0   0   50  0001 C CNN "notes"
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	10400 3350 9950 3350
-Wire Wire Line
-	9950 3350 9950 2750
-Wire Wire Line
-	10400 3850 10150 3850
-Wire Wire Line
-	10150 3850 10150 2550
-Wire Wire Line
 	8200 2550 9200 2550
 Wire Wire Line
 	10400 3750 9600 3750
@@ -327,11 +319,11 @@ Wire Wire Line
 Wire Wire Line
 	3850 2350 5850 2350
 Wire Wire Line
-	5850 2650 5750 2650
+	5850 2650 5300 2650
 Wire Wire Line
-	5750 2650 5750 2450
+	5300 2650 5300 2450
 Wire Wire Line
-	3850 2450 5750 2450
+	3850 2450 5300 2450
 Wire Wire Line
 	6350 2850 6350 3000
 $Comp
@@ -386,9 +378,43 @@ Wire Wire Line
 Connection ~ 9200 2550
 Wire Wire Line
 	9200 2550 10150 2550
-NoConn ~ 10400 3550
-NoConn ~ 10400 3650
 NoConn ~ 3850 2900
 NoConn ~ 3850 2800
 NoConn ~ 3850 2700
+$Comp
+L canbox-rescue:R-Device R11
+U 1 1 5CFFAE5F
+P 5450 1950
+F 0 "R11" H 5520 1996 50  0000 L CNN
+F 1 "NC" H 5520 1905 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 5380 1950 50  0001 C CNN
+F 3 "" H 5450 1950 50  0001 C CNN
+	1    5450 1950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5850 2550 5450 2550
+Wire Wire Line
+	5450 2550 5450 2100
+Wire Wire Line
+	5450 1800 5450 1700
+Wire Wire Line
+	5450 1700 6350 1700
+Connection ~ 6350 1700
+Wire Wire Line
+	6350 1700 6350 1600
+Wire Wire Line
+	10400 3550 9950 3550
+Wire Wire Line
+	9950 2750 9950 3550
+NoConn ~ 10400 3350
+Wire Wire Line
+	10400 3650 10150 3650
+Wire Wire Line
+	10150 3650 10150 2550
+NoConn ~ 10400 3850
+Text Notes 5600 2400 0    50   ~ 0
+<-
+Text Notes 5650 2250 0    50   ~ 0
+->
 $EndSCHEMATC
