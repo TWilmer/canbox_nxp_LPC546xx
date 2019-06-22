@@ -75,8 +75,6 @@ Wire Wire Line
 	8200 2550 8050 2550
 Wire Wire Line
 	8700 2800 8700 2750
-Wire Wire Line
-	8050 2750 8450 2750
 Connection ~ 8700 2750
 $Comp
 L canbox-rescue:GND-power #PWR034
@@ -186,29 +184,29 @@ $EndComp
 $Comp
 L canbox-rescue:R-Device R16
 U 1 1 5C3B1DC6
-P 8200 3050
-F 0 "R16" H 8270 3096 50  0000 L CNN
-F 1 "62" H 8270 3005 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 8130 3050 50  0001 C CNN
-F 3 "~" H 8200 3050 50  0001 C CNN
-F 4 "ERJ-6ENF59R0V" H 400 -350 50  0001 C CNN "OP"
-F 5 "ok" H 0   0   50  0001 C CNN "Mouser"
-F 6 "ok" H 0   0   50  0001 C CNN "notes"
-	1    8200 3050
+P 8200 3550
+F 0 "R16" H 8270 3596 50  0000 L CNN
+F 1 "62" H 8270 3505 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 8130 3550 50  0001 C CNN
+F 3 "~" H 8200 3550 50  0001 C CNN
+F 4 "ERJ-6ENF59R0V" H 400 150 50  0001 C CNN "OP"
+F 5 "ok" H 0   500 50  0001 C CNN "Mouser"
+F 6 "ok" H 0   500 50  0001 C CNN "notes"
+	1    8200 3550
 	1    0    0    -1  
 $EndComp
 $Comp
 L canbox-rescue:R-Device R17
 U 1 1 5C3B4F36
-P 8450 3050
-F 0 "R17" H 8520 3096 50  0000 L CNN
-F 1 "62" H 8520 3005 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 8380 3050 50  0001 C CNN
-F 3 "~" H 8450 3050 50  0001 C CNN
-F 4 "ERJ-6ENF59R0V" H 400 -350 50  0001 C CNN "OP"
-F 5 "ok" H 0   0   50  0001 C CNN "Mouser"
-F 6 "ok" H 0   0   50  0001 C CNN "notes"
-	1    8450 3050
+P 8450 3550
+F 0 "R17" H 8520 3596 50  0000 L CNN
+F 1 "62" H 8520 3505 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 8380 3550 50  0001 C CNN
+F 3 "~" H 8450 3550 50  0001 C CNN
+F 4 "ERJ-6ENF59R0V" H 400 150 50  0001 C CNN "OP"
+F 5 "ok" H 0   500 50  0001 C CNN "Mouser"
+F 6 "ok" H 0   500 50  0001 C CNN "notes"
+	1    8450 3550
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -232,37 +230,30 @@ Wire Wire Line
 $Comp
 L canbox-rescue:C-Device C40
 U 1 1 5C3C3F1C
-P 8350 3500
-F 0 "C40" H 8465 3546 50  0000 L CNN
-F 1 "22n" H 8465 3455 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 8388 3350 50  0001 C CNN
-F 3 "~" H 8350 3500 50  0001 C CNN
-F 4 "C0805C223K5RACTU" H 400 -350 50  0001 C CNN "OP"
-F 5 "ali" H 0   0   50  0001 C CNN "notes"
-	1    8350 3500
+P 8350 4650
+F 0 "C40" H 8465 4696 50  0000 L CNN
+F 1 "22n" H 8465 4605 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 8388 4500 50  0001 C CNN
+F 3 "~" H 8350 4650 50  0001 C CNN
+F 4 "C0805C223K5RACTU" H 400 800 50  0001 C CNN "OP"
+F 5 "ali" H 0   1150 50  0001 C CNN "notes"
+	1    8350 4650
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	8200 2900 8200 2550
 Connection ~ 8200 2550
 Wire Wire Line
-	8450 2900 8450 2750
-Connection ~ 8450 2750
+	8200 4250 8200 4450
 Wire Wire Line
-	8450 2750 8700 2750
+	8200 4450 8350 4450
 Wire Wire Line
-	8200 3200 8200 3300
+	8450 4450 8450 4250
 Wire Wire Line
-	8200 3300 8350 3300
+	8350 4500 8350 4450
+Connection ~ 8350 4450
 Wire Wire Line
-	8450 3300 8450 3200
+	8350 4450 8450 4450
 Wire Wire Line
-	8350 3350 8350 3300
-Connection ~ 8350 3300
-Wire Wire Line
-	8350 3300 8450 3300
-Wire Wire Line
-	8350 3750 8350 3650
+	8350 4900 8350 4800
 Wire Wire Line
 	8050 3000 8050 2750
 Connection ~ 8050 2750
@@ -363,12 +354,12 @@ NoConn ~ 10400 4150
 $Comp
 L canbox-rescue:GND-power #PWR0105
 U 1 1 5C0835E8
-P 8350 3750
-F 0 "#PWR0105" H 8350 3500 50  0001 C CNN
-F 1 "GND" H 8355 3577 50  0000 C CNN
-F 2 "" H 8350 3750 50  0001 C CNN
-F 3 "" H 8350 3750 50  0001 C CNN
-	1    8350 3750
+P 8350 4900
+F 0 "#PWR0105" H 8350 4650 50  0001 C CNN
+F 1 "GND" H 8355 4727 50  0000 C CNN
+F 2 "" H 8350 4900 50  0001 C CNN
+F 3 "" H 8350 4900 50  0001 C CNN
+	1    8350 4900
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -417,4 +408,41 @@ Text Notes 5600 2400 0    50   ~ 0
 <-
 Text Notes 5650 2250 0    50   ~ 0
 ->
+$Comp
+L canbox-rescue:Jumper_NC_Small-Device JP4
+U 1 1 5D07D244
+P 8450 4150
+F 0 "JP4" V 8404 4224 50  0000 L CNN
+F 1 "Jumper_NC_Small-Device" V 8495 4224 50  0000 L CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm" H 8450 4150 50  0001 C CNN
+F 3 "" H 8450 4150 50  0001 C CNN
+	1    8450 4150
+	0    1    1    0   
+$EndComp
+$Comp
+L canbox-rescue:Jumper_NC_Small-Device JP3
+U 1 1 5D07E798
+P 8200 4150
+AR Path="/5BDA19BB/5D07E798" Ref="JP3"  Part="1" 
+AR Path="/5BD9E863/5D07E798" Ref="JP3"  Part="1" 
+F 0 "JP3" V 8246 4103 50  0000 R CNN
+F 1 "Jumper_NC_Small-Device" V 8155 4103 50  0000 R CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm" H 8200 4150 50  0001 C CNN
+F 3 "" H 8200 4150 50  0001 C CNN
+	1    8200 4150
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	8050 2750 8450 2750
+Wire Wire Line
+	8450 2750 8450 3400
+Connection ~ 8450 2750
+Wire Wire Line
+	8450 2750 8700 2750
+Wire Wire Line
+	8200 3400 8200 2550
+Wire Wire Line
+	8200 3700 8200 4050
+Wire Wire Line
+	8450 3700 8450 4050
 $EndSCHEMATC
