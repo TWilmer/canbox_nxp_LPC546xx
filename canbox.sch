@@ -1,6 +1,6 @@
-EESchema Schematic File Version 4
+EESchema Schematic File Version 5
 LIBS:canbox-cache
-EELAYER 29 0
+EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -13,6 +13,11 @@ Comment1 ""
 Comment2 ""
 Comment3 ""
 Comment4 ""
+Comment5 ""
+Comment6 ""
+Comment7 ""
+Comment8 ""
+Comment9 ""
 $EndDescr
 $Sheet
 S 2500 2150 2050 1000
@@ -85,7 +90,7 @@ L canbox-rescue:MountingHole-Mechanical H4
 U 1 1 5C0741C7
 P 1850 5950
 F 0 "H4" H 1950 5996 50  0000 L CNN
-F 1 "MountingHole" H 1950 5905 50  0000 L CNN
+F 1 "H" H 1950 5905 50  0000 L CNN
 F 2 "MountingHole:MountingHole_2.5mm_Pad_Via" H 1850 5950 50  0001 C CNN
 F 3 "~" H 1850 5950 50  0001 C CNN
 	1    1850 5950
@@ -96,7 +101,7 @@ L canbox-rescue:MountingHole-Mechanical H3
 U 1 1 5C07437F
 P 1850 5650
 F 0 "H3" H 1950 5696 50  0000 L CNN
-F 1 "MountingHole" H 1950 5605 50  0000 L CNN
+F 1 "H" H 1950 5605 50  0000 L CNN
 F 2 "MountingHole:MountingHole_2.5mm_Pad_Via" H 1850 5650 50  0001 C CNN
 F 3 "~" H 1850 5650 50  0001 C CNN
 	1    1850 5650
@@ -107,7 +112,7 @@ L canbox-rescue:MountingHole-Mechanical H2
 U 1 1 5C074496
 P 1850 5350
 F 0 "H2" H 1950 5396 50  0000 L CNN
-F 1 "MountingHole" H 1950 5305 50  0000 L CNN
+F 1 "H" H 1950 5305 50  0000 L CNN
 F 2 "MountingHole:MountingHole_2.5mm_Pad_Via" H 1850 5350 50  0001 C CNN
 F 3 "~" H 1850 5350 50  0001 C CNN
 	1    1850 5350
@@ -128,4 +133,15 @@ Wire Wire Line
 	1850 5050 1850 6200
 Wire Wire Line
 	1850 6200 1600 6200
+$Comp
+L canbox-rescue:MountingHole-Mechanical H1
+U 1 1 5F0144FA
+P 1850 5050
+F 0 "H1" H 1950 5096 50  0000 L CNN
+F 1 "H" H 1950 5005 50  0000 L CNN
+F 2 "MountingHole:MountingHole_2.5mm_Pad_Via" H 1850 5050 50  0001 C CNN
+F 3 "~" H 1850 5050 50  0001 C CNN
+	1    1850 5050
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

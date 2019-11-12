@@ -12,6 +12,10 @@ K inductor choke coil reactor magnetic coupled
 F ~
 $ENDCMP
 #
+$CMP DP83TC811R-Q1
+F https://www.ti.com/lit/ds/symlink/dp83tc811r-q1.pdf
+$ENDCMP
+#
 $CMP L_Coupled
 D Coupled inductor
 K inductor choke coil reactor magnetic coupled

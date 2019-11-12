@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS := -lpower_hardabi -larm_cortexM4lf_math -lc
+LIBS := -lpower_hardabi
 

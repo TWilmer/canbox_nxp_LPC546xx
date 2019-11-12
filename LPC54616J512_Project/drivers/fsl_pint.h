@@ -1,35 +1,9 @@
 /*
- * The Clear BSD License
  * Copyright (c) 2016, Freescale Semiconductor, Inc.
  * Copyright 2016-2017 NXP
  * All rights reserved.
- * 
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted (subject to the limitations in the disclaimer below) provided
- *  that the following conditions are met:
  *
- * o Redistributions of source code must retain the above copyright notice, this list
- *   of conditions and the following disclaimer.
- *
- * o Redistributions in binary form must reproduce the above copyright notice, this
- *   list of conditions and the following disclaimer in the documentation and/or
- *   other materials provided with the distribution.
- *
- * o Neither the name of the copyright holder nor the names of its
- *   contributors may be used to endorse or promote products derived from this
- *   software without specific prior written permission.
- *
- * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS LICENSE.
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
- * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * SPDX-License-Identifier: BSD-3-Clause
  */
 
 #ifndef _FSL_PINT_H_
@@ -50,11 +24,14 @@
 
 /*! @name Driver version */
 /*@{*/
-#define FSL_PINT_DRIVER_VERSION (MAKE_VERSION(2, 0, 1)) /*!< Version 2.0.1 */
+#define FSL_PINT_DRIVER_VERSION (MAKE_VERSION(2, 1, 3)) /*!< Version 2.1.3 */
 /*@}*/
 
 /* Number of interrupt line supported by PINT */
 #define PINT_PIN_INT_COUNT 8U
+
+/* Number of interrupt line supported by SECURE PINT */
+#define SEC_PINT_PIN_INT_COUNT 2U
 
 /* Number of input sources supported by PINT */
 #define PINT_INPUT_COUNT 8U
@@ -114,6 +91,12 @@ typedef enum _pint_int
 #if (FSL_FEATURE_PINT_NUMBER_OF_CONNECTED_OUTPUTS > 7U)
     kPINT_PinInt7 = 7U, /*!< Pin Interrupt  7 */
 #endif
+#if (FSL_FEATURE_SECPINT_NUMBER_OF_CONNECTED_OUTPUTS > 0U)
+    kPINT_SecPinInt0 = 8U, /*!< Secure Pin Interrupt  0 */
+#endif
+#if (FSL_FEATURE_SECPINT_NUMBER_OF_CONNECTED_OUTPUTS > 1U)
+    kPINT_SecPinInt1 = 9U, /*!< Secure Pin Interrupt  1 */
+#endif
 } pint_pin_int_t;
 
 /*! @brief PINT Pattern Match bit slice input source type */
@@ -153,6 +136,12 @@ typedef enum _pint_pmatch_bslice
 #endif
 #if (FSL_FEATURE_PINT_NUMBER_OF_CONNECTED_OUTPUTS > 7U)
     kPINT_PatternMatchBSlice7 = 7U, /*!< Bit slice 7 */
+#endif
+#if (FSL_FEATURE_SECPINT_NUMBER_OF_CONNECTED_OUTPUTS > 0U)
+    kSECPINT_PatternMatchBSlice0 = 8U, /*!< Bit slice 0 */
+#endif
+#if (FSL_FEATURE_SECPINT_NUMBER_OF_CONNECTED_OUTPUTS > 1U)
+    kSECPINT_PatternMatchBSlice1 = 9U, /*!< Bit slice 1 */
 #endif
 } pint_pmatch_bslice_t;
 
@@ -228,7 +217,7 @@ void PINT_PinInterruptConfig(PINT_Type *base, pint_pin_int_t intr, pint_pin_enab
 void PINT_PinInterruptGetConfig(PINT_Type *base, pint_pin_int_t pintr, pint_pin_enable_t *enable, pint_cb_t *callback);
 
 /*!
- * @brief	Clear Selected pin interrupt status.
+ * @brief	Clear Selected pin interrupt status only when the pin was triggered by edge-sensitive.
 
  * This function clears the selected pin interrupt status.
  *
@@ -237,10 +226,7 @@ void PINT_PinInterruptGetConfig(PINT_Type *base, pint_pin_int_t pintr, pint_pin_
  *
  * @retval None.
  */
-static inline void PINT_PinInterruptClrStatus(PINT_Type *base, pint_pin_int_t pintr)
-{
-    base->IST = (1U << pintr);
-}
+void PINT_PinInterruptClrStatus(PINT_Type *base, pint_pin_int_t pintr);
 
 /*!
  * @brief	Get Selected pin interrupt status.
@@ -254,11 +240,11 @@ static inline void PINT_PinInterruptClrStatus(PINT_Type *base, pint_pin_int_t pi
  */
 static inline uint32_t PINT_PinInterruptGetStatus(PINT_Type *base, pint_pin_int_t pintr)
 {
-    return ((base->IST & (1U << pintr)) ? 1U : 0U);
+    return ((base->IST & (1UL << (uint32_t)pintr)) != 0U ? 1U : 0U);
 }
 
 /*!
- * @brief	Clear all pin interrupts status.
+ * @brief	Clear all pin interrupts status only when pins were triggered by edge-sensitive.
 
  * This function clears the status of all pin interrupts.
  *
@@ -266,10 +252,7 @@ static inline uint32_t PINT_PinInterruptGetStatus(PINT_Type *base, pint_pin_int_
  *
  * @retval None.
  */
-static inline void PINT_PinInterruptClrStatusAll(PINT_Type *base)
-{
-    base->IST = PINT_IST_PSTAT_MASK;
-}
+void PINT_PinInterruptClrStatusAll(PINT_Type *base);
 
 /*!
  * @brief	Get all pin interrupts status.
@@ -298,7 +281,7 @@ static inline uint32_t PINT_PinInterruptGetStatusAll(PINT_Type *base)
  */
 static inline void PINT_PinInterruptClrFallFlag(PINT_Type *base, pint_pin_int_t pintr)
 {
-    base->FALL = (1U << pintr);
+    base->FALL = (1UL << (uint32_t)pintr);
 }
 
 /*!
@@ -313,7 +296,7 @@ static inline void PINT_PinInterruptClrFallFlag(PINT_Type *base, pint_pin_int_t 
  */
 static inline uint32_t PINT_PinInterruptGetFallFlag(PINT_Type *base, pint_pin_int_t pintr)
 {
-    return ((base->FALL & (1U << pintr)) ? 1U : 0U);
+    return ((base->FALL & (1UL << (uint32_t)pintr)) != 0U ? 1U : 0U);
 }
 
 /*!
@@ -357,7 +340,7 @@ static inline uint32_t PINT_PinInterruptGetFallFlagAll(PINT_Type *base)
  */
 static inline void PINT_PinInterruptClrRiseFlag(PINT_Type *base, pint_pin_int_t pintr)
 {
-    base->RISE = (1U << pintr);
+    base->RISE = (1UL << (uint32_t)pintr);
 }
 
 /*!
@@ -372,7 +355,7 @@ static inline void PINT_PinInterruptClrRiseFlag(PINT_Type *base, pint_pin_int_t 
  */
 static inline uint32_t PINT_PinInterruptGetRiseFlag(PINT_Type *base, pint_pin_int_t pintr)
 {
-    return ((base->RISE & (1U << pintr)) ? 1U : 0U);
+    return ((base->RISE & (1UL << (uint32_t)pintr)) != 0U ? 1U : 0U);
 }
 
 /*!
@@ -442,7 +425,7 @@ void PINT_PatternMatchGetConfig(PINT_Type *base, pint_pmatch_bslice_t bslice, pi
  */
 static inline uint32_t PINT_PatternMatchGetStatus(PINT_Type *base, pint_pmatch_bslice_t bslice)
 {
-    return ((base->PMCTRL >> PINT_PMCTRL_PMAT_SHIFT) & (0x1U << bslice)) >> bslice;
+    return ((base->PMCTRL >> PINT_PMCTRL_PMAT_SHIFT) & (1UL << (uint32_t)bslice)) >> (uint32_t)bslice;
 }
 
 /*!
@@ -562,6 +545,30 @@ void PINT_DisableCallback(PINT_Type *base);
  * @retval None.
  */
 void PINT_Deinit(PINT_Type *base);
+
+/*!
+ * @brief	enable callback by pin index.
+
+ * This function  enables callback by pin index instead of enabling all pins.
+ *
+ * @param base Base address of the peripheral.
+ * @param pinIdx pin index.
+ *
+ * @retval None.
+ */
+void PINT_EnableCallbackByIndex(PINT_Type *base, pint_pin_int_t pintIdx);
+
+/*!
+ * @brief disable callback by pin index.
+
+ * This function disables callback by pin index instead of disabling all pins.
+ *
+ * @param base Base address of the peripheral.
+ * @param pinIdx pin index.
+ *
+ * @retval None.
+ */
+void PINT_DisableCallbackByIndex(PINT_Type *base, pint_pin_int_t pintIdx);
 
 #ifdef __cplusplus
 }

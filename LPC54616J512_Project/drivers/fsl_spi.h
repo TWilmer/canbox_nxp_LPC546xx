@@ -1,35 +1,9 @@
 /*
- * The Clear BSD License
  * Copyright (c) 2016, Freescale Semiconductor, Inc.
- * Copyright 2016-2017 NXP
+ * Copyright 2016-2018 NXP
  * All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted (subject to the limitations in the disclaimer below) provided
- * that the following conditions are met:
- *
- * o Redistributions of source code must retain the above copyright notice, this list
- *   of conditions and the following disclaimer.
- *
- * o Redistributions in binary form must reproduce the above copyright notice, this
- *   list of conditions and the following disclaimer in the documentation and/or
- *   other materials provided with the distribution.
- *
- * o Neither the name of the copyright holder nor the names of its
- *   contributors may be used to endorse or promote products derived from this
- *   software without specific prior written permission.
- *
- * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS LICENSE.
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
- * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * SPDX-License-Identifier: BSD-3-Clause
  */
 #ifndef _FSL_SPI_H_
 #define _FSL_SPI_H_
@@ -50,8 +24,8 @@
 
 /*! @name Driver version */
 /*@{*/
-/*! @brief SPI driver version 2.0.2. */
-#define FSL_SPI_DRIVER_VERSION (MAKE_VERSION(2, 0, 2))
+/*! @brief SPI driver version 2.0.3. */
+#define FSL_SPI_DRIVER_VERSION (MAKE_VERSION(2, 0, 3))
 /*@}*/
 
 /*! @brief Global variable for dummy data value setting. */
@@ -77,7 +51,7 @@ extern volatile uint8_t s_dummyData[];
 /*! @brief SPI transfer option.*/
 typedef enum _spi_xfer_option
 {
-    kSPI_FrameDelay = (SPI_FIFOWR_EOF_MASK),  /*!< A delay may be inserted, defined in the DLY register.*/
+    kSPI_FrameDelay  = (SPI_FIFOWR_EOF_MASK), /*!< A delay may be inserted, defined in the DLY register.*/
     kSPI_FrameAssert = (SPI_FIFOWR_EOT_MASK), /*!< SSEL will be deasserted at the end of a transfer */
 } spi_xfer_option_t;
 
@@ -99,9 +73,9 @@ typedef enum _spi_clock_polarity
 typedef enum _spi_clock_phase
 {
     kSPI_ClockPhaseFirstEdge = 0x0U, /*!< First edge on SCK occurs at the middle of the first
-                                         *   cycle of a data transfer. */
+                                      *   cycle of a data transfer. */
     kSPI_ClockPhaseSecondEdge        /*!< First edge on SCK occurs at the start of the
-                                         *   first cycle of a data transfer. */
+                                      *   first cycle of a data transfer. */
 } spi_clock_phase_t;
 
 /*! @brief txFIFO watermark values */
@@ -133,12 +107,12 @@ typedef enum _spi_rxfifo_watermark
 /*! @brief Transfer data width */
 typedef enum _spi_data_width
 {
-    kSPI_Data4Bits = 3,   /*!< 4 bits data width */
-    kSPI_Data5Bits = 4,   /*!< 5 bits data width */
-    kSPI_Data6Bits = 5,   /*!< 6 bits data width */
-    kSPI_Data7Bits = 6,   /*!< 7 bits data width */
-    kSPI_Data8Bits = 7,   /*!< 8 bits data width */
-    kSPI_Data9Bits = 8,   /*!< 9 bits data width */
+    kSPI_Data4Bits  = 3,  /*!< 4 bits data width */
+    kSPI_Data5Bits  = 4,  /*!< 5 bits data width */
+    kSPI_Data6Bits  = 5,  /*!< 6 bits data width */
+    kSPI_Data7Bits  = 6,  /*!< 7 bits data width */
+    kSPI_Data8Bits  = 7,  /*!< 8 bits data width */
+    kSPI_Data9Bits  = 8,  /*!< 9 bits data width */
     kSPI_Data10Bits = 9,  /*!< 10 bits data width */
     kSPI_Data11Bits = 10, /*!< 11 bits data width */
     kSPI_Data12Bits = 11, /*!< 12 bits data width */
@@ -217,8 +191,8 @@ typedef struct _spi_slave_config
 /*! @brief SPI transfer status.*/
 enum _spi_status
 {
-    kStatus_SPI_Busy = MAKE_STATUS(kStatusGroup_LPC_SPI, 0),  /*!< SPI bus is busy */
-    kStatus_SPI_Idle = MAKE_STATUS(kStatusGroup_LPC_SPI, 1),  /*!< SPI is idle */
+    kStatus_SPI_Busy  = MAKE_STATUS(kStatusGroup_LPC_SPI, 0), /*!< SPI bus is busy */
+    kStatus_SPI_Idle  = MAKE_STATUS(kStatusGroup_LPC_SPI, 1), /*!< SPI is idle */
     kStatus_SPI_Error = MAKE_STATUS(kStatusGroup_LPC_SPI, 2), /*!< SPI  error */
     kStatus_SPI_BaudrateNotSupport =
         MAKE_STATUS(kStatusGroup_LPC_SPI, 3) /*!< Baudrate is not support in current clock source */
@@ -234,10 +208,10 @@ enum _spi_interrupt_enable
 /*! @brief SPI status flags.*/
 enum _spi_statusflags
 {
-    kSPI_TxEmptyFlag = SPI_FIFOSTAT_TXEMPTY_MASK,       /*!< txFifo is empty */
-    kSPI_TxNotFullFlag = SPI_FIFOSTAT_TXNOTFULL_MASK,   /*!< txFifo is not full */
+    kSPI_TxEmptyFlag    = SPI_FIFOSTAT_TXEMPTY_MASK,    /*!< txFifo is empty */
+    kSPI_TxNotFullFlag  = SPI_FIFOSTAT_TXNOTFULL_MASK,  /*!< txFifo is not full */
     kSPI_RxNotEmptyFlag = SPI_FIFOSTAT_RXNOTEMPTY_MASK, /*!< rxFIFO is not empty */
-    kSPI_RxFullFlag = SPI_FIFOSTAT_RXFULL_MASK,         /*!< rxFIFO is full */
+    kSPI_RxFullFlag     = SPI_FIFOSTAT_RXFULL_MASK,     /*!< rxFIFO is full */
 };
 
 /*! @brief SPI transfer structure */

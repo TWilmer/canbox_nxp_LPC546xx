@@ -375,7 +375,7 @@ DEF Fujitsu_FTR-K3A-Relay K 0 20 Y Y 1 F N
 F0 "K" 0 500 50 H V C CNN
 F1 "Fujitsu_FTR-K3A-Relay" 0 400 50 H V C CNN
 F2 "Relay_THT:Relay_DPST_Fujitsu_FTR-F1A" 0 -400 50 H I C CNN
-F3 "https://www.mouser.com/datasheet/2/164/ftr-k3-21002.pdf" 50 550 50 H I C CNN
+F3 "" 50 550 50 H I C CNN
 $FPLIST
  *Relay*DPST*Fujitsu*FTR*F1A*
 $ENDFPLIST
@@ -400,6 +400,7 @@ X ~ 1 -300 200 100 R 50 50 1 1 P
 X ~ 2 300 200 100 L 50 50 1 1 P
 X ~ 3 300 0 100 L 50 50 1 1 P
 X ~ 4 -300 0 100 R 50 50 1 1 P
+X ~ 5 300 100 100 L 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #

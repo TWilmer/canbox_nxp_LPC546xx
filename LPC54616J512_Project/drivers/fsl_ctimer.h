@@ -1,35 +1,9 @@
 /*
- * The Clear BSD License
  * Copyright (c) 2016, Freescale Semiconductor, Inc.
- * Copyright 2016-2017 NXP
+ * Copyright 2016-2018 NXP
  * All rights reserved.
- * 
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted (subject to the limitations in the disclaimer below) provided
- *  that the following conditions are met:
  *
- * o Redistributions of source code must retain the above copyright notice, this list
- *   of conditions and the following disclaimer.
- *
- * o Redistributions in binary form must reproduce the above copyright notice, this
- *   list of conditions and the following disclaimer in the documentation and/or
- *   other materials provided with the distribution.
- *
- * o Neither the name of the copyright holder nor the names of its
- *   contributors may be used to endorse or promote products derived from this
- *   software without specific prior written permission.
- *
- * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS LICENSE.
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
- * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * SPDX-License-Identifier: BSD-3-Clause
  */
 #ifndef _FSL_CTIMER_H_
 #define _FSL_CTIMER_H_
@@ -49,7 +23,7 @@
 
 /*! @name Driver version */
 /*@{*/
-#define FSL_CTIMER_DRIVER_VERSION (MAKE_VERSION(2, 0, 1)) /*!< Version 2.0.1 */
+#define FSL_CTIMER_DRIVER_VERSION (MAKE_VERSION(2, 0, 2)) /*!< Version 2.0.2 */
 /*@}*/
 
 /*! @brief List of Timer capture channels */
@@ -101,31 +75,35 @@ typedef enum _ctimer_timer_mode
 /*! @brief List of Timer interrupts */
 typedef enum _ctimer_interrupt_enable
 {
-    kCTIMER_Match0InterruptEnable = CTIMER_MCR_MR0I_MASK,    /*!< Match 0 interrupt */
-    kCTIMER_Match1InterruptEnable = CTIMER_MCR_MR1I_MASK,    /*!< Match 1 interrupt */
-    kCTIMER_Match2InterruptEnable = CTIMER_MCR_MR2I_MASK,    /*!< Match 2 interrupt */
-    kCTIMER_Match3InterruptEnable = CTIMER_MCR_MR3I_MASK,    /*!< Match 3 interrupt */
+    kCTIMER_Match0InterruptEnable = CTIMER_MCR_MR0I_MASK, /*!< Match 0 interrupt */
+    kCTIMER_Match1InterruptEnable = CTIMER_MCR_MR1I_MASK, /*!< Match 1 interrupt */
+    kCTIMER_Match2InterruptEnable = CTIMER_MCR_MR2I_MASK, /*!< Match 2 interrupt */
+    kCTIMER_Match3InterruptEnable = CTIMER_MCR_MR3I_MASK, /*!< Match 3 interrupt */
+#if !(defined(FSL_FEATURE_CTIMER_HAS_NO_INPUT_CAPTURE) && (FSL_FEATURE_CTIMER_HAS_NO_INPUT_CAPTURE))
     kCTIMER_Capture0InterruptEnable = CTIMER_CCR_CAP0I_MASK, /*!< Capture 0 interrupt */
     kCTIMER_Capture1InterruptEnable = CTIMER_CCR_CAP1I_MASK, /*!< Capture 1 interrupt */
     kCTIMER_Capture2InterruptEnable = CTIMER_CCR_CAP2I_MASK, /*!< Capture 2 interrupt */
 #if defined(FSL_FEATURE_CTIMER_HAS_CCR_CAP3) && FSL_FEATURE_CTIMER_HAS_CCR_CAP3
     kCTIMER_Capture3InterruptEnable = CTIMER_CCR_CAP3I_MASK, /*!< Capture 3 interrupt */
 #endif                                                       /* FSL_FEATURE_CTIMER_HAS_CCR_CAP3 */
+#endif
 } ctimer_interrupt_enable_t;
 
 /*! @brief List of Timer flags */
 typedef enum _ctimer_status_flags
 {
-    kCTIMER_Match0Flag = CTIMER_IR_MR0INT_MASK,   /*!< Match 0 interrupt flag */
-    kCTIMER_Match1Flag = CTIMER_IR_MR1INT_MASK,   /*!< Match 1 interrupt flag */
-    kCTIMER_Match2Flag = CTIMER_IR_MR2INT_MASK,   /*!< Match 2 interrupt flag */
-    kCTIMER_Match3Flag = CTIMER_IR_MR3INT_MASK,   /*!< Match 3 interrupt flag */
+    kCTIMER_Match0Flag = CTIMER_IR_MR0INT_MASK, /*!< Match 0 interrupt flag */
+    kCTIMER_Match1Flag = CTIMER_IR_MR1INT_MASK, /*!< Match 1 interrupt flag */
+    kCTIMER_Match2Flag = CTIMER_IR_MR2INT_MASK, /*!< Match 2 interrupt flag */
+    kCTIMER_Match3Flag = CTIMER_IR_MR3INT_MASK, /*!< Match 3 interrupt flag */
+#if !(defined(FSL_FEATURE_CTIMER_HAS_NO_INPUT_CAPTURE) && (FSL_FEATURE_CTIMER_HAS_NO_INPUT_CAPTURE))
     kCTIMER_Capture0Flag = CTIMER_IR_CR0INT_MASK, /*!< Capture 0 interrupt flag */
     kCTIMER_Capture1Flag = CTIMER_IR_CR1INT_MASK, /*!< Capture 1 interrupt flag */
     kCTIMER_Capture2Flag = CTIMER_IR_CR2INT_MASK, /*!< Capture 2 interrupt flag */
 #if defined(FSL_FEATURE_CTIMER_HAS_IR_CR3INT) && FSL_FEATURE_CTIMER_HAS_IR_CR3INT
     kCTIMER_Capture3Flag = CTIMER_IR_CR3INT_MASK, /*!< Capture 3 interrupt flag */
 #endif                                            /* FSL_FEATURE_CTIMER_HAS_IR_CR3INT */
+#endif
 } ctimer_status_flags_t;
 
 typedef void (*ctimer_callback_t)(uint32_t flags);
@@ -248,11 +226,8 @@ void CTIMER_GetDefaultConfig(ctimer_config_t *config);
  * @return kStatus_Success on success
  *         kStatus_Fail If matchChannel passed in is 3; this channel is reserved to set the PWM period
  */
-status_t CTIMER_SetupPwmPeriod(CTIMER_Type *base,
-                         ctimer_match_t matchChannel,
-                         uint32_t pwmPeriod,
-                         uint32_t pulsePeriod,
-                         bool enableInt);
+status_t CTIMER_SetupPwmPeriod(
+    CTIMER_Type *base, ctimer_match_t matchChannel, uint32_t pwmPeriod, uint32_t pulsePeriod, bool enableInt);
 
 /*!
  * @brief Configures the PWM signal parameters.
@@ -299,7 +274,7 @@ static inline void CTIMER_UpdatePwmPulsePeriod(CTIMER_Type *base, ctimer_match_t
  * @brief Updates the duty cycle of an active PWM signal.
  *
  * @note Please use CTIMER_UpdatePwmPulsePeriod to update the PWM with high resolution.
- *  
+ *
  * @param base             Ctimer peripheral base address
  * @param matchChannel     Match pin to be used to output the PWM signal
  * @param dutyCyclePercent New PWM pulse width; the value should be between 0 to 100
@@ -334,6 +309,17 @@ void CTIMER_SetupCapture(CTIMER_Type *base,
                          bool enableInt);
 
 /*!
+ * @brief Get the timer count value from TC register.
+ *
+ * @param  base  Ctimer peripheral base address.
+ * @return       return the timer count value.
+ */
+static inline uint32_t CTIMER_GetTimerCountValue(CTIMER_Type *base)
+{
+    return (base->TC);
+}
+
+/*!
  * @brief Register callback.
  *
  * @param base      Ctimer peripheral base address
@@ -359,12 +345,14 @@ static inline void CTIMER_EnableInterrupts(CTIMER_Type *base, uint32_t mask)
     /* Enable match interrupts */
     base->MCR |= mask & (CTIMER_MCR_MR0I_MASK | CTIMER_MCR_MR1I_MASK | CTIMER_MCR_MR2I_MASK | CTIMER_MCR_MR3I_MASK);
 
-    /* Enable capture interrupts */
+/* Enable capture interrupts */
+#if !(defined(FSL_FEATURE_CTIMER_HAS_NO_INPUT_CAPTURE) && (FSL_FEATURE_CTIMER_HAS_NO_INPUT_CAPTURE))
     base->CCR |= mask & (CTIMER_CCR_CAP0I_MASK | CTIMER_CCR_CAP1I_MASK | CTIMER_CCR_CAP2I_MASK
 #if defined(FSL_FEATURE_CTIMER_HAS_CCR_CAP3) && FSL_FEATURE_CTIMER_HAS_CCR_CAP3
                          | CTIMER_CCR_CAP3I_MASK
 #endif /* FSL_FEATURE_CTIMER_HAS_CCR_CAP3 */
-                         );
+                        );
+#endif
 }
 
 /*!
@@ -379,12 +367,14 @@ static inline void CTIMER_DisableInterrupts(CTIMER_Type *base, uint32_t mask)
     /* Disable match interrupts */
     base->MCR &= ~(mask & (CTIMER_MCR_MR0I_MASK | CTIMER_MCR_MR1I_MASK | CTIMER_MCR_MR2I_MASK | CTIMER_MCR_MR3I_MASK));
 
-    /* Disable capture interrupts */
+/* Disable capture interrupts */
+#if !(defined(FSL_FEATURE_CTIMER_HAS_NO_INPUT_CAPTURE) && (FSL_FEATURE_CTIMER_HAS_NO_INPUT_CAPTURE))
     base->CCR &= ~(mask & (CTIMER_CCR_CAP0I_MASK | CTIMER_CCR_CAP1I_MASK | CTIMER_CCR_CAP2I_MASK
 #if defined(FSL_FEATURE_CTIMER_HAS_CCR_CAP3) && FSL_FEATURE_CTIMER_HAS_CCR_CAP3
                            | CTIMER_CCR_CAP3I_MASK
 #endif /* FSL_FEATURE_CTIMER_HAS_CCR_CAP3 */
                            ));
+#endif
 }
 
 /*!
@@ -403,12 +393,14 @@ static inline uint32_t CTIMER_GetEnabledInterrupts(CTIMER_Type *base)
     enabledIntrs =
         base->MCR & (CTIMER_MCR_MR0I_MASK | CTIMER_MCR_MR1I_MASK | CTIMER_MCR_MR2I_MASK | CTIMER_MCR_MR3I_MASK);
 
-    /* Get all the capture interrupts enabled */
+/* Get all the capture interrupts enabled */
+#if !(defined(FSL_FEATURE_CTIMER_HAS_NO_INPUT_CAPTURE) && (FSL_FEATURE_CTIMER_HAS_NO_INPUT_CAPTURE))
     enabledIntrs |= base->CCR & (CTIMER_CCR_CAP0I_MASK | CTIMER_CCR_CAP1I_MASK | CTIMER_CCR_CAP2I_MASK
 #if defined(FSL_FEATURE_CTIMER_HAS_CCR_CAP3) && FSL_FEATURE_CTIMER_HAS_CCR_CAP3
                                  | CTIMER_CCR_CAP3I_MASK
 #endif /* FSL_FEATURE_CTIMER_HAS_CCR_CAP3 */
-                                 );
+                                );
+#endif
 
     return enabledIntrs;
 }

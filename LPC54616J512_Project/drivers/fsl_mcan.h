@@ -1,35 +1,9 @@
 /*
- * The Clear BSD License
  * Copyright (c) 2016, Freescale Semiconductor, Inc.
  * Copyright 2016-2017 NXP
  * All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted (subject to the limitations in the disclaimer below) provided
- * that the following conditions are met:
- *
- * o Redistributions of source code must retain the above copyright notice, this list
- *   of conditions and the following disclaimer.
- *
- * o Redistributions in binary form must reproduce the above copyright notice, this
- *   list of conditions and the following disclaimer in the documentation and/or
- *   other materials provided with the distribution.
- *
- * o Neither the name of the copyright holder nor the names of its
- *   contributors may be used to endorse or promote products derived from this
- *   software without specific prior written permission.
- *
- * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS LICENSE.
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
- * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * SPDX-License-Identifier: BSD-3-Clause
  */
 #ifndef _FSL_MCAN_H_
 #define _FSL_MCAN_H_
@@ -47,31 +21,38 @@
 
 /*! @name Driver version */
 /*@{*/
-/*! @brief MCAN driver version 2.0.1. */
-#define FSL_MCAN_DRIVER_VERSION (MAKE_VERSION(2, 0, 1))
+/*! @brief MCAN driver version 2.1.0. */
+#define FSL_MCAN_DRIVER_VERSION (MAKE_VERSION(2, 1, 0))
 /*@}*/
+
+#ifndef MCAN_RETRY_TIMES
+/* Define to 0 by default means to retry infinitely until the flag is assert/de-assert.
+ * User can change the macro with their requirement by defined the MACRO.
+ */
+#define MCAN_RETRY_TIMES (0U)
+#endif
 
 /*! @brief MCAN transfer status. */
 enum _mcan_status
 {
-    kStatus_MCAN_TxBusy = MAKE_STATUS(kStatusGroup_MCAN, 0),            /*!< Tx Buffer is Busy. */
-    kStatus_MCAN_TxIdle = MAKE_STATUS(kStatusGroup_MCAN, 1),            /*!< Tx Buffer is Idle. */
-    kStatus_MCAN_RxBusy = MAKE_STATUS(kStatusGroup_MCAN, 2),            /*!< Rx Buffer is Busy. */
-    kStatus_MCAN_RxIdle = MAKE_STATUS(kStatusGroup_MCAN, 3),            /*!< Rx Buffer is Idle. */
-    kStatus_MCAN_RxFifo0New = MAKE_STATUS(kStatusGroup_MCAN, 4),        /*!< New message written to Rx FIFO 0. */
-    kStatus_MCAN_RxFifo0Idle = MAKE_STATUS(kStatusGroup_MCAN, 5),       /*!< Rx FIFO 0 is Idle. */
+    kStatus_MCAN_TxBusy           = MAKE_STATUS(kStatusGroup_MCAN, 0),  /*!< Tx Buffer is Busy. */
+    kStatus_MCAN_TxIdle           = MAKE_STATUS(kStatusGroup_MCAN, 1),  /*!< Tx Buffer is Idle. */
+    kStatus_MCAN_RxBusy           = MAKE_STATUS(kStatusGroup_MCAN, 2),  /*!< Rx Buffer is Busy. */
+    kStatus_MCAN_RxIdle           = MAKE_STATUS(kStatusGroup_MCAN, 3),  /*!< Rx Buffer is Idle. */
+    kStatus_MCAN_RxFifo0New       = MAKE_STATUS(kStatusGroup_MCAN, 4),  /*!< New message written to Rx FIFO 0. */
+    kStatus_MCAN_RxFifo0Idle      = MAKE_STATUS(kStatusGroup_MCAN, 5),  /*!< Rx FIFO 0 is Idle. */
     kStatus_MCAN_RxFifo0Watermark = MAKE_STATUS(kStatusGroup_MCAN, 6),  /*!< Rx FIFO 0 fill level reached watermark. */
-    kStatus_MCAN_RxFifo0Full = MAKE_STATUS(kStatusGroup_MCAN, 7),       /*!< Rx FIFO 0 full. */
-    kStatus_MCAN_RxFifo0Lost = MAKE_STATUS(kStatusGroup_MCAN, 8),       /*!< Rx FIFO 0 message lost. */
-    kStatus_MCAN_RxFifo1New = MAKE_STATUS(kStatusGroup_MCAN, 9),        /*!< New message written to Rx FIFO 1. */
-    kStatus_MCAN_RxFifo1Idle = MAKE_STATUS(kStatusGroup_MCAN, 10),      /*!< Rx FIFO 1 is Idle. */
+    kStatus_MCAN_RxFifo0Full      = MAKE_STATUS(kStatusGroup_MCAN, 7),  /*!< Rx FIFO 0 full. */
+    kStatus_MCAN_RxFifo0Lost      = MAKE_STATUS(kStatusGroup_MCAN, 8),  /*!< Rx FIFO 0 message lost. */
+    kStatus_MCAN_RxFifo1New       = MAKE_STATUS(kStatusGroup_MCAN, 9),  /*!< New message written to Rx FIFO 1. */
+    kStatus_MCAN_RxFifo1Idle      = MAKE_STATUS(kStatusGroup_MCAN, 10), /*!< Rx FIFO 1 is Idle. */
     kStatus_MCAN_RxFifo1Watermark = MAKE_STATUS(kStatusGroup_MCAN, 11), /*!< Rx FIFO 1 fill level reached watermark. */
-    kStatus_MCAN_RxFifo1Full = MAKE_STATUS(kStatusGroup_MCAN, 12),      /*!< Rx FIFO 1 full. */
-    kStatus_MCAN_RxFifo1Lost = MAKE_STATUS(kStatusGroup_MCAN, 13),      /*!< Rx FIFO 1 message lost. */
-    kStatus_MCAN_RxFifo0Busy = MAKE_STATUS(kStatusGroup_MCAN, 14),      /*!< Rx FIFO 0 is busy. */
-    kStatus_MCAN_RxFifo1Busy = MAKE_STATUS(kStatusGroup_MCAN, 15),      /*!< Rx FIFO 1 is busy. */
-    kStatus_MCAN_ErrorStatus = MAKE_STATUS(kStatusGroup_MCAN, 16),      /*!< MCAN Module Error and Status. */
-    kStatus_MCAN_UnHandled = MAKE_STATUS(kStatusGroup_MCAN, 17),        /*!< UnHadled Interrupt asserted. */
+    kStatus_MCAN_RxFifo1Full      = MAKE_STATUS(kStatusGroup_MCAN, 12), /*!< Rx FIFO 1 full. */
+    kStatus_MCAN_RxFifo1Lost      = MAKE_STATUS(kStatusGroup_MCAN, 13), /*!< Rx FIFO 1 message lost. */
+    kStatus_MCAN_RxFifo0Busy      = MAKE_STATUS(kStatusGroup_MCAN, 14), /*!< Rx FIFO 0 is busy. */
+    kStatus_MCAN_RxFifo1Busy      = MAKE_STATUS(kStatusGroup_MCAN, 15), /*!< Rx FIFO 1 is busy. */
+    kStatus_MCAN_ErrorStatus      = MAKE_STATUS(kStatusGroup_MCAN, 16), /*!< MCAN Module Error and Status. */
+    kStatus_MCAN_UnHandled        = MAKE_STATUS(kStatusGroup_MCAN, 17), /*!< UnHadled Interrupt asserted. */
 };
 
 /*!
@@ -84,10 +65,10 @@ enum _mcan_status
  */
 enum _mcan_flags
 {
-    kMCAN_AccesstoRsvdFlag = CAN_IR_ARA_MASK,    /*!< CAN Synchronization Status. */
+    kMCAN_AccesstoRsvdFlag    = CAN_IR_ARA_MASK, /*!< CAN Synchronization Status. */
     kMCAN_ProtocolErrDIntFlag = CAN_IR_PED_MASK, /*!< Tx Warning Interrupt Flag. */
     kMCAN_ProtocolErrAIntFlag = CAN_IR_PEA_MASK, /*!< Rx Warning Interrupt Flag. */
-    kMCAN_BusOffIntFlag = CAN_IR_BO_MASK,        /*!< Tx Error Warning Status. */
+    kMCAN_BusOffIntFlag       = CAN_IR_BO_MASK,  /*!< Tx Error Warning Status. */
     kMCAN_ErrorWarningIntFlag = CAN_IR_EW_MASK,  /*!< Rx Error Warning Status. */
     kMCAN_ErrorPassiveIntFlag = CAN_IR_EP_MASK,  /*!< Rx Error Warning Status. */
 };
@@ -100,14 +81,14 @@ enum _mcan_flags
  */
 enum _mcan_rx_fifo_flags
 {
-    kMCAN_RxFifo0NewFlag = CAN_IR_RF0N_MASK,       /*!< Rx FIFO 0 new message flag. */
+    kMCAN_RxFifo0NewFlag       = CAN_IR_RF0N_MASK, /*!< Rx FIFO 0 new message flag. */
     kMCAN_RxFifo0WatermarkFlag = CAN_IR_RF0W_MASK, /*!< Rx FIFO 0 watermark reached flag. */
-    kMCAN_RxFifo0FullFlag = CAN_IR_RF0F_MASK,      /*!< Rx FIFO 0 full flag. */
-    kMCAN_RxFifo0LostFlag = CAN_IR_RF0L_MASK,      /*!< Rx FIFO 0 message lost flag. */
-    kMCAN_RxFifo1NewFlag = CAN_IR_RF1N_MASK,       /*!< Rx FIFO 0 new message flag. */
+    kMCAN_RxFifo0FullFlag      = CAN_IR_RF0F_MASK, /*!< Rx FIFO 0 full flag. */
+    kMCAN_RxFifo0LostFlag      = CAN_IR_RF0L_MASK, /*!< Rx FIFO 0 message lost flag. */
+    kMCAN_RxFifo1NewFlag       = CAN_IR_RF1N_MASK, /*!< Rx FIFO 0 new message flag. */
     kMCAN_RxFifo1WatermarkFlag = CAN_IR_RF1W_MASK, /*!< Rx FIFO 0 watermark reached flag. */
-    kMCAN_RxFifo1FullFlag = CAN_IR_RF1F_MASK,      /*!< Rx FIFO 0 full flag. */
-    kMCAN_RxFifo1LostFlag = CAN_IR_RF1L_MASK,      /*!< Rx FIFO 0 message lost flag. */
+    kMCAN_RxFifo1FullFlag      = CAN_IR_RF1F_MASK, /*!< Rx FIFO 0 full flag. */
+    kMCAN_RxFifo1LostFlag      = CAN_IR_RF1L_MASK, /*!< Rx FIFO 0 message lost flag. */
 };
 
 /*!
@@ -118,13 +99,13 @@ enum _mcan_rx_fifo_flags
  */
 enum _mcan_tx_flags
 {
-    kMCAN_TxTransmitCompleteFlag = CAN_IR_TC_MASK,      /*!< Transmission completed flag. */
-    kMCAN_TxTransmitCancelFinishFlag = CAN_IR_TCF_MASK, /*!< Transmission cancellation finished flag. */
-    kMCAN_TxEventFifoLostFlag = CAN_IR_TEFL_MASK,       /*!< Tx Event FIFO element lost. */
-    kMCAN_TxEventFifoFullFlag = CAN_IR_TEFF_MASK,       /*!< Tx Event FIFO full. */
-    kMCAN_TxEventFifoWatermarkFlag = CAN_IR_TEFW_MASK,  /*!< Tx Event FIFO fill level reached watermark. */
-    kMCAN_TxEventFifoNewFlag = CAN_IR_TEFN_MASK,        /*!< Tx Handler wrote Tx Event FIFO element flag. */
-    kMCAN_TxEventFifoEmptyFlag = CAN_IR_TFE_MASK,       /*!< Tx FIFO empty flag. */
+    kMCAN_TxTransmitCompleteFlag     = CAN_IR_TC_MASK,   /*!< Transmission completed flag. */
+    kMCAN_TxTransmitCancelFinishFlag = CAN_IR_TCF_MASK,  /*!< Transmission cancellation finished flag. */
+    kMCAN_TxEventFifoLostFlag        = CAN_IR_TEFL_MASK, /*!< Tx Event FIFO element lost. */
+    kMCAN_TxEventFifoFullFlag        = CAN_IR_TEFF_MASK, /*!< Tx Event FIFO full. */
+    kMCAN_TxEventFifoWatermarkFlag   = CAN_IR_TEFW_MASK, /*!< Tx Event FIFO fill level reached watermark. */
+    kMCAN_TxEventFifoNewFlag         = CAN_IR_TEFN_MASK, /*!< Tx Handler wrote Tx Event FIFO element flag. */
+    kMCAN_TxEventFifoEmptyFlag       = CAN_IR_TFE_MASK,  /*!< Tx FIFO empty flag. */
 };
 
 /*!
@@ -134,8 +115,8 @@ enum _mcan_tx_flags
  */
 enum _mcan_interrupt_enable
 {
-    kMCAN_BusOffInterruptEnable = CAN_IE_BOE_MASK,  /*!< Bus Off interrupt. */
-    kMCAN_ErrorInterruptEnable = CAN_IE_EPE_MASK,   /*!< Error interrupt. */
+    kMCAN_BusOffInterruptEnable  = CAN_IE_BOE_MASK, /*!< Bus Off interrupt. */
+    kMCAN_ErrorInterruptEnable   = CAN_IE_EPE_MASK, /*!< Error interrupt. */
     kMCAN_WarningInterruptEnable = CAN_IE_EWE_MASK, /*!< Rx Warning interrupt. */
 };
 
@@ -143,20 +124,20 @@ enum _mcan_interrupt_enable
 typedef enum _mcan_frame_idformat
 {
     kMCAN_FrameIDStandard = 0x0U, /*!< Standard frame format attribute. */
-    kMCAN_FrameIDExtend = 0x1U,   /*!< Extend frame format attribute. */
+    kMCAN_FrameIDExtend   = 0x1U, /*!< Extend frame format attribute. */
 } mcan_frame_idformat_t;
 
 /*! @brief MCAN frame type. */
 typedef enum _mcan_frame_type
 {
-    kMCAN_FrameTypeData = 0x0U,   /*!< Data frame type attribute. */
+    kMCAN_FrameTypeData   = 0x0U, /*!< Data frame type attribute. */
     kMCAN_FrameTypeRemote = 0x1U, /*!< Remote frame type attribute. */
 } mcan_frame_type_t;
 
 /*! @brief MCAN frame datafield size. */
 typedef enum _mcan_bytes_in_datafield
 {
-    kMCAN_8ByteDatafield = 0x0U,  /*!< 8 byte data field. */
+    kMCAN_8ByteDatafield  = 0x0U, /*!< 8 byte data field. */
     kMCAN_12ByteDatafield = 0x1U, /*!< 12 byte data field. */
     kMCAN_16ByteDatafield = 0x2U, /*!< 16 byte data field. */
     kMCAN_20ByteDatafield = 0x3U, /*!< 20 byte data field. */
@@ -191,7 +172,7 @@ typedef struct _mcan_tx_buffer_frame
         uint32_t mm : 8;  /*!< Message Marker. */
     };
     uint8_t *data;
-    uint8_t size;       /*!< classical CAN is 8(bytes), FD is 12/64 such. */
+    uint8_t size; /*!< classical CAN is 8(bytes), FD is 12/64 such. */
 } mcan_tx_buffer_frame_t;
 
 /*! @brief MCAN Rx FIFO/Buffer structure. */
@@ -216,7 +197,7 @@ typedef struct _mcan_rx_buffer_frame
         uint32_t anmf : 1;  /*!< Accepted Non-matching Frame. */
     };
     uint8_t *data;
-    uint8_t size;       /*!< classical CAN is 8(bytes), FD is 12/64 such. */
+    uint8_t size; /*!< classical CAN is 8(bytes), FD is 12/64 such. */
 } mcan_rx_buffer_frame_t;
 
 /*! @brief MCAN Rx FIFO block number. */
@@ -229,14 +210,14 @@ typedef enum _mcan_fifo_type
 /*! @brief MCAN FIFO Operation Mode. */
 typedef enum _mcan_fifo_opmode_config
 {
-    kMCAN_FifoBlocking = 0x0U,  /*!< FIFO blocking mode. */
+    kMCAN_FifoBlocking  = 0x0U, /*!< FIFO blocking mode. */
     kMCAN_FifoOverwrite = 0x1U, /*!< FIFO overwrite mode. */
 } mcan_fifo_opmode_config_t;
 
 /*! @brief MCAN Tx FIFO/Queue Mode. */
 typedef enum _mcan_txmode_config
 {
-    kMCAN_txFifo = 0x0U,  /*!< Tx FIFO operation. */
+    kMCAN_txFifo  = 0x0U, /*!< Tx FIFO operation. */
     kMCAN_txQueue = 0x1U, /*!< Tx Queue operation. */
 } mcan_txmode_config_t;
 
@@ -252,20 +233,20 @@ typedef enum _mcan_nonmasking_frame_config
 {
     kMCAN_acceptinFifo0 = 0x0U, /*!< Accept non-masking frames in Rx FIFO 0. */
     kMCAN_acceptinFifo1 = 0x1U, /*!< Accept non-masking frames in Rx FIFO 1. */
-    kMCAN_reject0 = 0x2U,       /*!< Reject non-masking frames. */
-    kMCAN_reject1 = 0x3U,       /*!< Reject non-masking frames. */
+    kMCAN_reject0       = 0x2U, /*!< Reject non-masking frames. */
+    kMCAN_reject1       = 0x3U, /*!< Reject non-masking frames. */
 } mcan_nonmasking_frame_config_t;
 
 /*! @brief MCAN Filter Element Configuration. */
 typedef enum _mcan_fec_config
 {
-    kMCAN_disable = 0x0U,       /*!< Disable filter element. */
-    kMCAN_storeinFifo0 = 0x1U,  /*!< Store in Rx FIFO 0 if filter matches. */
-    kMCAN_storeinFifo1 = 0x2U,  /*!< Store in Rx FIFO 1 if filter matches. */
-    kMCAN_reject = 0x3U,        /*!< Reject ID if filter matches. */
-    kMCAN_setprio = 0x4U,       /*!< Set priority if filter matches. */
-    kMCAN_setpriofifo0 = 0x5U,  /*!< Set priority and store in FIFO 0 if filter matches. */
-    kMCAN_setpriofifo1 = 0x6U,  /*!< Set priority and store in FIFO 1 if filter matches. */
+    kMCAN_disable       = 0x0U, /*!< Disable filter element. */
+    kMCAN_storeinFifo0  = 0x1U, /*!< Store in Rx FIFO 0 if filter matches. */
+    kMCAN_storeinFifo1  = 0x2U, /*!< Store in Rx FIFO 1 if filter matches. */
+    kMCAN_reject        = 0x3U, /*!< Reject ID if filter matches. */
+    kMCAN_setprio       = 0x4U, /*!< Set priority if filter matches. */
+    kMCAN_setpriofifo0  = 0x5U, /*!< Set priority and store in FIFO 0 if filter matches. */
+    kMCAN_setpriofifo1  = 0x6U, /*!< Set priority and store in FIFO 1 if filter matches. */
     kMCAN_storeinbuffer = 0x7U, /*!< Store into Rx Buffer or as debug message. */
 } mcan_fec_config_t;
 
@@ -307,9 +288,9 @@ typedef struct _mcan_tx_buffer_config
 /*! @brief MCAN Filter Type. */
 typedef enum _mcan_std_filter_type
 {
-    kMCAN_range = 0x0U,           /*!< Range filter from SFID1 to SFID2. */
-    kMCAN_dual = 0x1U,            /*!< Dual ID filter for SFID1 or SFID2. */
-    kMCAN_classic = 0x2U,         /*!< Classic filter: SFID1 = filter, SFID2 = mask. */
+    kMCAN_range           = 0x0U, /*!< Range filter from SFID1 to SFID2. */
+    kMCAN_dual            = 0x1U, /*!< Dual ID filter for SFID1 or SFID2. */
+    kMCAN_classic         = 0x2U, /*!< Classic filter: SFID1 = filter, SFID2 = mask. */
     kMCAN_disableORrange2 = 0x3U, /*!< Filter element disabled for standard filter
                                     or Range filter, XIDAM mask not applied for extended filter. */
 } mcan_filter_type_t;
@@ -317,21 +298,21 @@ typedef enum _mcan_std_filter_type
 /*! @brief MCAN Standard Message ID Filter Element. */
 typedef struct _mcan_std_filter_element_config
 {
-    uint32_t sfid2 : 11;        /*!< Standard Filter ID 2. */
-    uint32_t : 5;               /*!< Reserved. */
-    uint32_t sfid1 : 11;        /*!< Standard Filter ID 1. */
-    uint32_t sfec : 3;          /*!< Standard Filter Element Configuration. */
-    uint32_t sft : 2;           /*!< Standard Filter Type. */
+    uint32_t sfid2 : 11; /*!< Standard Filter ID 2. */
+    uint32_t : 5;        /*!< Reserved. */
+    uint32_t sfid1 : 11; /*!< Standard Filter ID 1. */
+    uint32_t sfec : 3;   /*!< Standard Filter Element Configuration. */
+    uint32_t sft : 2;    /*!< Standard Filter Type. */
 } mcan_std_filter_element_config_t;
 
 /*! @brief MCAN Extended Message ID Filter Element. */
 typedef struct _mcan_ext_filter_element_config
 {
-    uint32_t efid1 : 29;        /*!< Extended Filter ID 1. */
-    uint32_t efec : 3;          /*!< Extended Filter Element Configuration. */
-    uint32_t efid2 : 29;        /*!< Extended Filter ID 2. */
-    uint32_t : 1;               /*!< Reserved. */
-    uint32_t eft : 2;           /*!< Extended Filter Type. */
+    uint32_t efid1 : 29; /*!< Extended Filter ID 1. */
+    uint32_t efec : 3;   /*!< Extended Filter Element Configuration. */
+    uint32_t efid2 : 29; /*!< Extended Filter ID 2. */
+    uint32_t : 1;        /*!< Reserved. */
+    uint32_t eft : 2;    /*!< Extended Filter Type. */
 } mcan_ext_filter_element_config_t;
 
 /*! @brief MCAN Rx filter configuration. */
@@ -344,26 +325,33 @@ typedef struct _mcan_frame_filter_config
     mcan_nonmasking_frame_config_t nmFrame; /*!< Non-masking frame treatment. */
 } mcan_frame_filter_config_t;
 
-/*! @brief MCAN module configuration structure. */
-typedef struct _mcan_config
-{
-    uint32_t baudRateA;     /*!< Baud rate of Arbitration phase in bps. */
-    uint32_t baudRateD;     /*!< Baud rate of Data phase in bps. */
-    bool enableCanfdNormal; /*!< Enable or Disable CANFD normal. */
-    bool enableCanfdSwitch; /*!< Enable or Disable CANFD with baudrate switch. */
-    bool enableLoopBackInt; /*!< Enable or Disable Internal Back. */
-    bool enableLoopBackExt; /*!< Enable or Disable External Loop Back. */
-    bool enableBusMon;      /*!< Enable or Disable Bus Monitoring Mode. */
-} mcan_config_t;
-
 /*! @brief MCAN protocol timing characteristic configuration structure. */
 typedef struct _mcan_timing_config
 {
-    uint16_t preDivider; /*!< Clock Pre-scaler Division Factor. */
-    uint8_t rJumpwidth;  /*!< Re-sync Jump Width. */
-    uint8_t seg1;        /*!< Data Time Segment 1. */
-    uint8_t seg2;        /*!< Data Time Segment 2. */
+    uint16_t preDivider; /*!< Nominal Clock Pre-scaler Division Factor. */
+    uint8_t rJumpwidth;  /*!< Nominal Re-sync Jump Width. */
+    uint8_t seg1;        /*!< Nominal Time Segment 1. */
+    uint8_t seg2;        /*!< Nominal Time Segment 2. */
+#if (defined(FSL_FEATURE_CAN_SUPPORT_CANFD) && FSL_FEATURE_CAN_SUPPORT_CANFD)
+    uint16_t datapreDivider; /*!< Data Clock Pre-scaler Division Factor. */
+    uint8_t datarJumpwidth;  /*!< Data Re-sync Jump Width. */
+    uint8_t dataseg1;        /*!< Data Time Segment 1. */
+    uint8_t dataseg2;        /*!< Data Time Segment 2. */
+#endif
 } mcan_timing_config_t;
+
+/*! @brief MCAN module configuration structure. */
+typedef struct _mcan_config
+{
+    uint32_t baudRateA;                /*!< Baud rate of Arbitration phase in bps. */
+    uint32_t baudRateD;                /*!< Baud rate of Data phase in bps. */
+    bool enableCanfdNormal;            /*!< Enable or Disable CANFD normal. */
+    bool enableCanfdSwitch;            /*!< Enable or Disable CANFD with baudrate switch. */
+    bool enableLoopBackInt;            /*!< Enable or Disable Internal Back. */
+    bool enableLoopBackExt;            /*!< Enable or Disable External Loop Back. */
+    bool enableBusMon;                 /*!< Enable or Disable Bus Monitoring Mode. */
+    mcan_timing_config_t timingConfig; /*!< Protocol timing . */
+} mcan_config_t;
 
 /*! @brief MCAN Buffer transfer. */
 typedef struct _mcan_buffer_transfer
@@ -428,7 +416,7 @@ extern "C" {
  *  @code
  *   mcan_config_t config;
  *   config->baudRateA = 500000U;
- *   config->baudRateD = 500000U;
+ *   config->baudRateD = 1000000U;
  *   config->enableCanfdNormal = false;
  *   config->enableCanfdSwitch = false;
  *   config->enableLoopBackInt = false;
@@ -458,7 +446,7 @@ void MCAN_Deinit(CAN_Type *base);
  * This function initializes the MCAN configuration structure to default values. The default
  * values are as follows.
  *   config->baudRateA = 500000U;
- *   config->baudRateD = 500000U;
+ *   config->baudRateD = 1000000U;
  *   config->enableCanfdNormal = false;
  *   config->enableCanfdSwitch = false;
  *   config->enableLoopBackInt = false;
@@ -513,6 +501,17 @@ static inline uint32_t MCAN_GetMsgRAMBase(CAN_Type *base)
 }
 
 /*!
+ * @brief Calculates the improved timing values by specific baudrates for classical CAN
+ *
+ * @param baudRate  The classical CAN speed in bps defined by user
+ * @param sourceClock_Hz The Source clock data speed in bps. Zero to disable baudrate switching
+ * @param pconfig Pointer to the MCAN timing configuration structure.
+ *
+ * @return TRUE if timing configuration found, FALSE if failed to find configuration
+ */
+bool MCAN_CalculateImprovedTimingValues(uint32_t baudRate, uint32_t sourceClock_Hz, mcan_timing_config_t *pconfig);
+
+/*!
  * @brief Sets the MCAN protocol arbitration phase timing characteristic.
  *
  * This function gives user settings to CAN bus timing characteristic.
@@ -529,6 +528,20 @@ static inline uint32_t MCAN_GetMsgRAMBase(CAN_Type *base)
 void MCAN_SetArbitrationTimingConfig(CAN_Type *base, const mcan_timing_config_t *config);
 
 #if (defined(FSL_FEATURE_CAN_SUPPORT_CANFD) && FSL_FEATURE_CAN_SUPPORT_CANFD)
+/*!
+ * @brief Calculates the improved timing values by specific baudrates for CANFD
+ *
+ * @param baudRate  The CANFD bus control speed in bps defined by user
+ * @param baudRateFD  The CANFD bus data speed in bps defined by user
+ * @param sourceClock_Hz The Source clock data speed in bps.
+ * @param pconfig Pointer to the MCAN timing configuration structure.
+ *
+ * @return TRUE if timing configuration found, FALSE if failed to find configuration
+ */
+bool MCAN_FDCalculateImprovedTimingValues(uint32_t baudRate,
+                                          uint32_t baudRateFD,
+                                          uint32_t sourceClock_Hz,
+                                          mcan_timing_config_t *pconfig);
 /*!
  * @brief Sets the MCAN protocol data phase timing characteristic.
  *
@@ -736,7 +749,7 @@ static inline void MCAN_ClearRxBufferStatusFlag(CAN_Type *base, uint8_t idx)
 static inline void MCAN_EnableInterrupts(CAN_Type *base, uint32_t line, uint32_t mask)
 {
     base->ILE |= (1U << line);
-    if (0 == line)
+    if (0U == line)
     {
         base->ILS &= ~mask;
     }

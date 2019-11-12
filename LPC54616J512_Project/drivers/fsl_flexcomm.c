@@ -1,35 +1,9 @@
 /*
- * The Clear BSD License
  * Copyright (c) 2016, Freescale Semiconductor, Inc.
  * Copyright 2016-2017 NXP
  * All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted (subject to the limitations in the disclaimer below) provided
- *  that the following conditions are met:
- *
- * o Redistributions of source code must retain the above copyright notice, this list
- *   of conditions and the following disclaimer.
- *
- * o Redistributions in binary form must reproduce the above copyright notice, this
- *   list of conditions and the following disclaimer in the documentation and/or
- *   other materials provided with the distribution.
- *
- * o Neither the name of the copyright holder nor the names of its
- *   contributors may be used to endorse or promote products derived from this
- *   software without specific prior written permission.
- *
- * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS LICENSE.
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
- * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * SPDX-License-Identifier: BSD-3-Clause
  */
 
 #include "fsl_common.h"
@@ -74,6 +48,11 @@ static const uint32_t s_flexcommBaseAddrs[FSL_FEATURE_SOC_FLEXCOMM_COUNT] = FLEX
 static const clock_ip_name_t s_flexcommClocks[] = FLEXCOMM_CLOCKS;
 #endif /* FSL_SDK_DISABLE_DRIVER_CLOCK_CONTROL */
 
+#if !(defined(FSL_FEATURE_FLEXCOMM_HAS_NO_RESET) && FSL_FEATURE_FLEXCOMM_HAS_NO_RESET)
+/*! @brief Pointers to FLEXCOMM resets for each instance. */
+static const reset_ip_name_t s_flexcommResets[] = FLEXCOMM_RSTS;
+#endif
+
 /*******************************************************************************
  * Code
  ******************************************************************************/
@@ -100,6 +79,7 @@ static bool FLEXCOMM_PeripheralIsPresent(FLEXCOMM_Type *base, FLEXCOMM_PERIPH_T 
 }
 
 /* Get the index corresponding to the FLEXCOMM */
+/*! brief Returns instance number for FLEXCOMM module with given base address. */
 uint32_t FLEXCOMM_GetInstance(void *base)
 {
     int i;
@@ -144,6 +124,7 @@ static status_t FLEXCOMM_SetPeriph(FLEXCOMM_Type *base, FLEXCOMM_PERIPH_T periph
     return kStatus_Success;
 }
 
+/*! brief Initializes FLEXCOMM and selects peripheral mode according to the second parameter. */
 status_t FLEXCOMM_Init(void *base, FLEXCOMM_PERIPH_T periph)
 {
     int idx = FLEXCOMM_GetInstance(base);
@@ -158,10 +139,17 @@ status_t FLEXCOMM_Init(void *base, FLEXCOMM_PERIPH_T periph)
     CLOCK_EnableClock(s_flexcommClocks[idx]);
 #endif /* FSL_SDK_DISABLE_DRIVER_CLOCK_CONTROL */
 
+#if !(defined(FSL_FEATURE_FLEXCOMM_HAS_NO_RESET) && FSL_FEATURE_FLEXCOMM_HAS_NO_RESET)
+    /* Reset the FLEXCOMM module */
+    RESET_PeripheralReset(s_flexcommResets[idx]);
+#endif
+
     /* Set the FLEXCOMM to given peripheral */
     return FLEXCOMM_SetPeriph((FLEXCOMM_Type *)base, periph, 0);
 }
 
+/*! brief Sets IRQ handler for given FLEXCOMM module. It is used by drivers register IRQ handler according to FLEXCOMM
+ * mode */
 void FLEXCOMM_SetIRQHandler(void *base, flexcomm_irq_handler_t handler, void *handle)
 {
     uint32_t instance;
@@ -171,7 +159,7 @@ void FLEXCOMM_SetIRQHandler(void *base, flexcomm_irq_handler_t handler, void *ha
 
     /* Clear handler first to avoid execution of the handler with wrong handle */
     s_flexcommIrqHandler[instance] = NULL;
-    s_flexcommHandle[instance] = handle;
+    s_flexcommHandle[instance]     = handle;
     s_flexcommIrqHandler[instance] = handler;
 /* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
   exception return operation might vector to incorrect interrupt */
@@ -304,6 +292,105 @@ void FLEXCOMM9_DriverIRQHandler(void)
 {
     assert(s_flexcommIrqHandler[9]);
     s_flexcommIrqHandler[9]((void *)s_flexcommBaseAddrs[9], s_flexcommHandle[9]);
+/* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
+  exception return operation might vector to incorrect interrupt */
+#if defined __CORTEX_M && (__CORTEX_M == 4U)
+    __DSB();
+#endif
+}
+#endif
+
+#if defined(FLEXCOMM10)
+void FLEXCOMM10_DriverIRQHandler(void)
+{
+    assert(s_flexcommIrqHandler[10]);
+    s_flexcommIrqHandler[10]((void *)s_flexcommBaseAddrs[10], s_flexcommHandle[10]);
+/* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
+  exception return operation might vector to incorrect interrupt */
+#if defined __CORTEX_M && (__CORTEX_M == 4U)
+    __DSB();
+#endif
+}
+#endif
+
+#if defined(FLEXCOMM11)
+void FLEXCOMM11_DriverIRQHandler(void)
+{
+    assert(s_flexcommIrqHandler[11]);
+    s_flexcommIrqHandler[11]((void *)s_flexcommBaseAddrs[11], s_flexcommHandle[11]);
+/* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
+  exception return operation might vector to incorrect interrupt */
+#if defined __CORTEX_M && (__CORTEX_M == 4U)
+    __DSB();
+#endif
+}
+#endif
+
+#if defined(FLEXCOMM12)
+void FLEXCOMM12_DriverIRQHandler(void)
+{
+    assert(s_flexcommIrqHandler[12]);
+    s_flexcommIrqHandler[12]((void *)s_flexcommBaseAddrs[12], s_flexcommHandle[12]);
+/* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
+  exception return operation might vector to incorrect interrupt */
+#if defined __CORTEX_M && (__CORTEX_M == 4U)
+    __DSB();
+#endif
+}
+#endif
+
+#if defined(FLEXCOMM13)
+void FLEXCOMM13_DriverIRQHandler(void)
+{
+    assert(s_flexcommIrqHandler[13]);
+    s_flexcommIrqHandler[13]((void *)s_flexcommBaseAddrs[13], s_flexcommHandle[13]);
+/* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
+  exception return operation might vector to incorrect interrupt */
+#if defined __CORTEX_M && (__CORTEX_M == 4U)
+    __DSB();
+#endif
+}
+#endif
+
+#if defined(FLEXCOMM14)
+void FLEXCOMM14_DriverIRQHandler(void)
+{
+    uint32_t instance;
+
+    /* Look up instance number */
+    instance = FLEXCOMM_GetInstance(FLEXCOMM14);
+    assert(s_flexcommIrqHandler[instance]);
+    s_flexcommIrqHandler[instance]((void *)s_flexcommBaseAddrs[instance], s_flexcommHandle[instance]);
+/* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
+  exception return operation might vector to incorrect interrupt */
+#if defined __CORTEX_M && (__CORTEX_M == 4U)
+    __DSB();
+#endif
+}
+#endif
+
+#if defined(FLEXCOMM15)
+void FLEXCOMM15_DriverIRQHandler(void)
+{
+    uint32_t instance;
+
+    /* Look up instance number */
+    instance = FLEXCOMM_GetInstance(FLEXCOMM14);
+    assert(s_flexcommIrqHandler[instance]);
+    s_flexcommIrqHandler[instance]((void *)s_flexcommBaseAddrs[instance], s_flexcommHandle[instance]);
+/* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
+  exception return operation might vector to incorrect interrupt */
+#if defined __CORTEX_M && (__CORTEX_M == 4U)
+    __DSB();
+#endif
+}
+#endif
+
+#if defined(FLEXCOMM16)
+void FLEXCOMM16_DriverIRQHandler(void)
+{
+    assert(s_flexcommIrqHandler[16]);
+    s_flexcommIrqHandler[16]((void *)s_flexcommBaseAddrs[16], s_flexcommHandle[16]);
 /* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
   exception return operation might vector to incorrect interrupt */
 #if defined __CORTEX_M && (__CORTEX_M == 4U)

@@ -19,11 +19,11 @@
 /* clang-format off */
 /* TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
 !!GlobalInfo
-product: Clocks v4.1
+product: Clocks v6.0
 processor: LPC54616J512
 package_id: LPC54616J512BD100
 mcu_data: ksdk2_0
-processor_version: 4.0.0
+processor_version: 6.0.2
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
 /* clang-format on */
 
@@ -169,17 +169,17 @@ void BOARD_BootClockRUN(void)
     CLOCK_SetClkDiv(kCLOCK_DivCan1Clk, 1U, false);                  /*!< Set CAN1CLKDIV divider to value 1 */
 
     /*!< Set up clock selectors - Attach clocks to the peripheries */
-    CLOCK_AttachClk(kSYS_PLL_to_MAIN_CLK);                  /*!< Switch MAIN_CLK to SYS_PLL */
+    CLOCK_AttachClk(kSYS_PLL_to_MAIN_CLK);                    /*!< Switch MAIN_CLK to SYS_PLL */
     SYSCON->ASYNCAPBCTRL = SYSCON_ASYNCAPBCTRL_ENABLE_MASK;       /*!< Enable ASYNC APB subsystem */
     CLOCK_AttachClk(kMAIN_CLK_to_ASYNC_APB);                  /*!< Switch ASYNC_APB to MAIN_CLK */
-    CLOCK_AttachClk(kUSB_PLL_to_USB0_CLK);                  /*!< Switch USB0_CLK to USB_PLL */
-    CLOCK_AttachClk(kUSB_PLL_to_USB1_CLK);                  /*!< Switch USB1_CLK to USB_PLL */
+    CLOCK_AttachClk(kUSB_PLL_to_USB0_CLK);                    /*!< Switch USB0_CLK to USB_PLL */
+    CLOCK_AttachClk(kUSB_PLL_to_USB1_CLK);                    /*!< Switch USB1_CLK to USB_PLL */
     SYSCON->FROHFCLKDIV = ((SYSCON->FROHFCLKDIV & ~SYSCON_FROHFCLKDIV_DIV_MASK) | SYSCON_FROHFCLKDIV_DIV(0U)); /*!< Set FROHF CLKDIV  to value 0 */
-    CLOCK_AttachClk(kFRO_HF_to_FLEXCOMM0);                      /*!< Switch FLEXCOMM0 to FRO_HF */
-    CLOCK_AttachClk(kAUDIO_PLL_to_FLEXCOMM1);                  /*!< Switch FLEXCOMM1 to AUDIO_PLL */
-    CLOCK_AttachClk(kAUDIO_PLL_to_FLEXCOMM2);                  /*!< Switch FLEXCOMM2 to AUDIO_PLL */
-    CLOCK_AttachClk(kAUDIO_PLL_to_FLEXCOMM4);                  /*!< Switch FLEXCOMM4 to AUDIO_PLL */
-    CLOCK_AttachClk(kAUDIO_PLL_to_FLEXCOMM7);                  /*!< Switch FLEXCOMM7 to AUDIO_PLL */
+    CLOCK_AttachClk(kFRO_HF_to_FLEXCOMM0);                       /*!< Switch FLEXCOMM0 to FRO_HF */
+    CLOCK_AttachClk(kAUDIO_PLL_to_FLEXCOMM1);                    /*!< Switch FLEXCOMM1 to AUDIO_PLL */
+    CLOCK_AttachClk(kAUDIO_PLL_to_FLEXCOMM2);                    /*!< Switch FLEXCOMM2 to AUDIO_PLL */
+    CLOCK_AttachClk(kAUDIO_PLL_to_FLEXCOMM4);                    /*!< Switch FLEXCOMM4 to AUDIO_PLL */
+    CLOCK_AttachClk(kAUDIO_PLL_to_FLEXCOMM7);                    /*!< Switch FLEXCOMM7 to AUDIO_PLL */
     SYSCON->MAINCLKSELA = ((SYSCON->MAINCLKSELA & ~SYSCON_MAINCLKSELA_SEL_MASK) | SYSCON_MAINCLKSELA_SEL(0U)); /*!< Switch MAINCLKSELA to FRO12M even it is not used for MAINCLKSELB */
     /* Set SystemCoreClock variable. */
     SystemCoreClock = BOARD_BOOTCLOCKRUN_CORE_CLOCK;

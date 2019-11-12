@@ -1,6 +1,6 @@
-EESchema Schematic File Version 4
+EESchema Schematic File Version 5
 LIBS:canbox-cache
-EELAYER 29 0
+EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -13,6 +13,11 @@ Comment1 ""
 Comment2 ""
 Comment3 ""
 Comment4 ""
+Comment5 ""
+Comment6 ""
+Comment7 ""
+Comment8 ""
+Comment9 ""
 $EndDescr
 $Comp
 L canbox-rescue:Varistor-Device RV1
@@ -43,20 +48,6 @@ F 6 "495-4607-1-ND " H 0   0   50  0001 C CNN "DigiKez"
 	1    0    0    -1  
 $EndComp
 $Comp
-L canbox-rescue:DLW43MH201XK2L-cypress L5
-U 1 1 5C690F7D
-P 7850 2650
-F 0 "L5" H 7850 2931 50  0000 C CNN
-F 1 "DLW43MH201XK2L" H 7850 2840 50  0000 C CNN
-F 2 "cypress:DLW43MH201XK2L" H 7850 2650 50  0001 C CNN
-F 3 "~" H 7850 2650 50  0001 C CNN
-F 4 "DLW43MH201XK2L" H 400 -350 50  0001 C CNN "OP"
-F 5 "DLW43MH201XK2L" H 0   0   50  0001 C CNN "Arrow"
-F 6 "490-14325-1-ND  " H 0   0   50  0001 C CNN "DigiKez"
-	1    7850 2650
-	-1   0    0    -1  
-$EndComp
-$Comp
 L canbox-rescue:DB9_Male-Connector J5
 U 1 1 5C690F83
 P 10700 3750
@@ -71,8 +62,6 @@ F 5 "ali" H 0   0   50  0001 C CNN "notes"
 	1    10700 3750
 	1    0    0    1   
 $EndComp
-Wire Wire Line
-	8200 2550 8050 2550
 Wire Wire Line
 	8700 2800 8700 2750
 Connection ~ 8700 2750
@@ -189,9 +178,10 @@ F 0 "R16" H 8270 3596 50  0000 L CNN
 F 1 "62" H 8270 3505 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 8130 3550 50  0001 C CNN
 F 3 "~" H 8200 3550 50  0001 C CNN
-F 4 "ERJ-6ENF59R0V" H 400 150 50  0001 C CNN "OP"
+F 4 "0805W8F6201T5E" H 400 150 50  0001 C CNN "OP"
 F 5 "ok" H 0   500 50  0001 C CNN "Mouser"
 F 6 "ok" H 0   500 50  0001 C CNN "notes"
+F 7 "C17767" H 8200 3550 50  0001 C CNN "JLC"
 	1    8200 3550
 	1    0    0    -1  
 $EndComp
@@ -203,9 +193,10 @@ F 0 "R17" H 8520 3596 50  0000 L CNN
 F 1 "62" H 8520 3505 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 8380 3550 50  0001 C CNN
 F 3 "~" H 8450 3550 50  0001 C CNN
-F 4 "ERJ-6ENF59R0V" H 400 150 50  0001 C CNN "OP"
+F 4 "0805W8F6201T5E" H 400 150 50  0001 C CNN "OP"
 F 5 "ok" H 0   500 50  0001 C CNN "Mouser"
 F 6 "ok" H 0   500 50  0001 C CNN "notes"
+F 7 "C17767" H 8450 3550 50  0001 C CNN "JLC"
 	1    8450 3550
 	1    0    0    -1  
 $EndComp
@@ -237,6 +228,7 @@ F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 8388 4500 50  
 F 3 "~" H 8350 4650 50  0001 C CNN
 F 4 "C0805C223K5RACTU" H 400 800 50  0001 C CNN "OP"
 F 5 "ali" H 0   1150 50  0001 C CNN "notes"
+F 6 "C1729 " H 8350 4650 50  0001 C CNN "JLC"
 	1    8350 4650
 	1    0    0    -1  
 $EndComp
@@ -256,17 +248,14 @@ Wire Wire Line
 	8350 4900 8350 4800
 Wire Wire Line
 	8050 3000 8050 2750
-Connection ~ 8050 2750
 Wire Wire Line
 	7650 3000 7650 2750
 Wire Wire Line
 	7650 3000 7750 3000
-Connection ~ 7650 2750
 Wire Wire Line
 	7650 2550 7650 2250
 Wire Wire Line
 	7650 2250 7700 2250
-Connection ~ 7650 2550
 Wire Wire Line
 	8000 2250 8200 2250
 Wire Wire Line
@@ -276,10 +265,11 @@ L canbox-rescue:TJA1051T-Interface_CAN_LIN U5
 U 1 1 5BF1E24D
 P 6350 2450
 F 0 "U5" H 6350 3031 50  0000 C CNN
-F 1 "TJA1051T" H 6350 2940 50  0000 C CNN
+F 1 "TJA1051T/3/1J" H 6350 2940 50  0000 C CNN
 F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 6350 1950 50  0001 C CIN
 F 3 "http://www.nxp.com/documents/data_sheet/TJA1051.pdf" H 6350 2450 50  0001 C CNN
 F 4 "ali" H 0   0   50  0001 C CNN "notes"
+F 5 "C38695" H 6350 2450 50  0001 C CNN "JLC"
 	1    6350 2450
 	1    0    0    -1  
 $EndComp
@@ -336,8 +326,9 @@ F 0 "C12" H 1115 1796 50  0000 L CNN
 F 1 "100n" H 1115 1705 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 1038 1600 50  0001 C CNN
 F 3 "~" H 1000 1750 50  0001 C CNN
-F 4 "C0805C103K1RACTU" H -450 0   50  0001 C CNN "OP"
+F 4 "CC0805KRX7R9BB104" H -450 0   50  0001 C CNN "OP"
 F 5 "ali" H 0   0   50  0001 C CNN "notes"
+F 6 " C49678 " H 1000 1750 50  0001 C CNN "JLC"
 	1    1000 1750
 	1    0    0    -1  
 $EndComp
@@ -413,7 +404,7 @@ L canbox-rescue:Jumper_NC_Small-Device JP4
 U 1 1 5D07D244
 P 8450 4150
 F 0 "JP4" V 8404 4224 50  0000 L CNN
-F 1 "Jumper_NC_Small-Device" V 8495 4224 50  0000 L CNN
+F 1 "TERM" V 8495 4224 50  0000 L CNN
 F 2 "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm" H 8450 4150 50  0001 C CNN
 F 3 "" H 8450 4150 50  0001 C CNN
 	1    8450 4150
@@ -421,12 +412,12 @@ F 3 "" H 8450 4150 50  0001 C CNN
 $EndComp
 $Comp
 L canbox-rescue:Jumper_NC_Small-Device JP3
-U 1 1 5D07E798
+U 1 1 5DA2AD5D
 P 8200 4150
-AR Path="/5BDA19BB/5D07E798" Ref="JP3"  Part="1" 
-AR Path="/5BD9E863/5D07E798" Ref="JP3"  Part="1" 
+AR Path="/5BDA19BB/5DA2AD5D" Ref="JP3"  Part="1" 
+AR Path="/5BD9E863/5DA2AD5D" Ref="JP3"  Part="1" 
 F 0 "JP3" V 8246 4103 50  0000 R CNN
-F 1 "Jumper_NC_Small-Device" V 8155 4103 50  0000 R CNN
+F 1 "TERM" V 8155 4103 50  0000 R CNN
 F 2 "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm" H 8200 4150 50  0001 C CNN
 F 3 "" H 8200 4150 50  0001 C CNN
 	1    8200 4150
@@ -445,4 +436,39 @@ Wire Wire Line
 	8200 3700 8200 4050
 Wire Wire Line
 	8450 3700 8450 4050
+$Comp
+L canbox-rescue:L_Core_Iron_Coupled_Small-Device L4
+U 1 1 5E74A7ED
+P 7850 2650
+F 0 "L4" H 7850 2881 50  0000 C CNN
+F 1 "AE2002" H 7850 2790 50  0000 C CNN
+F 2 "Inductor_SMD:L_CMC_1812" H 7850 2650 50  0001 C CNN
+F 3 "~" H 7850 2650 50  0001 C CNN
+F 4 "1840-1044-1-ND" H -1750 -1150 50  0001 C CNN "OP"
+F 5 "AE2002" H -1750 -1150 50  0001 C CNN "Arrow"
+F 6 "1840-1044-1-ND" H -1750 -1150 50  0001 C CNN "DigiKez"
+	1    7850 2650
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	7950 2600 8025 2600
+Wire Wire Line
+	8025 2600 8025 2550
+Wire Wire Line
+	8025 2550 8200 2550
+Wire Wire Line
+	7950 2700 8050 2700
+Wire Wire Line
+	8050 2700 8050 2750
+Connection ~ 8050 2750
+Wire Wire Line
+	7750 2700 7650 2700
+Wire Wire Line
+	7650 2700 7650 2750
+Connection ~ 7650 2750
+Wire Wire Line
+	7750 2600 7650 2600
+Wire Wire Line
+	7650 2600 7650 2550
+Connection ~ 7650 2550
 $EndSCHEMATC

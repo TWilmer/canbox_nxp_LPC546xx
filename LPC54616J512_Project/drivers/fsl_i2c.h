@@ -1,35 +1,9 @@
 /*
- * The Clear BSD License
  * Copyright (c) 2016, Freescale Semiconductor, Inc.
- * Copyright 2016-2017 NXP
+ * Copyright 2016-2018 NXP
  * All rights reserved.
- * 
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted (subject to the limitations in the disclaimer below) provided
- *  that the following conditions are met:
  *
- * o Redistributions of source code must retain the above copyright notice, this list
- *   of conditions and the following disclaimer.
- *
- * o Redistributions in binary form must reproduce the above copyright notice, this
- *   list of conditions and the following disclaimer in the documentation and/or
- *   other materials provided with the distribution.
- *
- * o Neither the name of the copyright holder nor the names of its
- *   contributors may be used to endorse or promote products derived from this
- *   software without specific prior written permission.
- *
- * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS LICENSE.
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
- * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * SPDX-License-Identifier: BSD-3-Clause
  */
 #ifndef _FSL_I2C_H_
 #define _FSL_I2C_H_
@@ -53,13 +27,13 @@
 
 /*! @name Driver version */
 /*@{*/
-/*! @brief I2C driver version 2.0.3. */
-#define FSL_I2C_DRIVER_VERSION (MAKE_VERSION(2, 0, 3))
+/*! @brief I2C driver version 2.0.5. */
+#define FSL_I2C_DRIVER_VERSION (MAKE_VERSION(2, 0, 5))
 /*@}*/
 
-/*! @brief Timeout times for waiting flag. */
-#ifndef I2C_WAIT_TIMEOUT
-#define I2C_WAIT_TIMEOUT 0U /* Define to zero means keep waiting until the flag is assert/deassert. */
+/*! @brief Retry times for waiting flag. */
+#ifndef I2C_RETRY_TIMES
+#define I2C_RETRY_TIMES 0U /* Define to zero means keep waiting until the flag is assert/deassert. */
 #endif
 
 /* definitions for MSTCODE bits in I2C Status register STAT */
@@ -87,10 +61,11 @@ enum _i2c_status
     kStatus_I2C_ArbitrationLost = MAKE_STATUS(kStatusGroup_FLEXCOMM_I2C, 5), /*!< Arbitration lost error. */
     kStatus_I2C_NoTransferInProgress =
         MAKE_STATUS(kStatusGroup_FLEXCOMM_I2C, 6), /*!< Attempt to abort a transfer when one is not in progress. */
-    kStatus_I2C_DmaRequestFail = MAKE_STATUS(kStatusGroup_FLEXCOMM_I2C, 7), /*!< DMA request failed. */
-    kStatus_I2C_StartStopError = MAKE_STATUS(kStatusGroup_FLEXCOMM_I2C, 8),
+    kStatus_I2C_DmaRequestFail  = MAKE_STATUS(kStatusGroup_FLEXCOMM_I2C, 7), /*!< DMA request failed. */
+    kStatus_I2C_StartStopError  = MAKE_STATUS(kStatusGroup_FLEXCOMM_I2C, 8),
     kStatus_I2C_UnexpectedState = MAKE_STATUS(kStatusGroup_FLEXCOMM_I2C, 9),
-    kStatus_I2C_Timeout = MAKE_STATUS(kStatusGroup_FLEXCOMM_I2C, 10), /*!< Timeout poling status flags. */
+    kStatus_I2C_Timeout         = MAKE_STATUS(kStatusGroup_FLEXCOMM_I2C, 10), /*!< Timeout poling status flags. */
+    kStatus_I2C_Addr_Nak        = MAKE_STATUS(kStatusGroup_FLEXCOMM_I2C, 11), /*!< NAK received for Address */
 };
 
 /*! @} */
@@ -118,7 +93,7 @@ enum _i2c_master_flags
 typedef enum _i2c_direction
 {
     kI2C_Write = 0U, /*!< Master transmit. */
-    kI2C_Read = 1U   /*!< Master receive. */
+    kI2C_Read  = 1U  /*!< Master receive. */
 } i2c_direction_t;
 
 /*!
@@ -167,10 +142,10 @@ typedef void (*i2c_master_transfer_callback_t)(I2C_Type *base,
  */
 enum _i2c_master_transfer_flags
 {
-    kI2C_TransferDefaultFlag = 0x00U,       /*!< Transfer starts with a start signal, stops with a stop signal. */
-    kI2C_TransferNoStartFlag = 0x01U,       /*!< Don't send a start condition, address, and sub address */
+    kI2C_TransferDefaultFlag       = 0x00U, /*!< Transfer starts with a start signal, stops with a stop signal. */
+    kI2C_TransferNoStartFlag       = 0x01U, /*!< Don't send a start condition, address, and sub address */
     kI2C_TransferRepeatedStartFlag = 0x02U, /*!< Send a repeated start condition */
-    kI2C_TransferNoStopFlag = 0x04U,        /*!< Don't send a stop condition. */
+    kI2C_TransferNoStopFlag        = 0x04U, /*!< Don't send a stop condition. */
 };
 
 /*! @brief States for the state machine used by transactional APIs. */
@@ -228,10 +203,10 @@ struct _i2c_master_handle
  */
 
 /*!
-* @brief I2C slave peripheral flags.
-*
-* @note These enums are meant to be OR'd together to form a bit mask.
-*/
+ * @brief I2C slave peripheral flags.
+ *
+ * @note These enums are meant to be OR'd together to form a bit mask.
+ */
 enum _i2c_slave_flags
 {
     kI2C_SlavePendingFlag = I2C_STAT_SLVPENDING_MASK, /*!< The I2C module is waiting for software interaction. */
@@ -270,9 +245,9 @@ typedef enum _i2c_slave_address_qual_mode
 typedef enum _i2c_slave_bus_speed
 {
     kI2C_SlaveStandardMode = 0U,
-    kI2C_SlaveFastMode = 1U,
+    kI2C_SlaveFastMode     = 1U,
     kI2C_SlaveFastModePlus = 2U,
-    kI2C_SlaveHsMode = 3U,
+    kI2C_SlaveHsMode       = 3U,
 } i2c_slave_bus_speed_t;
 
 /*!
@@ -317,7 +292,7 @@ typedef struct _i2c_slave_config
 typedef enum _i2c_slave_transfer_event
 {
     kI2C_SlaveAddressMatchEvent = 0x01U, /*!< Received the slave address after a start or repeated start. */
-    kI2C_SlaveTransmitEvent = 0x02U,     /*!< Callback is requested to provide data to transmit
+    kI2C_SlaveTransmitEvent     = 0x02U, /*!< Callback is requested to provide data to transmit
                                                 (slave-transmitter role). */
     kI2C_SlaveReceiveEvent = 0x04U,      /*!< Callback is requested to provide a buffer in which to place received
                                                  data (slave-receiver role). */
@@ -367,8 +342,8 @@ typedef void (*i2c_slave_transfer_callback_t)(I2C_Type *base, volatile i2c_slave
 typedef enum _i2c_slave_fsm
 {
     kI2C_SlaveFsmAddressMatch = 0u,
-    kI2C_SlaveFsmReceive = 2u,
-    kI2C_SlaveFsmTransmit = 3u,
+    kI2C_SlaveFsmReceive      = 2u,
+    kI2C_SlaveFsmTransmit     = 3u,
 } i2c_slave_fsm_t;
 
 /*!
@@ -435,8 +410,8 @@ void I2C_MasterGetDefaultConfig(i2c_master_config_t *masterConfig);
 void I2C_MasterInit(I2C_Type *base, const i2c_master_config_t *masterConfig, uint32_t srcClock_Hz);
 
 /*!
-* @brief Deinitializes the I2C master peripheral.
-*
+ * @brief Deinitializes the I2C master peripheral.
+ *
  * This function disables the I2C master peripheral and gates the clock. It also performs a software
  * reset to restore the peripheral to reset conditions.
  *
@@ -817,15 +792,15 @@ status_t I2C_SlaveInit(I2C_Type *base, const i2c_slave_config_t *slaveConfig, ui
  * changed.
  * @param address The slave address to be stored to the address register for matching.
  * @param addressDisable Disable matching of the specified address register.
-  */
+ */
 void I2C_SlaveSetAddress(I2C_Type *base,
                          i2c_slave_address_register_t addressRegister,
                          uint8_t address,
                          bool addressDisable);
 
 /*!
-* @brief Deinitializes the I2C slave peripheral.
-*
+ * @brief Deinitializes the I2C slave peripheral.
+ *
  * This function disables the I2C slave peripheral and gates the clock. It also performs a software
  * reset to restore the peripheral to reset conditions.
  *
@@ -981,7 +956,7 @@ status_t I2C_SlaveSetSendBuffer(
 
 /*!
  * @brief Starts accepting master write to slave requests.
-  *
+ *
  * The function can be called in response to #kI2C_SlaveReceiveEvent callback to start a new slave Rx transfer
  * from within the transfer callback.
  *

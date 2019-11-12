@@ -16,8 +16,10 @@
 #include "fsl_gpio.h"
 #include "fsl_adc.h"
 #include "fsl_spi.h"
-#include "fsl_i2c.h"
 #include "fsl_sctimer.h"
+#include "fsl_mcan.h"
+#include "fsl_pint.h"
+#include "fsl_ctimer.h"
 
 #if defined(__cplusplus)
 extern "C" {
@@ -31,30 +33,27 @@ extern "C" {
 #define USART_1_PERIPHERAL ((USART_Type *)FLEXCOMM0)
 /* Definition of the clock source frequency */
 #define USART_1_CLOCK_SOURCE CLOCK_GetFreq(kCLOCK_Flexcomm0)
-/* Alias for GPIO peripheral */
+/* Definition of peripheral ID */
 #define GPIO_1_GPIO GPIO
 /* Alias for ADC0 peripheral */
 #define ADC_1_PERIPHERAL ADC0
+/* Definition of the clock source frequency. */
+#define ADC_1_CLK_FREQ 180000000UL
 /* BOARD_InitPeripherals defines for FLEXCOMM1 */
 /* Definition of peripheral ID */
 #define SPI_1_PERIPHERAL ((SPI_Type *)FLEXCOMM1)
 /* Definition of the clock source frequency */
-#define SPI_1_CLOCK_SOURCE CLOCK_GetFreq(kCLOCK_Flexcomm1)
+#define SPI_1_CLOCK_SOURCE 12000000UL
 /* BOARD_InitPeripherals defines for FLEXCOMM2 */
 /* Definition of peripheral ID */
 #define SPI_2_PERIPHERAL ((SPI_Type *)FLEXCOMM2)
 /* Definition of the clock source frequency */
-#define SPI_2_CLOCK_SOURCE CLOCK_GetFreq(kCLOCK_Flexcomm2)
+#define SPI_2_CLOCK_SOURCE 12000000UL
 /* BOARD_InitPeripherals defines for FLEXCOMM4 */
 /* Definition of peripheral ID */
 #define SPI_3_PERIPHERAL ((SPI_Type *)FLEXCOMM4)
 /* Definition of the clock source frequency */
-#define SPI_3_CLOCK_SOURCE CLOCK_GetFreq(kCLOCK_Flexcomm4)
-/* BOARD_InitPeripherals defines for FLEXCOMM7 */
-/* Definition of peripheral ID */
-#define I2C_1_PERIPHERAL ((I2C_Type *)FLEXCOMM7)
-/* Definition of the clock source frequency */
-#define I2C_1_CLOCK_SOURCE CLOCK_GetFreq(kCLOCK_Flexcomm7)
+#define SPI_3_CLOCK_SOURCE 12000000UL
 /* BOARD_InitPeripherals defines for SCT0 */
 /* Definition of peripheral ID */
 #define SCTIMER_1_PERIPHERAL SCT0
@@ -80,6 +79,57 @@ extern "C" {
 #define SCTIMER_OUTPUT_6_MASK (1U << kSCTIMER_Out_6)
 /* SCTimer output 7 mask */
 #define SCTIMER_OUTPUT_7_MASK (1U << kSCTIMER_Out_7)
+/* SCTimer output 8 mask */
+#define SCTIMER_OUTPUT_8_MASK (1U << kSCTIMER_Out_8)
+/* SCTimer output 9 mask */
+#define SCTIMER_OUTPUT_9_MASK (1U << kSCTIMER_Out_9)
+/* Definition of peripheral ID */
+#define CAN_1_PERIPHERAL CAN1
+/* Definition of the clock source frequency */
+#define CAN_1_CLOCK_SOURCE 360000000UL
+/* Definition of the base address alignment */
+#define CAN_1_BASE_ADDRESS_ALIGN_SIZE (0x10000)
+/* Definition of the message RAM size in words */
+#define CAN_1_MESSAGE_RAM_SIZE 9
+/* Nominal baud rate value (calculated) */
+#define CAN_1_NOMINAL_BAUD_RATE_VALUE 500000
+/* Mask of enabled TX buffer interrupts */
+#define CAN_1_TX_BUFFERS_IRQ_MASK 0
+/* BOARD_InitPeripherals defines for PINT */
+/* Definition of peripheral ID */
+#define PINT_1_PERIPHERAL ((PINT_Type *) PINT_BASE)
+/* Definition of PINT interrupt ID for interrupt 0  */
+#define PINT_1_INT_0 kPINT_PinInt0
+/* Definition of peripheral ID */
+#define CAN_2_PERIPHERAL CAN0
+/* Definition of the clock source frequency */
+#define CAN_2_CLOCK_SOURCE 360000000UL
+/* Definition of the base address alignment */
+#define CAN_2_BASE_ADDRESS_ALIGN_SIZE (0x10000)
+/* Definition of the message RAM size in words */
+#define CAN_2_MESSAGE_RAM_SIZE 9
+/* Nominal baud rate value (calculated) */
+#define CAN_2_NOMINAL_BAUD_RATE_VALUE 500000
+/* Mask of enabled TX buffer interrupts */
+#define CAN_2_TX_BUFFERS_IRQ_MASK 0
+/* Definition of peripheral ID */
+#define CTIMER_1_PERIPHERAL CTIMER1
+/* Timer tick frequency in Hz (input frequency of the timer) */
+#define CTIMER_1_TICK_FREQ 180000000UL
+/* Timer tick period in ns (input period of the timer) */
+#define CTIMER_1_TICK_PERIOD 6UL
+/* Definition of peripheral ID */
+#define CTIMER_2_PERIPHERAL CTIMER3
+/* Timer tick frequency in Hz (input frequency of the timer) */
+#define CTIMER_2_TICK_FREQ 360000000UL
+/* Timer tick period in ns (input period of the timer) */
+#define CTIMER_2_TICK_PERIOD 3UL
+/* Definition of peripheral ID */
+#define CTIMER_3_PERIPHERAL CTIMER2
+/* Timer tick frequency in Hz (input frequency of the timer) */
+#define CTIMER_3_TICK_FREQ 180000000UL
+/* Timer tick period in ns (input period of the timer) */
+#define CTIMER_3_TICK_PERIOD 6UL
 
 /***********************************************************************************************************************
  * Global variables
@@ -89,10 +139,38 @@ extern const adc_config_t ADC_1configStruct;
 extern const spi_master_config_t SPI_1_config;
 extern const spi_master_config_t SPI_2_config;
 extern const spi_master_config_t SPI_3_config;
-extern const i2c_master_config_t I2C_1_config;
 extern const sctimer_config_t SCTimer_1_initConfig;
 extern const sctimer_pwm_signal_param_t SCTimer_1_pwmSignalsConfig[1];
 extern uint32_t SCTimer_1_pwmEvent[1];
+extern const mcan_config_t CAN_1_config;
+extern uint32_t CAN_1_RAM_BASE_ADDRESS[CAN_1_MESSAGE_RAM_SIZE];
+extern const mcan_timing_config_t CAN_1_nominal_bit_time;
+extern const mcan_frame_filter_config_t CAN_1_std_filter_config;
+extern const mcan_frame_filter_config_t CAN_1_ext_filter_config;
+extern const mcan_rx_fifo_config_t CAN_1_rx_fifo0_config;
+extern const mcan_rx_fifo_config_t CAN_1_rx_fifo1_config;
+extern const mcan_rx_buffer_config_t CAN_1_rx_buffers_config;
+extern const mcan_tx_fifo_config_t CAN_1_tx_event_fifo_config;
+extern const mcan_tx_buffer_config_t CAN_1_tx_buffers_config;
+extern const mcan_config_t CAN_2_config;
+extern uint32_t CAN_2_RAM_BASE_ADDRESS[CAN_2_MESSAGE_RAM_SIZE];
+extern const mcan_timing_config_t CAN_2_nominal_bit_time;
+extern const mcan_frame_filter_config_t CAN_2_std_filter_config;
+extern const mcan_frame_filter_config_t CAN_2_ext_filter_config;
+extern const mcan_rx_fifo_config_t CAN_2_rx_fifo0_config;
+extern const mcan_rx_fifo_config_t CAN_2_rx_fifo1_config;
+extern const mcan_rx_buffer_config_t CAN_2_rx_buffers_config;
+extern const mcan_tx_fifo_config_t CAN_2_tx_event_fifo_config;
+extern const mcan_tx_buffer_config_t CAN_2_tx_buffers_config;
+extern const ctimer_config_t CTIMER_1_config;
+extern const ctimer_config_t CTIMER_2_config;
+extern const ctimer_config_t CTIMER_3_config;
+
+/***********************************************************************************************************************
+ * Callback functions
+ **********************************************************************************************************************/
+/* INT_0 callback function for the PINT_1 component */
+extern void interrupt_int0(pint_pin_int_t,uint32_t);
 
 /***********************************************************************************************************************
  * Initialization functions

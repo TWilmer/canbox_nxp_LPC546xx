@@ -4,7 +4,7 @@
 //                  to hang application when debugger not connected.
 //
 // ****************************************************************************
-// Copyright(C) NXP Semiconductors, 2017-2018
+// Copyright 2017-2019 NXP
 // All rights reserved.
 //
 // Software that is described herein is for illustrative purposes only

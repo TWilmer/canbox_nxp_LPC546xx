@@ -1,35 +1,9 @@
 /*
- * The Clear BSD License
  * Copyright (c) 2016, Freescale Semiconductor, Inc.
  * Copyright 2016-2017 NXP
  * All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted (subject to the limitations in the disclaimer below) provided
- *  that the following conditions are met:
- *
- * o Redistributions of source code must retain the above copyright notice, this list
- *   of conditions and the following disclaimer.
- *
- * o Redistributions in binary form must reproduce the above copyright notice, this
- *   list of conditions and the following disclaimer in the documentation and/or
- *   other materials provided with the distribution.
- *
- * o Neither the name of the copyright holder nor the names of its
- *   contributors may be used to endorse or promote products derived from this
- *   software without specific prior written permission.
- *
- * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS LICENSE.
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
- * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * SPDX-License-Identifier: BSD-3-Clause
  */
 
 #include "fsl_sctimer.h"
@@ -69,6 +43,7 @@ static SCT_Type *const s_sctBases[] = SCT_BASE_PTRS;
 static const clock_ip_name_t s_sctClocks[] = SCT_CLOCKS;
 #endif /* FSL_SDK_DISABLE_DRIVER_CLOCK_CONTROL */
 
+#if !(defined(FSL_SDK_DISABLE_DRIVER_RESET_CONTROL) && FSL_SDK_DISABLE_DRIVER_RESET_CONTROL)
 #if defined(FSL_FEATURE_SCT_WRITE_ZERO_ASSERT_RESET) && FSL_FEATURE_SCT_WRITE_ZERO_ASSERT_RESET
 /*! @brief Pointers to SCT resets for each instance, writing a zero asserts the reset */
 static const reset_ip_name_t s_sctResets[] = SCT_RSTS_N;
@@ -76,6 +51,7 @@ static const reset_ip_name_t s_sctResets[] = SCT_RSTS_N;
 /*! @brief Pointers to SCT resets for each instance, writing a one asserts the reset */
 static const reset_ip_name_t s_sctResets[] = SCT_RSTS;
 #endif
+#endif /* FSL_SDK_DISABLE_DRIVER_RESET_CONTROL */
 
 /*!< @brief SCTimer event Callback function. */
 static sctimer_event_callback_t s_eventCallback[FSL_FEATURE_SCT_NUMBER_OF_EVENTS];
@@ -114,6 +90,16 @@ static uint32_t SCTIMER_GetInstance(SCT_Type *base)
     return instance;
 }
 
+/*!
+ * brief Ungates the SCTimer clock and configures the peripheral for basic operation.
+ *
+ * note This API should be called at the beginning of the application using the SCTimer driver.
+ *
+ * param base   SCTimer peripheral base address
+ * param config Pointer to the user configuration structure.
+ *
+ * return kStatus_Success indicates success; Else indicates failure.
+ */
 status_t SCTIMER_Init(SCT_Type *base, const sctimer_config_t *config)
 {
     assert(config);
@@ -124,12 +110,15 @@ status_t SCTIMER_Init(SCT_Type *base, const sctimer_config_t *config)
     CLOCK_EnableClock(s_sctClocks[SCTIMER_GetInstance(base)]);
 #endif /* FSL_SDK_DISABLE_DRIVER_CLOCK_CONTROL */
 
-    /* Reset the module */
+#if !(defined(FSL_SDK_DISABLE_DRIVER_RESET_CONTROL) && FSL_SDK_DISABLE_DRIVER_RESET_CONTROL)
+    /* Reset the module. */
     RESET_PeripheralReset(s_sctResets[SCTIMER_GetInstance(base)]);
+#endif /* FSL_SDK_DISABLE_DRIVER_RESET_CONTROL */
 
-    /* Setup the counter operation */
+    /* Setup the counter operation. For Current Driver interface SCTIMER_Init don't know detail
+     * frequency of input clock, but User know it. So the INSYNC have to set by user level. */
     base->CONFIG = SCT_CONFIG_CKSEL(config->clockSelect) | SCT_CONFIG_CLKMODE(config->clockMode) |
-                   SCT_CONFIG_UNIFY(config->enableCounterUnify);
+                   SCT_CONFIG_UNIFY(config->enableCounterUnify) | SCT_CONFIG_INSYNC(config->inputsync);
 
     /* Write to the control register, clear the counter and keep the counters halted */
     base->CTRL = SCT_CTRL_BIDIR_L(config->enableBidirection_l) | SCT_CTRL_PRE_L(config->prescale_l) |
@@ -161,6 +150,11 @@ status_t SCTIMER_Init(SCT_Type *base, const sctimer_config_t *config)
     return kStatus_Success;
 }
 
+/*!
+ * brief Gates the SCTimer clock.
+ *
+ * param base SCTimer peripheral base address
+ */
 void SCTIMER_Deinit(SCT_Type *base)
 {
     /* Halt the counters */
@@ -172,9 +166,29 @@ void SCTIMER_Deinit(SCT_Type *base)
 #endif /* FSL_SDK_DISABLE_DRIVER_CLOCK_CONTROL */
 }
 
+/*!
+ * brief  Fills in the SCTimer configuration structure with the default settings.
+ *
+ * The default values are:
+ * code
+ *  config->enableCounterUnify = true;
+ *  config->clockMode = kSCTIMER_System_ClockMode;
+ *  config->clockSelect = kSCTIMER_Clock_On_Rise_Input_0;
+ *  config->enableBidirection_l = false;
+ *  config->enableBidirection_h = false;
+ *  config->prescale_l = 0U;
+ *  config->prescale_h = 0U;
+ *  config->outInitState = 0U;
+ *  config->inputsync  = 0xFU;
+ * endcode
+ * param config Pointer to the user configuration structure.
+ */
 void SCTIMER_GetDefaultConfig(sctimer_config_t *config)
 {
     assert(config);
+
+    /* Initializes the configure structure to zero. */
+    memset(config, 0, sizeof(*config));
 
     /* SCT operates as a unified 32-bit counter */
     config->enableCounterUnify = true;
@@ -187,13 +201,53 @@ void SCTIMER_GetDefaultConfig(sctimer_config_t *config)
     /* Up count mode only for Counte_H */
     config->enableBidirection_h = false;
     /* Prescale factor of 1 */
-    config->prescale_l = 0;
+    config->prescale_l = 0U;
     /* Prescale factor of 1 for Counter_H*/
-    config->prescale_h = 0;
+    config->prescale_h = 0U;
     /* Clear outputs */
-    config->outInitState = 0;
+    config->outInitState = 0U;
+    /* Default value is 0xFU, it can be clear as 0 when speical conditions met.
+     * Condition can be clear as 0: (for all Clock Modes):
+     * (1) The corresponding input is already synchronous to the SCTimer/PWM clock.
+     * (2) The SCTimer/PWM clock frequency does not exceed 100 MHz.
+     * Note: The SCTimer/PWM clock is the bus/system clock for CKMODE 0-2 or asynchronous input
+     * clock for CKMODE3.
+     * Another condition can be clear as 0: (for CKMODE2 only)
+     * (1) The corresponding input is synchronous to the designated CKMODE2 input clock.
+     * (2) The CKMODE2 input clock frequency is less than one-third the frequency of the bus/system clock.
+     * Default value set as 0U, input0~input3 are set as bypasses. */
+    config->inputsync = 0xFU;
 }
 
+/*!
+ * brief Configures the PWM signal parameters.
+ *
+ * Call this function to configure the PWM signal period, mode, duty cycle, and edge. This
+ * function will create 2 events; one of the events will trigger on match with the pulse value
+ * and the other will trigger when the counter matches the PWM period. The PWM period event is
+ * also used as a limit event to reset the counter or change direction. Both events are enabled
+ * for the same state. The state number can be retrieved by calling the function
+ * SCTIMER_GetCurrentStateNumber().
+ * The counter is set to operate as one 32-bit counter (unify bit is set to 1).
+ * The counter operates in bi-directional mode when generating a center-aligned PWM.
+ *
+ * note When setting PWM output from multiple output pins, they all should use the same PWM mode
+ * i.e all PWM's should be either edge-aligned or center-aligned.
+ * When using this API, the PWM signal frequency of all the initialized channels must be the same.
+ * Otherwise all the initialized channels' PWM signal frequency is equal to the last call to the
+ * API's pwmFreq_Hz.
+ *
+ * param base        SCTimer peripheral base address
+ * param pwmParams   PWM parameters to configure the output
+ * param mode        PWM operation mode, options available in enumeration ::sctimer_pwm_mode_t
+ * param pwmFreq_Hz  PWM signal frequency in Hz
+ * param srcClock_Hz SCTimer counter clock in Hz
+ * param event       Pointer to a variable where the PWM period event number is stored
+ *
+ * return kStatus_Success on success
+ *         kStatus_Fail If we have hit the limit in terms of number of events created or if
+ *                      an incorrect PWM dutycylce is passed in.
+ */
 status_t SCTIMER_SetupPwm(SCT_Type *base,
                           const sctimer_pwm_signal_param_t *pwmParams,
                           sctimer_pwm_mode_t mode,
@@ -207,7 +261,7 @@ status_t SCTIMER_SetupPwm(SCT_Type *base,
     assert(pwmParams->output < FSL_FEATURE_SCT_NUMBER_OF_OUTPUTS);
 
     uint32_t period, pulsePeriod = 0;
-    uint32_t sctClock = srcClock_Hz / (((base->CTRL & SCT_CTRL_PRE_L_MASK) >> SCT_CTRL_PRE_L_SHIFT) + 1);
+    uint32_t sctClock    = srcClock_Hz / (((base->CTRL & SCT_CTRL_PRE_L_MASK) >> SCT_CTRL_PRE_L_SHIFT) + 1);
     uint32_t periodEvent = 0, pulseEvent = 0;
     uint32_t reg;
 
@@ -314,12 +368,21 @@ status_t SCTIMER_SetupPwm(SCT_Type *base,
     return kStatus_Success;
 }
 
+/*!
+ * brief Updates the duty cycle of an active PWM signal.
+ *
+ * param base              SCTimer peripheral base address
+ * param output            The output to configure
+ * param dutyCyclePercent  New PWM pulse width; the value should be between 1 to 100
+ * param event             Event number associated with this PWM signal. This was returned to the user by the
+ *                          function SCTIMER_SetupPwm().
+ */
 void SCTIMER_UpdatePwmDutycycle(SCT_Type *base, sctimer_out_t output, uint8_t dutyCyclePercent, uint32_t event)
 
 {
     assert(dutyCyclePercent > 0);
     assert(output < FSL_FEATURE_SCT_NUMBER_OF_OUTPUTS);
-      
+
     uint32_t periodMatchReg, pulseMatchReg;
     uint32_t pulsePeriod = 0, period;
 
@@ -344,13 +407,36 @@ void SCTIMER_UpdatePwmDutycycle(SCT_Type *base, sctimer_out_t output, uint8_t du
     SCTIMER_StopTimer(base, kSCTIMER_Counter_L);
 
     /* Update dutycycle */
-    base->SCTMATCH[pulseMatchReg] = SCT_SCTMATCH_MATCHn_L(pulsePeriod);
+    base->SCTMATCH[pulseMatchReg]    = SCT_SCTMATCH_MATCHn_L(pulsePeriod);
     base->SCTMATCHREL[pulseMatchReg] = SCT_SCTMATCHREL_RELOADn_L(pulsePeriod);
 
     /* Restart the counter */
     SCTIMER_StartTimer(base, kSCTIMER_Counter_L);
 }
 
+/*!
+ * brief Create an event that is triggered on a match or IO and schedule in current state.
+ *
+ * This function will configure an event using the options provided by the user. If the event type uses
+ * the counter match, then the function will set the user provided match value into a match register
+ * and put this match register number into the event control register.
+ * The event is enabled for the current state and the event number is increased by one at the end.
+ * The function returns the event number; this event number can be used to configure actions to be
+ * done when this event is triggered.
+ *
+ * param base         SCTimer peripheral base address
+ * param howToMonitor Event type; options are available in the enumeration ::sctimer_interrupt_enable_t
+ * param matchValue   The match value that will be programmed to a match register
+ * param whichIO      The input or output that will be involved in event triggering. This field
+ *                     is ignored if the event type is "match only"
+ * param whichCounter SCTimer counter to use when operating in 16-bit mode. In 32-bit mode, this
+ *                     field has no meaning as we have only 1 unified counter; hence ignored.
+ * param event        Pointer to a variable where the new event number is stored
+ *
+ * return kStatus_Success on success
+ *         kStatus_Error if we have hit the limit in terms of number of events created or
+                         if we have reached the limit in terms of number of match registers
+ */
 status_t SCTIMER_CreateAndScheduleEvent(SCT_Type *base,
                                         sctimer_event_t howToMonitor,
                                         uint32_t matchValue,
@@ -385,14 +471,14 @@ status_t SCTIMER_CreateAndScheduleEvent(SCT_Type *base,
         /* Use Counter_L bits if counter is operating in 32-bit mode or user wants to setup the L counter */
         if ((base->CONFIG & SCT_CONFIG_UNIFY_MASK) || (whichCounter == kSCTIMER_Counter_L))
         {
-            base->SCTMATCH[s_currentMatch] = SCT_SCTMATCH_MATCHn_L(matchValue);
+            base->SCTMATCH[s_currentMatch]    = SCT_SCTMATCH_MATCHn_L(matchValue);
             base->SCTMATCHREL[s_currentMatch] = SCT_SCTMATCHREL_RELOADn_L(matchValue);
         }
         else
         {
             /* Select the counter, no need for this if operating in 32-bit mode */
             currentCtrlVal |= SCT_EVENT_CTRL_HEVENT(whichCounter);
-            base->SCTMATCH[s_currentMatch] = SCT_SCTMATCH_MATCHn_H(matchValue);
+            base->SCTMATCH[s_currentMatch]    = SCT_SCTMATCH_MATCHn_H(matchValue);
             base->SCTMATCHREL[s_currentMatch] = SCT_SCTMATCHREL_RELOADn_H(matchValue);
         }
         base->EVENT[s_currentEvent].CTRL = currentCtrlVal;
@@ -412,14 +498,14 @@ status_t SCTIMER_CreateAndScheduleEvent(SCT_Type *base,
         /* Use Counter_L bits if counter is operating in 32-bit mode or user wants to setup the L counter */
         if ((base->CONFIG & SCT_CONFIG_UNIFY_MASK) || (whichCounter == kSCTIMER_Counter_L))
         {
-            base->SCTMATCH[s_currentMatch] = SCT_SCTMATCH_MATCHn_L(matchValue);
+            base->SCTMATCH[s_currentMatch]    = SCT_SCTMATCH_MATCHn_L(matchValue);
             base->SCTMATCHREL[s_currentMatch] = SCT_SCTMATCHREL_RELOADn_L(matchValue);
         }
         else
         {
             /* Select the counter, no need for this if operating in 32-bit mode */
             currentCtrlVal |= SCT_EVENT_CTRL_HEVENT(whichCounter);
-            base->SCTMATCH[s_currentMatch] = SCT_SCTMATCH_MATCHn_H(matchValue);
+            base->SCTMATCH[s_currentMatch]    = SCT_SCTMATCH_MATCHn_H(matchValue);
             base->SCTMATCHREL[s_currentMatch] = SCT_SCTMATCHREL_RELOADn_H(matchValue);
         }
         base->EVENT[s_currentEvent].CTRL = currentCtrlVal;
@@ -439,12 +525,35 @@ status_t SCTIMER_CreateAndScheduleEvent(SCT_Type *base,
     return kStatus_Success;
 }
 
+/*!
+ * brief Enable an event in the current state.
+ *
+ * This function will allow the event passed in to trigger in the current state. The event must
+ * be created earlier by either calling the function SCTIMER_SetupPwm() or function
+ * SCTIMER_CreateAndScheduleEvent() .
+ *
+ * param base  SCTimer peripheral base address
+ * param event Event number to enable in the current state
+ *
+ */
 void SCTIMER_ScheduleEvent(SCT_Type *base, uint32_t event)
 {
     /* Enable event in the current state */
     base->EVENT[event].STATE |= (1U << s_currentState);
 }
 
+/*!
+ * brief Increase the state by 1
+ *
+ * All future events created by calling the function SCTIMER_ScheduleEvent() will be enabled in this new
+ * state.
+ *
+ * param base  SCTimer peripheral base address
+ *
+ * return kStatus_Success on success
+ *         kStatus_Error if we have hit the limit in terms of states used
+
+ */
 status_t SCTIMER_IncreaseState(SCT_Type *base)
 {
     /* Return an error if we have hit the limit in terms of states used */
@@ -458,11 +567,29 @@ status_t SCTIMER_IncreaseState(SCT_Type *base)
     return kStatus_Success;
 }
 
+/*!
+ * brief Provides the current state
+ *
+ * User can use this to set the next state by calling the function SCTIMER_SetupNextStateAction().
+ *
+ * param base SCTimer peripheral base address
+ *
+ * return The current state
+ */
 uint32_t SCTIMER_GetCurrentState(SCT_Type *base)
 {
     return s_currentState;
 }
 
+/*!
+ * brief Toggle the output level.
+ *
+ * This change in the output level is triggered by the event number that is passed in by the user.
+ *
+ * param base    SCTimer peripheral base address
+ * param whichIO The output to toggle
+ * param event   Event number that will trigger the output change
+ */
 void SCTIMER_SetupOutputToggleAction(SCT_Type *base, uint32_t whichIO, uint32_t event)
 {
     assert(whichIO < FSL_FEATURE_SCT_NUMBER_OF_OUTPUTS);
@@ -480,6 +607,19 @@ void SCTIMER_SetupOutputToggleAction(SCT_Type *base, uint32_t whichIO, uint32_t 
     base->RES = reg;
 }
 
+/*!
+ * brief Setup capture of the counter value on trigger of a selected event
+ *
+ * param base            SCTimer peripheral base address
+ * param whichCounter    SCTimer counter to use when operating in 16-bit mode. In 32-bit mode, this
+ *                        field has no meaning as only the Counter_L bits are used.
+ * param captureRegister Pointer to a variable where the capture register number will be returned. User
+ *                        can read the captured value from this register when the specified event is triggered.
+ * param event           Event number that will trigger the capture
+ *
+ * return kStatus_Success on success
+ *         kStatus_Error if we have hit the limit in terms of number of match/capture registers available
+ */
 status_t SCTIMER_SetupCaptureAction(SCT_Type *base,
                                     sctimer_counter_t whichCounter,
                                     uint32_t *captureRegister,
@@ -518,18 +658,34 @@ status_t SCTIMER_SetupCaptureAction(SCT_Type *base,
     return kStatus_Success;
 }
 
+/*!
+ * brief Receive noticification when the event trigger an interrupt.
+ *
+ * If the interrupt for the event is enabled by the user, then a callback can be registered
+ * which will be invoked when the event is triggered
+ *
+ * param base     SCTimer peripheral base address
+ * param event    Event number that will trigger the interrupt
+ * param callback Function to invoke when the event is triggered
+ */
+
 void SCTIMER_SetCallback(SCT_Type *base, sctimer_event_callback_t callback, uint32_t event)
 {
     s_eventCallback[event] = callback;
 }
 
+/*!
+ * brief SCTimer interrupt handler.
+ *
+ * param base SCTimer peripheral base address.
+ */
 void SCTIMER_EventHandleIRQ(SCT_Type *base)
 {
     uint32_t eventFlag = SCT0->EVFLAG;
     /* Only clear the flags whose interrupt field is enabled */
     uint32_t clearFlag = (eventFlag & SCT0->EVEN);
-    uint32_t mask = eventFlag;
-    int i = 0;
+    uint32_t mask      = eventFlag;
+    int i              = 0;
 
     /* Invoke the callback for certain events */
     for (i = 0; (i < FSL_FEATURE_SCT_NUMBER_OF_EVENTS) && (mask != 0); i++)
@@ -548,7 +704,7 @@ void SCTIMER_EventHandleIRQ(SCT_Type *base)
     SCT0->EVFLAG = clearFlag;
 }
 
-void SCT0_IRQHandler(void)
+void SCT0_DriverIRQHandler(void)
 {
     s_sctimerIsr(SCT0);
 /* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping

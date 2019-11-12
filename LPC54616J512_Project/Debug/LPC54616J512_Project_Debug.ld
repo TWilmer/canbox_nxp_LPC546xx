@@ -1,11 +1,12 @@
 /*
  * GENERATED FILE - DO NOT EDIT
- * (c) Code Red Technologies Ltd, 2008-2013
- * (c) NXP Semiconductors 2013-2018
+ * Copyright (c) 2008-2013 Code Red Technologies Ltd,
+ * Copyright 2015, 2018-2019 NXP
+ * (c) NXP Semiconductors 2013-2019
  * Generated linker script file for LPC54616J512
  * Created from linkscript.ldt by FMCreateLinkLibraries
  * Using Freemarker v2.3.23
- * MCUXpresso IDE v10.2.1 [Build 795] [2018-07-25] on Nov 5, 2018 10:11:18 PM
+ * MCUXpresso IDE v11.0.0 [Build 2516] [2019-06-05] on Aug 13, 2019 12:59:55 PM
  */
 
 INCLUDE "LPC54616J512_Project_Debug_library.ld"
@@ -15,7 +16,7 @@ ENTRY(ResetISR)
 
 SECTIONS
 {
-    /* MAIN TEXT SECTION */
+     /* MAIN TEXT SECTION */
     .text : ALIGN(4)
     {
         FILL(0xff)
@@ -72,7 +73,7 @@ SECTIONS
         *(.ARM.exidx* .gnu.linkonce.armexidx.*)
     } > PROGRAM_FLASH
     __exidx_end = .;
-
+ 
     _etext = .;
         
  
@@ -89,8 +90,10 @@ SECTIONS
         PROVIDE(__start_data_RAM2 = .) ;
         *(.ramfunc.$RAM2)
         *(.ramfunc.$SRAMX)
-        *(.data.$RAM2*)
-        *(.data.$SRAMX*)
+        *(.data.$RAM2)
+        *(.data.$SRAMX)
+        *(.data.$RAM2.*)
+        *(.data.$SRAMX.*)
         . = ALIGN(4) ;
         PROVIDE(__end_data_RAM2 = .) ;
      } > SRAMX AT>PROGRAM_FLASH
@@ -102,16 +105,19 @@ SECTIONS
         PROVIDE(__start_data_RAM3 = .) ;
         *(.ramfunc.$RAM3)
         *(.ramfunc.$USB_RAM)
-        *(.data.$RAM3*)
-        *(.data.$USB_RAM*)
+        *(.data.$RAM3)
+        *(.data.$USB_RAM)
+        *(.data.$RAM3.*)
+        *(.data.$USB_RAM.*)
         . = ALIGN(4) ;
         PROVIDE(__end_data_RAM3 = .) ;
      } > USB_RAM AT>PROGRAM_FLASH
     /* MAIN DATA SECTION */
-    .uninit_RESERVED : ALIGN(4)
+    .uninit_RESERVED (NOLOAD) :
     {
-        KEEP(*(.bss.$RESERVED*))
         . = ALIGN(4) ;
+        KEEP(*(.bss.$RESERVED*))
+       . = ALIGN(4) ;
         _end_uninit_RESERVED = .;
     } > SRAM_0_1_2_3
 
@@ -128,28 +134,35 @@ SECTIONS
     } > SRAM_0_1_2_3 AT>PROGRAM_FLASH
 
     /* BSS section for SRAMX */
-    .bss_RAM2 : ALIGN(4)
+    .bss_RAM2 :
     {
+       . = ALIGN(4) ;
        PROVIDE(__start_bss_RAM2 = .) ;
-       *(.bss.$RAM2*)
-       *(.bss.$SRAMX*)
+       *(.bss.$RAM2)
+       *(.bss.$SRAMX)
+       *(.bss.$RAM2.*)
+       *(.bss.$SRAMX.*)
        . = ALIGN (. != 0 ? 4 : 1) ; /* avoid empty segment */
        PROVIDE(__end_bss_RAM2 = .) ;
-    } > SRAMX 
+    } > SRAMX
 
     /* BSS section for USB_RAM */
-    .bss_RAM3 : ALIGN(4)
+    .bss_RAM3 :
     {
+       . = ALIGN(4) ;
        PROVIDE(__start_bss_RAM3 = .) ;
-       *(.bss.$RAM3*)
-       *(.bss.$USB_RAM*)
+       *(.bss.$RAM3)
+       *(.bss.$USB_RAM)
+       *(.bss.$RAM3.*)
+       *(.bss.$USB_RAM.*)
        . = ALIGN (. != 0 ? 4 : 1) ; /* avoid empty segment */
        PROVIDE(__end_bss_RAM3 = .) ;
-    } > USB_RAM 
+    } > USB_RAM
 
     /* MAIN BSS SECTION */
-    .bss : ALIGN(4)
+    .bss :
     {
+        . = ALIGN(4) ;
         _bss = .;
         *(.bss*)
         *(COMMON)
@@ -159,26 +172,33 @@ SECTIONS
     } > SRAM_0_1_2_3
 
     /* NOINIT section for SRAMX */
-    .noinit_RAM2 (NOLOAD) : ALIGN(4)
+    .noinit_RAM2 (NOLOAD) :
     {
-       *(.noinit.$RAM2*)
-       *(.noinit.$SRAMX*)
        . = ALIGN(4) ;
-    } > SRAMX 
+       *(.noinit.$RAM2)
+       *(.noinit.$SRAMX)
+       *(.noinit.$RAM2.*)
+       *(.noinit.$SRAMX.*)
+       . = ALIGN(4) ;
+    } > SRAMX
 
     /* NOINIT section for USB_RAM */
-    .noinit_RAM3 (NOLOAD) : ALIGN(4)
+    .noinit_RAM3 (NOLOAD) :
     {
-       *(.noinit.$RAM3*)
-       *(.noinit.$USB_RAM*)
        . = ALIGN(4) ;
-    } > USB_RAM 
+       *(.noinit.$RAM3)
+       *(.noinit.$USB_RAM)
+       *(.noinit.$RAM3.*)
+       *(.noinit.$USB_RAM.*)
+       . = ALIGN(4) ;
+    } > USB_RAM
 
     /* DEFAULT NOINIT SECTION */
-    .noinit (NOLOAD): ALIGN(4)
+    .noinit (NOLOAD):
     {
+         . = ALIGN(4) ;
         _noinit = .;
-        *(.noinit*) 
+        *(.noinit*)
          . = ALIGN(4) ;
         _end_noinit = .;
     } > SRAM_0_1_2_3
