@@ -112,7 +112,7 @@ Text HLabel 1400 2550 0    50   Input ~ 0
 Wire Wire Line
 	9300 7400 9850 7400
 Wire Wire Line
-	9300 7700 9850 7700
+	9300 7700 9450 7700
 $Comp
 L canbox-rescue:R-Device R4
 U 1 1 5C1E255F
@@ -482,18 +482,6 @@ Wire Wire Line
 Wire Wire Line
 	6700 6700 6975 6700
 Wire Wire Line
-	7850 6800 7300 6800
-Wire Wire Line
-	6700 6900 7300 6900
-Wire Wire Line
-	7850 7100 7300 7100
-Wire Wire Line
-	6700 7200 7300 7200
-Wire Wire Line
-	7850 7300 7300 7300
-Wire Wire Line
-	6700 7550 7150 7550
-Wire Wire Line
 	6700 7650 6950 7650
 $Comp
 L canbox-rescue:C-Device C20
@@ -643,8 +631,6 @@ Wire Wire Line
 Wire Wire Line
 	6975 5650 6975 6700
 Connection ~ 6975 6700
-Wire Wire Line
-	6975 6700 7300 6700
 Wire Wire Line
 	6975 5350 6975 5300
 Connection ~ 6975 5300
@@ -872,20 +858,6 @@ Connection ~ 6950 7650
 Wire Wire Line
 	6950 7650 7850 7650
 $Comp
-L Connector:TestPoint TP4
-U 1 1 5F3572D2
-P 7150 7550
-F 0 "TP4" H 7208 7668 50  0000 L CNN
-F 1 "MDIO" H 7208 7577 50  0000 L CNN
-F 2 "TestPoint:TestPoint_THTPad_1.5x1.5mm_Drill0.7mm" H 7350 7550 50  0001 C CNN
-F 3 "~" H 7350 7550 50  0001 C CNN
-	1    7150 7550
-	1    0    0    -1  
-$EndComp
-Connection ~ 7150 7550
-Wire Wire Line
-	7150 7550 7550 7550
-$Comp
 L canbox-rescue:Jumper_NC_Small-Device JP7
 U 1 1 5C0E65A0
 P 7550 7900
@@ -917,24 +889,6 @@ F 3 "~" H 7500 6900 50  0001 C CNN
 	1    7500 6900
 	1    0    0    -1  
 $EndComp
-Connection ~ 7300 6700
-Wire Wire Line
-	7300 6700 7850 6700
-Connection ~ 7300 6800
-Wire Wire Line
-	7300 6800 7250 6800
-Connection ~ 7300 6900
-Wire Wire Line
-	7300 6900 7850 6900
-Connection ~ 7300 7100
-Wire Wire Line
-	7300 7100 6700 7100
-Connection ~ 7300 7200
-Wire Wire Line
-	7300 7200 7850 7200
-Connection ~ 7300 7300
-Wire Wire Line
-	7300 7300 6700 7300
 Wire Wire Line
 	7300 7000 7100 7000
 Wire Wire Line
@@ -1067,4 +1021,137 @@ Text Label 6300 4150 0    50   ~ 0
 ETH_3V3
 Text Label 6300 9100 0    50   ~ 0
 ETH_3V3
+Wire Wire Line
+	6700 6350 6850 6350
+Wire Wire Line
+	6850 6350 6850 8450
+Wire Wire Line
+	6850 8450 9450 8450
+$Comp
+L canbox-rescue:R-Device R26
+U 1 1 5E45B6BA
+P 9450 7900
+F 0 "R26" H 9520 7946 50  0000 L CNN
+F 1 "NM" H 9520 7855 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 9380 7900 50  0001 C CNN
+F 3 "~" H 9450 7900 50  0001 C CNN
+F 4 "0805W8F1003T5E" H -1850 3200 50  0001 C CNN "OP"
+F 5 "stock" H -1850 3200 50  0001 C CNN "Arrow"
+F 6 "stok" H -1850 3200 50  0001 C CNN "notes"
+F 7 "C17407" H 9450 7900 50  0001 C CNN "JLC"
+	1    9450 7900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9450 7800 9450 7750
+Connection ~ 9450 7700
+Wire Wire Line
+	9450 7700 9850 7700
+Connection ~ 9450 7750
+Wire Wire Line
+	9450 7750 9450 7700
+$Comp
+L canbox-rescue:R-Device R35
+U 1 1 5E491BC5
+P 9450 8250
+F 0 "R35" H 9520 8296 50  0000 L CNN
+F 1 "NM" H 9520 8205 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 9380 8250 50  0001 C CNN
+F 3 "~" H 9450 8250 50  0001 C CNN
+F 4 "0805W8F1003T5E" H -1850 3550 50  0001 C CNN "OP"
+F 5 "stock" H -1850 3550 50  0001 C CNN "Arrow"
+F 6 "stok" H -1850 3550 50  0001 C CNN "notes"
+F 7 "C17407" H 9450 8250 50  0001 C CNN "JLC"
+	1    9450 8250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9450 8400 9450 8450
+Wire Wire Line
+	9450 8050 9450 8100
+$Comp
+L canbox-rescue:R-Device R38
+U 1 1 5E54DCB2
+P 7600 7300
+F 0 "R38" H 7670 7346 50  0000 L CNN
+F 1 "NM" H 7670 7255 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 7530 7300 50  0001 C CNN
+F 3 "~" H 7600 7300 50  0001 C CNN
+F 4 "0805W8F1003T5E" H -3700 2600 50  0001 C CNN "OP"
+F 5 "stock" H -3700 2600 50  0001 C CNN "Arrow"
+F 6 "stok" H -3700 2600 50  0001 C CNN "notes"
+F 7 "C17407" H 7600 7300 50  0001 C CNN "JLC"
+	1    7600 7300
+	0    1    1    0   
+$EndComp
+$Comp
+L canbox-rescue:R-Device R37
+U 1 1 5E56FBFB
+P 7600 7200
+F 0 "R37" H 7670 7246 50  0000 L CNN
+F 1 "NM" H 7670 7155 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 7530 7200 50  0001 C CNN
+F 3 "~" H 7600 7200 50  0001 C CNN
+F 4 "0805W8F1003T5E" H -3700 2500 50  0001 C CNN "OP"
+F 5 "stock" H -3700 2500 50  0001 C CNN "Arrow"
+F 6 "stok" H -3700 2500 50  0001 C CNN "notes"
+F 7 "C17407" H 7600 7200 50  0001 C CNN "JLC"
+	1    7600 7200
+	0    1    1    0   
+$EndComp
+$Comp
+L canbox-rescue:R-Device R36
+U 1 1 5E5749C1
+P 7600 7100
+F 0 "R36" H 7670 7146 50  0000 L CNN
+F 1 "NM" H 7670 7055 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 7530 7100 50  0001 C CNN
+F 3 "~" H 7600 7100 50  0001 C CNN
+F 4 "0805W8F1003T5E" H -3700 2400 50  0001 C CNN "OP"
+F 5 "stock" H -3700 2400 50  0001 C CNN "Arrow"
+F 6 "stok" H -3700 2400 50  0001 C CNN "notes"
+F 7 "C17407" H 7600 7100 50  0001 C CNN "JLC"
+	1    7600 7100
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	7250 6800 7300 6800
+Wire Wire Line
+	6700 6900 7300 6900
+Wire Wire Line
+	6975 6700 7300 6700
+Wire Wire Line
+	7750 7100 7850 7100
+Wire Wire Line
+	7750 7200 7850 7200
+Wire Wire Line
+	7750 7300 7850 7300
+Wire Wire Line
+	6700 7100 7300 7100
+Wire Wire Line
+	6700 7200 7300 7200
+Wire Wire Line
+	6700 7300 7300 7300
+Connection ~ 7300 6700
+Wire Wire Line
+	7300 6700 7850 6700
+Connection ~ 7300 6800
+Wire Wire Line
+	7300 6800 7850 6800
+Connection ~ 7300 6900
+Wire Wire Line
+	7300 6900 7850 6900
+Connection ~ 7300 7100
+Wire Wire Line
+	7300 7100 7450 7100
+Connection ~ 7300 7200
+Wire Wire Line
+	7300 7200 7450 7200
+Connection ~ 7300 7300
+Wire Wire Line
+	7300 7300 7450 7300
+Wire Wire Line
+	6700 7550 7550 7550
+Wire Wire Line
+	7850 6250 6700 6250
 $EndSCHEMATC

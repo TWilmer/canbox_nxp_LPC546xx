@@ -19,19 +19,6 @@ Comment7 ""
 Comment8 ""
 Comment9 ""
 $EndDescr
-$Comp
-L canbox-rescue:USB_B_Micro-Connector J7
-U 1 1 5BDA6E1E
-P 7950 1200
-F 0 "J7" H 8007 1667 50  0000 C CNN
-F 1 "USB_B_Micro" H 8007 1576 50  0000 C CNN
-F 2 "cypress:MicroUsb" H 8100 1150 50  0001 C CNN
-F 3 "~" H 8100 1150 50  0001 C CNN
-F 4 "1050170001" H 7950 1200 50  0001 C CNN "OP"
-F 5 "ali" H 0   0   50  0001 C CNN "notes"
-	1    7950 1200
-	-1   0    0    -1  
-$EndComp
 Wire Wire Line
 	3550 3550 3550 3500
 $Comp
@@ -837,4 +824,97 @@ Text Label 3800 7000 0    50   ~ 0
 3V3_LC
 Text Label 3900 1050 0    50   ~ 0
 3V3_LC
+$Comp
+L canbox-rescue:USB_B_Micro-Connector J7
+U 1 1 5BDA6E1E
+P 7950 1200
+F 0 "J7" H 8007 1667 50  0000 C CNN
+F 1 "USB_B_Micro" H 8007 1576 50  0000 C CNN
+F 2 "cypress:MicroUsb" H 8100 1150 50  0001 C CNN
+F 3 "~" H 8100 1150 50  0001 C CNN
+F 4 "1050170001" H 7950 1200 50  0001 C CNN "OP"
+F 5 "ali" H 0   0   50  0001 C CNN "notes"
+	1    7950 1200
+	-1   0    0    -1  
+$EndComp
+$Comp
+L canbox-rescue:USB_B_Micro-Connector J9
+U 1 1 5E3C43EB
+P 10450 1200
+F 0 "J9" H 10507 1667 50  0000 C CNN
+F 1 "USB_B_Micro" H 10507 1576 50  0000 C CNN
+F 2 "cypress:MicroUsb" H 10600 1150 50  0001 C CNN
+F 3 "~" H 10600 1150 50  0001 C CNN
+F 4 "1050170001" H 10450 1200 50  0001 C CNN "OP"
+F 5 "ali" H 2500 0   50  0001 C CNN "notes"
+	1    10450 1200
+	-1   0    0    -1  
+$EndComp
+$Comp
+L canbox-rescue:USB_B_Micro-Connector J11
+U 1 1 5E3D3C08
+P 10500 2200
+F 0 "J11" H 10557 2667 50  0000 C CNN
+F 1 "USB_B_Micro" H 10557 2576 50  0000 C CNN
+F 2 "cypress:MicroUsb" H 10650 2150 50  0001 C CNN
+F 3 "~" H 10650 2150 50  0001 C CNN
+F 4 "1050170001" H 10500 2200 50  0001 C CNN "OP"
+F 5 "ali" H 2550 1000 50  0001 C CNN "notes"
+	1    10500 2200
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	10150 1000 9800 1000
+Wire Wire Line
+	9800 1000 9800 2000
+Wire Wire Line
+	9800 2000 10200 2000
+Wire Wire Line
+	10200 2200 9900 2200
+Wire Wire Line
+	9900 2200 9900 1200
+Wire Wire Line
+	9900 1200 10150 1200
+Wire Wire Line
+	10150 1300 10000 1300
+Wire Wire Line
+	10000 1300 10000 2300
+Wire Wire Line
+	10000 2300 10200 2300
+Wire Wire Line
+	10200 2400 10050 2400
+Wire Wire Line
+	10050 2400 10050 1400
+Wire Wire Line
+	10050 1400 10150 1400
+$Comp
+L canbox-rescue:GND-power #PWR0109
+U 1 1 5E3DA6CD
+P 10500 2800
+F 0 "#PWR0109" H 10500 2550 50  0001 C CNN
+F 1 "GND" H 10505 2627 50  0000 C CNN
+F 2 "" H 10500 2800 50  0001 C CNN
+F 3 "" H 10500 2800 50  0001 C CNN
+	1    10500 2800
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	10500 2800 10500 2700
+Wire Wire Line
+	10950 2700 10950 1700
+Wire Wire Line
+	10950 1700 10450 1700
+Wire Wire Line
+	10450 1700 10450 1600
+Wire Wire Line
+	10500 2700 10950 2700
+Connection ~ 10500 2700
+Wire Wire Line
+	10500 2700 10500 2600
+Wire Wire Line
+	10550 1600 10750 1600
+Wire Wire Line
+	10750 1600 10750 2600
+Wire Wire Line
+	10750 2600 10600 2600
 $EndSCHEMATC
