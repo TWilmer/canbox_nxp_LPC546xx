@@ -201,7 +201,7 @@ L canbox-rescue:R-Device R30
 U 1 1 5BE4C7F1
 P 6400 3650
 F 0 "R30" H 6470 3696 50  0000 L CNN
-F 1 "124k" H 6470 3605 50  0000 L CNN
+F 1 "12.4k" H 6470 3605 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 6330 3650 50  0001 C CNN
 F 3 "~" H 6400 3650 50  0001 C CNN
 F 4 "0805W8F1243T5E" H 0   0   50  0001 C CNN "OP"
@@ -216,7 +216,7 @@ L canbox-rescue:R-Device R31
 U 1 1 5BE4DA01
 P 6400 4050
 F 0 "R31" H 6470 4096 50  0000 L CNN
-F 1 "39.2k" H 6470 4005 50  0000 L CNN
+F 1 "3.9k" H 6470 4005 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 6330 4050 50  0001 C CNN
 F 3 "~" H 6400 4050 50  0001 C CNN
 F 4 "0805W8F4022T5E" H 0   0   50  0001 C CNN "OP"
@@ -363,9 +363,6 @@ Wire Wire Line
 	8900 600  8900 2750
 Wire Wire Line
 	8900 2750 9450 2750
-Connection ~ 7500 1000
-Wire Wire Line
-	7500 1000 7000 1000
 $Comp
 L canbox-rescue:CP-Device C46
 U 1 1 5C037742
@@ -527,7 +524,6 @@ F 3 "" H 7800 2700 50  0001 C CNN
 	1    7800 2700
 	1    0    0    -1  
 $EndComp
-Connection ~ 7800 2700
 Wire Wire Line
 	7800 2700 7950 2700
 Wire Wire Line
@@ -716,108 +712,6 @@ Wire Wire Line
 	3300 1300 7650 1300
 Wire Wire Line
 	3300 1200 7650 1200
-$Comp
-L canbox-rescue:USB_B_Micro-Connector J4
-U 1 1 5F413967
-P 5250 1975
-F 0 "J4" H 5307 2442 50  0000 C CNN
-F 1 "USB_B_Micro" H 5307 2351 50  0000 C CNN
-F 2 "cypress:MicroUsb" H 5400 1925 50  0001 C CNN
-F 3 "~" H 5400 1925 50  0001 C CNN
-F 4 "1050170001" H 5250 1975 50  0001 C CNN "OP"
-F 5 "ali" H -2700 775 50  0001 C CNN "notes"
-	1    5250 1975
-	-1   0    0    -1  
-$EndComp
-Wire Wire Line
-	3825 1975 3825 2100
-Wire Wire Line
-	3825 2100 3300 2100
-Wire Wire Line
-	3300 2250 3825 2250
-Wire Wire Line
-	5250 2375 5300 2375
-Connection ~ 5300 2375
-Wire Wire Line
-	5300 2375 5350 2375
-Wire Wire Line
-	3300 1050 3600 1050
-Wire Wire Line
-	4525 1475 4525 1775
-Wire Wire Line
-	5300 2375 5300 2700
-Wire Wire Line
-	3600 1950 3300 1950
-Wire Wire Line
-	4525 1775 4950 1775
-Wire Wire Line
-	3600 1950 3600 1050
-Connection ~ 3600 1050
-Wire Wire Line
-	3600 1050 6250 1050
-Wire Wire Line
-	4950 2175 4500 2175
-Wire Wire Line
-	4500 2175 4500 2400
-Wire Wire Line
-	4500 2400 3300 2400
-Text Label 4350 1975 0    50   ~ 0
-Slow_D+
-Text Label 4350 2075 0    50   ~ 0
-Slow_D-
-$Comp
-L canbox-rescue:R-Device R21
-U 1 1 5F4C53F3
-P 4125 1975
-F 0 "R21" H 4195 2021 50  0000 L CNN
-F 1 "33" H 4195 1930 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 4055 1975 50  0001 C CNN
-F 3 "~" H 4125 1975 50  0001 C CNN
-F 4 "0805W8F1243T5E" H -2275 -1675 50  0001 C CNN "OP"
-F 5 "ok" H -2875 -25 50  0001 C CNN "Mouser"
-F 6 "ok" H -2875 -25 50  0001 C CNN "notes"
-F 7 "C17440" H 4125 1975 50  0001 C CNN "JLC"
-	1    4125 1975
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	3975 1975 3825 1975
-$Comp
-L canbox-rescue:R-Device R2
-U 1 1 5F4CBF14
-P 3975 2250
-F 0 "R2" H 4045 2296 50  0000 L CNN
-F 1 "33" H 4045 2205 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 3905 2250 50  0001 C CNN
-F 3 "~" H 3975 2250 50  0001 C CNN
-F 4 "0805W8F1243T5E" H -2425 -1400 50  0001 C CNN "OP"
-F 5 "ok" H -3025 250 50  0001 C CNN "Mouser"
-F 6 "ok" H -3025 250 50  0001 C CNN "notes"
-F 7 "C17440" H 3975 2250 50  0001 C CNN "JLC"
-	1    3975 2250
-	0    1    1    0   
-$EndComp
-Text Label 3375 2100 0    50   ~ 0
-USB0_D+
-Text Label 3375 2250 0    50   ~ 0
-USB0_D-
-Wire Wire Line
-	4125 2250 4300 2250
-Wire Wire Line
-	4300 2250 4300 2075
-Wire Wire Line
-	4300 2075 4950 2075
-Wire Wire Line
-	4950 1975 4275 1975
-Wire Wire Line
-	5300 2700 7800 2700
-Wire Wire Line
-	7000 1475 4525 1475
-Wire Wire Line
-	7000 1000 7000 1475
-Connection ~ 7000 1475
-Wire Wire Line
-	7000 1475 7000 1500
 Wire Wire Line
 	6000 3450 6400 3450
 Text Label 3800 7000 0    50   ~ 0
@@ -837,84 +731,6 @@ F 5 "ali" H 0   0   50  0001 C CNN "notes"
 	1    7950 1200
 	-1   0    0    -1  
 $EndComp
-$Comp
-L canbox-rescue:USB_B_Micro-Connector J9
-U 1 1 5E3C43EB
-P 10450 1200
-F 0 "J9" H 10507 1667 50  0000 C CNN
-F 1 "USB_B_Micro" H 10507 1576 50  0000 C CNN
-F 2 "cypress:MicroUsb" H 10600 1150 50  0001 C CNN
-F 3 "~" H 10600 1150 50  0001 C CNN
-F 4 "1050170001" H 10450 1200 50  0001 C CNN "OP"
-F 5 "ali" H 2500 0   50  0001 C CNN "notes"
-	1    10450 1200
-	-1   0    0    -1  
-$EndComp
-$Comp
-L canbox-rescue:USB_B_Micro-Connector J11
-U 1 1 5E3D3C08
-P 10500 2200
-F 0 "J11" H 10557 2667 50  0000 C CNN
-F 1 "USB_B_Micro" H 10557 2576 50  0000 C CNN
-F 2 "cypress:MicroUsb" H 10650 2150 50  0001 C CNN
-F 3 "~" H 10650 2150 50  0001 C CNN
-F 4 "1050170001" H 10500 2200 50  0001 C CNN "OP"
-F 5 "ali" H 2550 1000 50  0001 C CNN "notes"
-	1    10500 2200
-	-1   0    0    -1  
-$EndComp
 Wire Wire Line
-	10150 1000 9800 1000
-Wire Wire Line
-	9800 1000 9800 2000
-Wire Wire Line
-	9800 2000 10200 2000
-Wire Wire Line
-	10200 2200 9900 2200
-Wire Wire Line
-	9900 2200 9900 1200
-Wire Wire Line
-	9900 1200 10150 1200
-Wire Wire Line
-	10150 1300 10000 1300
-Wire Wire Line
-	10000 1300 10000 2300
-Wire Wire Line
-	10000 2300 10200 2300
-Wire Wire Line
-	10200 2400 10050 2400
-Wire Wire Line
-	10050 2400 10050 1400
-Wire Wire Line
-	10050 1400 10150 1400
-$Comp
-L canbox-rescue:GND-power #PWR0109
-U 1 1 5E3DA6CD
-P 10500 2800
-F 0 "#PWR0109" H 10500 2550 50  0001 C CNN
-F 1 "GND" H 10505 2627 50  0000 C CNN
-F 2 "" H 10500 2800 50  0001 C CNN
-F 3 "" H 10500 2800 50  0001 C CNN
-	1    10500 2800
-	-1   0    0    -1  
-$EndComp
-Wire Wire Line
-	10500 2800 10500 2700
-Wire Wire Line
-	10950 2700 10950 1700
-Wire Wire Line
-	10950 1700 10450 1700
-Wire Wire Line
-	10450 1700 10450 1600
-Wire Wire Line
-	10500 2700 10950 2700
-Connection ~ 10500 2700
-Wire Wire Line
-	10500 2700 10500 2600
-Wire Wire Line
-	10550 1600 10750 1600
-Wire Wire Line
-	10750 1600 10750 2600
-Wire Wire Line
-	10750 2600 10600 2600
+	3300 1050 6250 1050
 $EndSCHEMATC

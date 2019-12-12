@@ -32,12 +32,14 @@ void phy_setXMMI_Loopback(bool value)
 {
 	 uint32_t BMCR=0;
 	 uint32_t BISTCTR=0;
+	 uint32_t BISTCR=0;
 	PHY_Read(ENET, ENET_PHY_ADDR, PHY_BASICCONTROL_REG, &BMCR);
 	printf("Initial BMCR is %x\n",BMCR );
-	if(value)
+	if(false)
 		BMCR |= (1<<14);
 	else
 		BMCR &=~(1<<14);
+// 110 0001 0000 0000
 
 	PHY_Write(ENET, ENET_PHY_ADDR, PHY_BASICCONTROL_REG,BMCR );
 	printf("Write BMCR is %x\n",BMCR );
@@ -55,6 +57,37 @@ void phy_setXMMI_Loopback(bool value)
 	printf("Write BISTCTR is %x\n",BISTCTR );
 	PHY_Read(ENET, ENET_PHY_ADDR, PHY_BISTCR_REG, &BISTCTR);
     printf("Got BISTCTR is %x\n",BISTCTR );
+
+
+
+	PHY_Read(ENET, ENET_PHY_ADDR, PHY_BASICCONTROL_REG, &BISTCR);
+	printf("Initial BISTCR is %x\n",BISTCR );
+	if(value)
+		BISTCR |= (1<<2);
+	else
+		BISTCR &=~(1<<2);
+// 110 0001 0000 0000
+
+	PHY_Write(ENET, ENET_PHY_ADDR, PHY_BISTCR_REG,BISTCR );
+	printf("Write BISTCR is %x\n",BISTCR );
+	PHY_Read(ENET, ENET_PHY_ADDR, PHY_BISTCR_REG, &BISTCR);
+	printf("Got BISTCR is %x\n",BISTCR );
+
+	uint32_t xMII_IMP_CTRL;
+	PHY_Read(ENET, ENET_PHY_ADDR, PHY_xMII_IMP_CTRL_REG, &xMII_IMP_CTRL);
+	printf("Read xMII_IMP_CTRL is %x\n",xMII_IMP_CTRL );
+//	PHY_Write(ENET, ENET_PHY_ADDR, PHY_xMII_IMP_CTRL_REG, 0x0400 | (0x1F<<1));
+	PHY_Write(ENET, ENET_PHY_ADDR, PHY_xMII_IMP_CTRL_REG, 0x0400 );
+
+	 uint32_t MON_STAT2=0;
+	PHY_Read(ENET, ENET_PHY_ADDR, PHY_MON_STAT2_REG, &MON_STAT2);
+	printf("Got MON_STAT2 is %x\n",MON_STAT2 );
+
+	 uint32_t MON_STAT1=0;
+		PHY_Read(ENET, ENET_PHY_ADDR, PHY_MON_STAT1_REG, &MON_STAT1);
+		printf("Got MON_STAT1 is %x\n",MON_STAT1 );
+
+
 }
 #define ENET_ALIGN(x, align) ((unsigned int)((x) + ((align)-1)) & (unsigned int)(~(unsigned int)((align)-1)))
 #define ENET_BuffSizeAlign(n) ENET_ALIGN(n, ENET_BUFF_ALIGNMENT)
@@ -194,7 +227,7 @@ printf("Test2");
 
   	PHY_RESET_SET(1);
   	LED1_INIT(1);
-
+	  board_sleep(500);
   	   ENET_SetSMI(ENET);
   		      PHY_Init(EXAMPLE_ENET_BASE, EXAMPLE_PHY_ADDR, 0);
 
@@ -239,46 +272,10 @@ printf("Test2");
 
 					phy_setXMMI_Loopback(1);
 
+				    board_sleep(1000);
 
 
-					idReg=0;
-
-					PHY_Write(ENET, ENET_PHY_ADDR, PHY_xMII_IMP_CTRL_REG,idReg);
-
-					PHY_Read(ENET, ENET_PHY_ADDR, PHY_xMII_CTRL_REG, &idReg);
-						printf("Phy %d PHY_xMII_CTRL_REG: %x\n",PHY_xMII_CTRL_REG, idReg);
-						idReg=0x4000
-								| 1<<5 // RMII Mode
-								| 1<<4 // RMII 1.0  Mode
-								| 1<<6 // Reserved should be 1
-								;
-						PHY_Write(ENET, ENET_PHY_ADDR, PHY_xMII_CTRL_REG,idReg);
-
-						PHY_Read(ENET, ENET_PHY_ADDR, PHY_xMII_CTRL_REG, &idReg);
-										printf("Phy %d PHY_xMII_CTRL_REG: %x\n",PHY_xMII_CTRL_REG, idReg);
-
-
-if(true)
-{
-    // pin 61, pio_0 7 is the clock, lets invert it
-										 IOCON->PIO[0][7] = ((IOCON->PIO[0][7] &
-										                         /* Mask bits to zero which are setting */
-										                         (~(IOCON_PIO_FUNC_MASK | IOCON_PIO_DIGIMODE_MASK)))
-
-										                        /* Selects pin function.
-										                         * : PORT07 (pin 61) is configured as ENET_RX_CLK. */
-										                        | IOCON_PIO_FUNC(PIO07_FUNC_ALT7)
-
-																/* Select Invert
-																 */
-																| IOCON_PIO_INVERT(1)
-
-										                        /* Select Analog/Digital mode.
-										                         * : Digital mode. */
-										                        | IOCON_PIO_DIGIMODE(PIO07_DIGIMODE_DIGITAL));
-
-
-}
+//GPIO_TEST(1);
 if(true)
 								{
     printf("\r\nTransmission start now!\r\n");
@@ -290,10 +287,12 @@ if(true)
     ENET->MAC_FRAME_FILTER|=ENET_MAC_FRAME_FILTER_RA(1);
 
 
-    ENET->MAC_CONFIG|=ENET_MAC_CONFIG_DO(1);
+    ENET->MAC_CONFIG|=ENET_MAC_CONFIG_DO(0);
+    ENET->MAC_CONFIG|=ENET_MAC_CONFIG_DCRS(1);
+
     ENET->MAC_EXT_CONFIG|=ENET_MAC_EXT_CONFIG_DCRCC(1);
 }
-    //ENET->MAC_CONFIG|=ENET_MAC_CONFIG_LM(1);
+   //  ENET->MAC_CONFIG|=ENET_MAC_CONFIG_LM(1);
     while (1)
     {
         /* Get the Frame size */

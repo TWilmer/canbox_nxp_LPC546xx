@@ -73,6 +73,7 @@ U 5CA6EA6B
 F0 "RelayButtons" 50
 F1 "RelayButtons.sch" 50
 F2 "5V" I R 4400 1350 50 
+F3 "3V3" I R 4400 1550 50 
 $EndSheet
 Wire Wire Line
 	6150 4350 6150 1350
@@ -86,62 +87,52 @@ Wire Wire Line
 Wire Wire Line
 	5950 2300 4550 2300
 $Comp
-L canbox-rescue:MountingHole-Mechanical H4
-U 1 1 5C0741C7
-P 1850 5950
-F 0 "H4" H 1950 5996 50  0000 L CNN
-F 1 "H" H 1950 5905 50  0000 L CNN
-F 2 "MountingHole:MountingHole_2.5mm_Pad_Via" H 1850 5950 50  0001 C CNN
-F 3 "~" H 1850 5950 50  0001 C CNN
-	1    1850 5950
-	1    0    0    -1  
-$EndComp
-$Comp
-L canbox-rescue:MountingHole-Mechanical H3
-U 1 1 5C07437F
-P 1850 5650
-F 0 "H3" H 1950 5696 50  0000 L CNN
-F 1 "H" H 1950 5605 50  0000 L CNN
-F 2 "MountingHole:MountingHole_2.5mm_Pad_Via" H 1850 5650 50  0001 C CNN
-F 3 "~" H 1850 5650 50  0001 C CNN
-	1    1850 5650
+L canbox-rescue:MountingHole-Mechanical H1
+U 1 1 5E0AFF15
+P 1200 3300
+F 0 "H1" H 1300 3346 50  0000 L CNN
+F 1 "MountingHole-Mechanical" H 1300 3255 50  0000 L CNN
+F 2 "MountingHole:MountingHole_2.2mm_M2_DIN965" H 1200 3300 50  0001 C CNN
+F 3 "" H 1200 3300 50  0001 C CNN
+	1    1200 3300
 	1    0    0    -1  
 $EndComp
 $Comp
 L canbox-rescue:MountingHole-Mechanical H2
-U 1 1 5C074496
-P 1850 5350
-F 0 "H2" H 1950 5396 50  0000 L CNN
-F 1 "H" H 1950 5305 50  0000 L CNN
-F 2 "MountingHole:MountingHole_2.5mm_Pad_Via" H 1850 5350 50  0001 C CNN
-F 3 "~" H 1850 5350 50  0001 C CNN
-	1    1850 5350
+U 1 1 5E0B01F5
+P 1200 3700
+F 0 "H2" H 1300 3746 50  0000 L CNN
+F 1 "MountingHole-Mechanical" H 1300 3655 50  0000 L CNN
+F 2 "MountingHole:MountingHole_2.2mm_M2_DIN965" H 1200 3700 50  0001 C CNN
+F 3 "" H 1200 3700 50  0001 C CNN
+	1    1200 3700
 	1    0    0    -1  
 $EndComp
 $Comp
-L canbox-rescue:GND-power #PWR0104
-U 1 1 5C074F1C
-P 1600 6200
-F 0 "#PWR0104" H 1600 5950 50  0001 C CNN
-F 1 "GND" H 1605 6027 50  0000 C CNN
-F 2 "" H 1600 6200 50  0001 C CNN
-F 3 "" H 1600 6200 50  0001 C CNN
-	1    1600 6200
+L canbox-rescue:MountingHole-Mechanical H3
+U 1 1 5E0B036E
+P 1200 4000
+F 0 "H3" H 1300 4046 50  0000 L CNN
+F 1 "MountingHole-Mechanical" H 1300 3955 50  0000 L CNN
+F 2 "MountingHole:MountingHole_2.2mm_M2_DIN965" H 1200 4000 50  0001 C CNN
+F 3 "" H 1200 4000 50  0001 C CNN
+	1    1200 4000
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	1850 5050 1850 6200
-Wire Wire Line
-	1850 6200 1600 6200
 $Comp
-L canbox-rescue:MountingHole-Mechanical H1
-U 1 1 5F0144FA
-P 1850 5050
-F 0 "H1" H 1950 5096 50  0000 L CNN
-F 1 "H" H 1950 5005 50  0000 L CNN
-F 2 "MountingHole:MountingHole_2.5mm_Pad_Via" H 1850 5050 50  0001 C CNN
-F 3 "~" H 1850 5050 50  0001 C CNN
-	1    1850 5050
+L canbox-rescue:MountingHole-Mechanical H4
+U 1 1 5E0B05BD
+P 1200 4350
+F 0 "H4" H 1300 4396 50  0000 L CNN
+F 1 "MountingHole-Mechanical" H 1300 4305 50  0000 L CNN
+F 2 "MountingHole:MountingHole_2.2mm_M2_DIN965" H 1200 4350 50  0001 C CNN
+F 3 "" H 1200 4350 50  0001 C CNN
+	1    1200 4350
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	4400 1550 5650 1550
+Wire Wire Line
+	5650 1550 5650 2500
+Connection ~ 5650 2500
 $EndSCHEMATC

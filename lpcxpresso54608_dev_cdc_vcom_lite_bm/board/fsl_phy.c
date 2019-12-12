@@ -72,8 +72,43 @@ status_t PHY_Init(ENET_Type *base, uint32_t phyAddr, uint32_t srcClock_Hz)
 
     return kStatus_Success;
 }
+static status_t PHY_Read_Raw(ENET_Type *base, uint32_t phyAddr, uint32_t phyReg, uint32_t *dataPtr);
+static status_t PHY_Write_Raw(ENET_Type *base, uint32_t phyAddr, uint32_t phyReg, uint32_t data);
 
-status_t PHY_Write(ENET_Type *base, uint32_t phyAddr, uint32_t phyReg, uint32_t data)
+status_t PHY_Read(ENET_Type *base, uint32_t phyAddr, uint32_t phyReg, uint32_t *dataPtr)
+{
+	if(phyReg<0xF)
+		return PHY_Read_Raw(base,phyAddr,phyReg,dataPtr);
+
+	status_t ret = kStatus_Success;
+
+	 // Set address
+	if(ret==kStatus_Success)	PHY_Write_Raw(base, phyAddr, PHY_REGCR_REG, 0x001f);
+	if(ret==kStatus_Success)	PHY_Write_Raw(base, phyAddr, PHY_ADDAR_REG, phyReg);
+
+
+		 // Write value
+	if(ret==kStatus_Success) PHY_Write_Raw(base, phyAddr, PHY_REGCR_REG, 0x401F);
+	if(ret==kStatus_Success) PHY_Read_Raw(base, phyAddr, PHY_ADDAR_REG, dataPtr);
+	return ret;
+
+}
+status_t PHY_Write(ENET_Type *base, uint32_t phyAddr, uint32_t phyReg, uint32_t data){
+	if(phyReg<0xF)
+		return PHY_Write_Raw(base,phyAddr,phyReg,data);
+	status_t ret = kStatus_Success;
+	 // Set address
+	if(ret==kStatus_Success)PHY_Write_Raw(base, phyAddr, PHY_REGCR_REG, 0x001f);
+	if(ret==kStatus_Success)PHY_Write_Raw(base, phyAddr, PHY_ADDAR_REG, phyReg);
+
+
+	 // Write value
+	if(ret==kStatus_Success)PHY_Write_Raw(base, phyAddr, PHY_REGCR_REG, 0x401F);
+	if(ret==kStatus_Success)PHY_Write_Raw(base, phyAddr, PHY_ADDAR_REG, data);
+	return ret;
+}
+
+status_t PHY_Write_Raw(ENET_Type *base, uint32_t phyAddr, uint32_t phyReg, uint32_t data)
 {
 #if defined(FSL_FEATURE_SOC_ENET_COUNT) && (FSL_FEATURE_SOC_ENET_COUNT > 0)
     uint32_t counter;
@@ -110,7 +145,7 @@ status_t PHY_Write(ENET_Type *base, uint32_t phyAddr, uint32_t phyReg, uint32_t 
     return kStatus_Success;
 }
 
-status_t PHY_Read(ENET_Type *base, uint32_t phyAddr, uint32_t phyReg, uint32_t *dataPtr)
+status_t PHY_Read_Raw(ENET_Type *base, uint32_t phyAddr, uint32_t phyReg, uint32_t *dataPtr)
 {
 #if defined(FSL_FEATURE_SOC_ENET_COUNT) && (FSL_FEATURE_SOC_ENET_COUNT > 0)
     assert(dataPtr);

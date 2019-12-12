@@ -33,10 +33,15 @@
 #define PHY_ID1_REG 0x02U               /*!< The PHY ID one register. */
 #define PHY_ID2_REG 0x03U               /*!< The PHY ID two register. */
 #define PHY_BISTCR_REG 0x16U		    /* The BIST Control Register*/
+#define PHY_LD_CTRL_REG 0x0400
 #define PHY_xMII_CTRL_REG 0x17
 #define PHY_LED_CFG1_REG 0x0460
 #define PHY_xMII_IMP_CTRL_REG  0x0461
+#define PHY_MON_STAT2_REG 0x0484
+#define PHY_MON_STAT1_REG 0x0483
 #define PHY_IO_CTRL1_REG 0x0462
+#define PHY_REGCR_REG 0x000D
+#define PHY_ADDAR_REG 0x000E
 #define PHY_AUTONEG_ADVERTISE_REG 0x04U /*!< The PHY auto-negotiate advertise register. */
 #define PHY_SEPCIAL_CONTROL_REG 0x1FU   /*!< The PHY control two register. */
 

@@ -57,6 +57,12 @@ void BOARD_InitBootPins(void);
  * @brief Selects pin function.: Alternative connection 7. */
 #define PIO013_FUNC_ALT7 0x07u
 /*!
+ * @brief Select Analog/Digital mode.: Digital mode. */
+#define PIO014_DIGIMODE_DIGITAL 0x01u
+/*!
+ * @brief Selects pin function.: Alternative connection 0. */
+#define PIO014_FUNC_ALT0 0x00u
+/*!
  * @brief Select Analog/Digital mode.: Analog mode. */
 #define PIO015_DIGIMODE_ANALOG 0x00u
 /*!
@@ -437,6 +443,13 @@ void BOARD_InitBootPins(void);
 /*! @name CLKOUT (number 27), CLKOUT
   @{ */
 /* @} */
+
+/*! @name PIO0_14 (number 69), RX_ERROR
+  @{ */
+#define BOARD_INITPINS_RX_ERROR_GPIO GPIO /*!<@brief GPIO device name: GPIO */
+#define BOARD_INITPINS_RX_ERROR_PORT 0U   /*!<@brief PORT device name: 0U */
+#define BOARD_INITPINS_RX_ERROR_PIN 14U   /*!<@brief 0U pin index: 14 */
+                                          /* @} */
 
 /*!
  * @brief Configures pin routing and optionally pin electrical features.

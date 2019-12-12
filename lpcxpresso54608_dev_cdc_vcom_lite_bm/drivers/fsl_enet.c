@@ -1301,7 +1301,7 @@ void ENET_SetSMI(ENET_Type *base)
     {
         crDiv = 3;
     }
-    else if ((srcClock_Hz >= 100) && (srcClock_Hz < 150))
+    else if ((srcClock_Hz >= 100) && (srcClock_Hz < 200))
     {
         crDiv = 1;
     }

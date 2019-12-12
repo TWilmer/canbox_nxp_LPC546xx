@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="com.crt.dsfdebug.crtmcu.launchType">
 <stringAttribute key=".gdbinit" value=""/>
+<stringAttribute key="InstructionTraceInfo" value="eJzFVl1v4jgUfd9fEeV9FgI0ZaRhK+OYIdp8KXba1bxYLriUnZCwidPp/Pu5cYAWcFseRto+VP44Pvfecw+Ov9w8b3LrSVb1uiwmtvNn37ZksSiX62I1sTM2+zS2b/7644tUG6nuPanEOq9hzkS1kmomhWoqWVuh+LesbvcswBGui6MFOEJYOBW1tNByCUfqif3paui6/ZF7PbCtBJZkoSa2qhpp9wDu3bFz+Nh1x45rgvsm9vF1/7NjZCdsakqmf3X9mv1B5HWHD8/wjhkHIv1QJ9CBOx4NnaHbNx5hlVjIWVMUMj9O5+qzOxr3jdr8ULisJF2vHmGw2ZYF7FttVKNauA7KxfeJHTV53o1tCyhSuaIKaKA//9uf3XX6YW+ktoaj5Lv9BRQpKgHZ1lbUbO5lNbFHWgrabLdlpeTSwpttKNTicaeThX8uconLplAtWq8BvpVrZ2PLE0q08303rGBdfHcOs1A8h6IG3Zwr+xC1r6OaWbq4O5JuYuRw3uG4PJPBb2EZapbeQcbOXUlVPqxzuAN2+tVdGzhmaWDdiryReyV6b6B7r7q6g51bFjai5y1RG1wvzu27vxv29r0rq+XBvvK+WaXyv0NxQEKVqBQ4eqtvIJjl+WFbzwL5JHO9ydYbWSvxSir9K0QvJ7oLa/ZSwYvRfG9iw57vpTxJCSURO3FiC2ApwoRThlIG/+PkHegcUT7zZ/EsCwLDNgoYSSPE/FvCpymK8JwnCP9NjFHnWTjlwwGnWZLEqRHihwTSChMOnBkKOIlw7PnRVwM2JV6GicdxnEWQBHcMGIwinlHCSTgFpA9F3yGG50nsR4wa8B5iiCMPxMNxm0TM9skSz1h9wFPy1acQn8IIeWgakM56xw3S5jvulF7SDdeZdlWcJnUMCkOPgB5QrB8l2VkFp4xA+A/TlaAUsfgDcl37pWAgJpEHmrYDMEDQZcQpCQh++/Rg1B1vHcU9krD5h1E0eZyxD+tNkJ/q3hFKP65jl4g2hnfmjUv0fUuCaUY59b+RNxQ4qeyCQH5EWZqF4C8aZykmHbp3sFTvcE21Tw0YXPL13T0+DNfXyWf/jE0a6PavAcPHvDU/ZbOTi/n9ABpx9IhrV46feb8AI8EZywAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
 <booleanAttribute key="attach" value="false"/>
 <stringAttribute key="bootrom.stall" value=""/>
 <stringAttribute key="com.crt.ctrlcenter.OFSemuDetails" value="LinkServer"/>
@@ -64,7 +65,7 @@
 <booleanAttribute key="org.eclipse.cdt.dsf.gdb.EXTERNAL_CONSOLE" value="false"/>
 <stringAttribute key="org.eclipse.cdt.dsf.gdb.GDB_INIT" value=""/>
 <booleanAttribute key="org.eclipse.cdt.dsf.gdb.NON_STOP" value="true"/>
-<booleanAttribute key="org.eclipse.cdt.dsf.gdb.REVERSE" value="false"/>
+<booleanAttribute key="org.eclipse.cdt.dsf.gdb.REVERSE" value="true"/>
 <stringAttribute key="org.eclipse.cdt.dsf.gdb.REVERSE_MODE" value="UseSoftTrace"/>
 <stringAttribute key="org.eclipse.cdt.dsf.gdb.TRACEPOINT_MODE" value="TP_NORMAL_ONLY"/>
 <booleanAttribute key="org.eclipse.cdt.dsf.gdb.UPDATE_THREADLIST_ON_SUSPEND" value="false"/>

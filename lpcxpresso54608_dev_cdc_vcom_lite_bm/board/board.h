@@ -222,6 +222,11 @@ extern  void board_sleep(int len);
     GPIO_PinInit(BOARD_INITPINS_RELAY_GPIO, BOARD_INITPINS_RELAY_PORT, BOARD_INITPINS_RELAY_PIN, \
                  &(gpio_pin_config_t){kGPIO_DigitalOutput, (output)}) /*!< Enable target LED1 */
 
+/*
+#define GPIO_TEST(output)                                                    \
+    GPIO_PinInit(BOARD_INITPINS_TEST_GPIO, BOARD_INITPINS_TEST_PORT, BOARD_INITPINS_TEST_PIN, \
+                 &(gpio_pin_config_t){kGPIO_DigitalOutput, (output)})
+*/
 
 #if defined(__cplusplus)
 extern "C" {
