@@ -33,6 +33,7 @@ U 5BDA0002
 F0 "Ethernet" 50
 F1 "Ethernet.sch" 50
 F2 "3V3" I L 6700 2650 50 
+F3 "5V" I L 6700 2850 50 
 $EndSheet
 $Sheet
 S 6650 4150 2550 1150
@@ -76,14 +77,12 @@ F2 "5V" I R 4400 1350 50
 F3 "3V3" I R 4400 1550 50 
 $EndSheet
 Wire Wire Line
-	6150 4350 6150 1350
+	6150 4350 6150 2850
 Wire Wire Line
 	6150 1350 4400 1350
 Connection ~ 6150 4350
 Wire Wire Line
 	5200 5100 5950 5100
-Wire Wire Line
-	5950 5100 5950 2300
 Wire Wire Line
 	5950 2300 4550 2300
 $Comp
@@ -109,17 +108,6 @@ F 3 "" H 1200 3700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L canbox-rescue:MountingHole-Mechanical H3
-U 1 1 5E0B036E
-P 1200 4000
-F 0 "H3" H 1300 4046 50  0000 L CNN
-F 1 "MountingHole-Mechanical" H 1300 3955 50  0000 L CNN
-F 2 "MountingHole:MountingHole_2.2mm_M2_DIN965" H 1200 4000 50  0001 C CNN
-F 3 "" H 1200 4000 50  0001 C CNN
-	1    1200 4000
-	1    0    0    -1  
-$EndComp
-$Comp
 L canbox-rescue:MountingHole-Mechanical H4
 U 1 1 5E0B05BD
 P 1200 4350
@@ -135,4 +123,11 @@ Wire Wire Line
 Wire Wire Line
 	5650 1550 5650 2500
 Connection ~ 5650 2500
+Wire Wire Line
+	5950 2300 5950 5100
+Wire Wire Line
+	6700 2850 6150 2850
+Connection ~ 6150 2850
+Wire Wire Line
+	6150 2850 6150 1350
 $EndSCHEMATC

@@ -179,12 +179,11 @@
                   <pin peripheral="ENET" signal="ENET_RX_DV" pin_num="78" pin_signal="PIO1_14/ENET_RX_DV/UTICK_CAP2/CTIMER1_MAT2/FC5_CTS_SDA_SSEL0/USB0_UP_LED/EMC_DQM(1)"/>
                   <pin peripheral="ENET" signal="ENET_RXD, 0" pin_num="67" pin_signal="PIO0_13/FC1_CTS_SDA_SSEL0/UTICK_CAP0/CTIMER0_CAP0/SCT0_GPI0/ENET_RXD0"/>
                   <pin peripheral="ENET" signal="ENET_RXD, 1" pin_num="66" pin_signal="PIO1_13/ENET_RXD1/FC6_RXD_SDA_MOSI_DATA/CTIMER1_CAP2/USB0_OVERCURRENTN/USB0_FRAME/EMC_DQM(0)"/>
-                  <pin peripheral="ADC0" signal="CH, 3" pin_num="26" pin_signal="PIO0_15/FC6_CTS_SDA_SSEL0/UTICK_CAP2/CTIMER4_CAP0/SCT0_OUT2/EMC_WEN/ENET_TX_EN/ADC0_3"/>
                   <pin peripheral="SYSCON" signal="CLKOUT" pin_num="27" pin_signal="PIO0_16/FC4_TXD_SCL_MISO/CLKOUT/CTIMER1_CAP0/EMC_CSN(0)/ENET_TXD0/ADC0_4"/>
                   <pin peripheral="GPIO" signal="PIO0, 14" pin_num="69" pin_signal="PIO0_14/FC1_RTS_SCL_SSEL1/UTICK_CAP1/CTIMER0_CAP1/SCT0_GPI1/ENET_RXD1"/>
-                  <pin peripheral="ENET" signal="ENET_TX_EN" pin_num="94" pin_signal="PIO1_11/ENET_TX_EN/FC1_TXD_SCL_MISO/CTIMER1_CAP1/USB0_VBUS/EMC_CLK(0)"/>
                   <pin peripheral="ENET" signal="ENET_TXD, 1" pin_num="41" pin_signal="PIO1_10/ENET_TXD1/FC1_RXD_SDA_MOSI/CTIMER1_MAT0/SCT0_OUT3/EMC_RASN"/>
                   <pin peripheral="ENET" signal="ENET_TXD, 0" pin_num="39" pin_signal="PIO1_9/ENET_TXD0/FC1_SCK/CTIMER1_CAP0/SCT0_OUT2/FC4_CTS_SDA_SSEL0/EMC_CASN"/>
+                  <pin peripheral="ENET" signal="ENET_TX_EN" pin_num="26" pin_signal="PIO0_15/FC6_CTS_SDA_SSEL0/UTICK_CAP2/CTIMER4_CAP0/SCT0_OUT2/EMC_WEN/ENET_TX_EN/ADC0_3"/>
                </pins>
             </function>
          </functions_list>

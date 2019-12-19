@@ -27,7 +27,7 @@ U 1 1 5BDAD7F5
 P 6700 3850
 F 0 "C51" H 6818 3896 50  0000 L CNN
 F 1 "22u" H 6818 3805 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 6738 3700 50  0001 C CNN
+F 2 "Capacitor_Tantalum_SMD:CP_EIA-3528-21_Kemet-B_Pad1.50x2.35mm_HandSolder" H 6738 3700 50  0001 C CNN
 F 3 "~" H 6700 3850 50  0001 C CNN
 F 4 "C0805C224Z3VACTU" H 0   0   50  0001 C CNN "OP"
 F 5 "ali" H 0   0   50  0001 C CNN "notes"
@@ -459,7 +459,7 @@ Wire Wire Line
 	7700 3850 7700 3450
 Connection ~ 7700 3450
 Wire Wire Line
-	7700 3450 8850 3450
+	7700 3450 8300 3450
 $Comp
 L canbox-rescue:TestPoint-Connector TP3
 U 1 1 5C14BC8C
@@ -541,8 +541,6 @@ Connection ~ 3150 3500
 Wire Wire Line
 	2600 3500 3150 3500
 Wire Wire Line
-	5250 6950 5250 6850
-Wire Wire Line
 	4050 7000 4300 7000
 $Comp
 L canbox-rescue:TestPoint-Connector TP1
@@ -621,16 +619,16 @@ F 6 "TLV70233DBVR" H 3400 7100 50  0001 C CNN "OP"
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2600 5550 2600 3500
+	2600 5550 2600 4750
 $Comp
 L canbox-rescue:GND-power #PWR041
 U 1 1 5C045BB1
-P 5250 6950
-F 0 "#PWR041" H 5250 6700 50  0001 C CNN
-F 1 "GND" H 5255 6777 50  0000 C CNN
-F 2 "" H 5250 6950 50  0001 C CNN
-F 3 "" H 5250 6950 50  0001 C CNN
-	1    5250 6950
+P 6350 6100
+F 0 "#PWR041" H 6350 5850 50  0001 C CNN
+F 1 "GND" H 6355 5927 50  0000 C CNN
+F 2 "" H 6350 6100 50  0001 C CNN
+F 3 "" H 6350 6100 50  0001 C CNN
+	1    6350 6100
 	-1   0    0    -1  
 $EndComp
 $Comp
@@ -651,7 +649,7 @@ Wire Wire Line
 	7250 3650 7250 3450
 Connection ~ 7250 3450
 Wire Wire Line
-	7250 3450 7700 3450
+	7250 3450 7550 3450
 Wire Wire Line
 	6700 4350 7250 4350
 Wire Wire Line
@@ -692,7 +690,7 @@ Wire Wire Line
 	8850 3450 8850 3600
 Connection ~ 8850 3450
 Wire Wire Line
-	8850 3450 10300 3450
+	8850 3450 9250 3450
 $Comp
 L canbox-rescue:GND-power #PWR0107
 U 1 1 5DA8371A
@@ -707,7 +705,7 @@ $EndComp
 Wire Wire Line
 	8850 3900 8850 4050
 Wire Wire Line
-	8850 4350 8850 4550
+	8850 4350 8850 4400
 Wire Wire Line
 	3300 1300 7650 1300
 Wire Wire Line
@@ -733,4 +731,89 @@ F 5 "ali" H 0   0   50  0001 C CNN "notes"
 $EndComp
 Wire Wire Line
 	3300 1050 6250 1050
+Wire Wire Line
+	7550 5450 7550 3450
+Connection ~ 7550 3450
+Wire Wire Line
+	7550 3450 7700 3450
+Wire Wire Line
+	7550 5600 7550 5450
+Connection ~ 7550 5450
+Wire Wire Line
+	3550 5450 3550 4750
+Wire Wire Line
+	3550 4750 2600 4750
+Connection ~ 2600 4750
+Wire Wire Line
+	2600 4750 2600 3500
+$Comp
+L cypress:AP2114H-3.3 U4
+U 1 1 5DF51146
+P 6350 5450
+F 0 "U4" H 6350 5692 50  0000 C CNN
+F 1 "AP2114H-3.3" H 6350 5601 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-223-3_TabPin2" H 6350 5675 50  0001 C CNN
+F 3 "https://www.diodes.com/assets/Datasheets/AP2204.pdf" H 6350 5450 50  0001 C CNN
+	1    6350 5450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6650 5450 7550 5450
+Wire Wire Line
+	6350 5750 6350 6100
+Wire Wire Line
+	3550 5450 6050 5450
+NoConn ~ 3300 1950
+NoConn ~ 3300 2100
+NoConn ~ 3300 2250
+NoConn ~ 3300 2400
+$Comp
+L canbox-rescue:CP-Device C28
+U 1 1 5EB127DA
+P 8300 3850
+F 0 "C28" H 8418 3896 50  0000 L CNN
+F 1 "NM" H 8418 3805 50  0000 L CNN
+F 2 "Capacitor_Tantalum_SMD:CP_EIA-3528-21_Kemet-B_Pad1.50x2.35mm_HandSolder" H 8338 3700 50  0001 C CNN
+F 3 "~" H 8300 3850 50  0001 C CNN
+F 4 "CL21A226MAQNNNE" H 1600 0   50  0001 C CNN "OP"
+F 5 "ali" H 1600 0   50  0001 C CNN "notes"
+F 6 "C45783 " H 8300 3850 50  0001 C CNN "JLC"
+	1    8300 3850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8300 3700 8300 3450
+Connection ~ 8300 3450
+Wire Wire Line
+	8300 3450 8850 3450
+Wire Wire Line
+	8300 4400 8300 4000
+Wire Wire Line
+	8300 4400 8850 4400
+Connection ~ 8850 4400
+Wire Wire Line
+	8850 4400 8850 4550
+$Comp
+L canbox-rescue:C-Device C29
+U 1 1 5EB1AE20
+P 9250 3800
+F 0 "C29" H 9365 3846 50  0000 L CNN
+F 1 "NM" H 9365 3755 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 9288 3650 50  0001 C CNN
+F 3 "~" H 9250 3800 50  0001 C CNN
+F 4 "CC0805KRX7R9BB104" H 3250 150 50  0001 C CNN "OP"
+F 5 "ali" H 5700 100 50  0001 C CNN "notes"
+F 6 " C49678 " H 9250 3800 50  0001 C CNN "JLC"
+	1    9250 3800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9250 3650 9250 3450
+Connection ~ 9250 3450
+Wire Wire Line
+	9250 3450 10300 3450
+Wire Wire Line
+	8850 4400 9250 4400
+Wire Wire Line
+	9250 4400 9250 3950
 $EndSCHEMATC

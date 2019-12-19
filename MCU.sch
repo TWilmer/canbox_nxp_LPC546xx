@@ -345,7 +345,7 @@ F 3 "" H 6350 3500 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	6350 3500 6350 3450
-Text HLabel 2600 3000 0    50   Input ~ 0
+Text HLabel 1950 3000 0    50   Input ~ 0
 3V3_LC
 Wire Wire Line
 	2950 3000 3350 3000
@@ -377,82 +377,6 @@ Connection ~ 3350 3000
 Connection ~ 3350 3200
 Wire Wire Line
 	3350 3200 3550 3200
-Connection ~ 4150 2250
-Connection ~ 5400 5250
-Wire Wire Line
-	5250 5250 5400 5250
-Connection ~ 5250 5250
-Wire Wire Line
-	4150 2250 4150 2150
-Connection ~ 4150 2150
-Wire Wire Line
-	4150 2150 4150 2050
-Connection ~ 4150 2050
-Wire Wire Line
-	5100 5250 5250 5250
-Connection ~ 5100 5250
-Wire Wire Line
-	5750 5250 5900 5250
-Connection ~ 5750 5250
-Wire Wire Line
-	4150 2050 4150 1950
-Connection ~ 4150 1950
-Wire Wire Line
-	4950 5250 5100 5250
-Connection ~ 4950 5250
-Wire Wire Line
-	4150 1950 4150 1850
-Connection ~ 4150 1850
-Wire Wire Line
-	4800 5250 4950 5250
-Connection ~ 4800 5250
-Wire Wire Line
-	4150 2500 4150 2350
-Wire Wire Line
-	4150 2350 4150 2250
-Connection ~ 4150 2350
-Wire Wire Line
-	4650 5250 4800 5250
-Connection ~ 4650 5250
-Wire Wire Line
-	4150 1850 4150 1750
-Connection ~ 4150 1750
-Connection ~ 4150 2500
-Wire Wire Line
-	5550 5250 5750 5250
-Wire Wire Line
-	5400 5250 5550 5250
-Connection ~ 5550 5250
-Wire Wire Line
-	4500 5250 4650 5250
-Wire Wire Line
-	4350 5250 4500 5250
-Connection ~ 4500 5250
-Wire Wire Line
-	4150 1750 4150 1650
-Wire Wire Line
-	4150 1650 4150 1550
-Connection ~ 4150 1650
-Connection ~ 5900 5250
-Connection ~ 4150 3000
-Wire Wire Line
-	4150 2850 4150 2700
-Wire Wire Line
-	4150 3000 4150 2850
-Connection ~ 4150 2850
-$Comp
-L lpc_LPC54616J512:LPC54616J512 U1
-U 1 1 5BE7F06B
-P 4250 1450
-F 0 "U1" H 5100 1615 50  0000 C CNN
-F 1 "LPC54616J512" H 5100 1524 50  0000 C CNN
-F 2 "Package_QFP:LQFP-100_14x14mm_P0.5mm" H 4300 1300 50  0001 C CNN
-F 3 "" H 4300 1300 50  0001 C CNN
-F 4 "LPC54616J512BD100E" H 0   0   50  0001 C CNN "OP"
-F 5 "nm" H 0   0   50  0001 C CNN "Arrow"
-	1    4250 1450
-	1    0    0    -1  
-$EndComp
 NoConn ~ 6050 3750
 NoConn ~ 6050 3850
 NoConn ~ 6050 3950
@@ -670,4 +594,143 @@ Wire Wire Line
 Wire Wire Line
 	3650 3200 3550 3200
 Connection ~ 3550 3200
+$Comp
+L canbox-rescue:C_Small-Device C15
+U 1 1 5EACD5ED
+P 1450 2600
+F 0 "C15" H 1542 2646 50  0000 L CNN
+F 1 "100n" H 1542 2555 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 1450 2600 50  0001 C CNN
+F 3 "~" H 1450 2600 50  0001 C CNN
+F 4 "CC0805KRX7R9BB104" H 1450 2600 50  0001 C CNN "OP"
+F 5 "ali" H -1950 0   50  0001 C CNN "notes"
+F 6 " C49678 " H 1450 2600 50  0001 C CNN "JLC"
+	1    1450 2600
+	1    0    0    -1  
+$EndComp
+$Comp
+L canbox-rescue:C_Small-Device C14
+U 1 1 5EAD2D64
+P 1100 2600
+F 0 "C14" H 1192 2646 50  0000 L CNN
+F 1 "100n" H 1192 2555 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 1100 2600 50  0001 C CNN
+F 3 "~" H 1100 2600 50  0001 C CNN
+F 4 "CC0805KRX7R9BB104" H 1100 2600 50  0001 C CNN "OP"
+F 5 "ali" H -2300 0   50  0001 C CNN "notes"
+F 6 " C49678 " H 1100 2600 50  0001 C CNN "JLC"
+	1    1100 2600
+	1    0    0    -1  
+$EndComp
+$Comp
+L canbox-rescue:C_Small-Device C26
+U 1 1 5EAD5D3A
+P 2250 3100
+F 0 "C26" H 2342 3146 50  0000 L CNN
+F 1 "100n" H 2342 3055 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 2250 3100 50  0001 C CNN
+F 3 "~" H 2250 3100 50  0001 C CNN
+F 4 "CC0805KRX7R9BB104" H 2250 3100 50  0001 C CNN "OP"
+F 5 "ali" H -1150 500 50  0001 C CNN "notes"
+F 6 " C49678 " H 2250 3100 50  0001 C CNN "JLC"
+	1    2250 3100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1950 3000 2250 3000
+Connection ~ 2600 3000
+Connection ~ 2250 3000
+Wire Wire Line
+	2250 3000 2600 3000
+Wire Wire Line
+	2600 3200 2250 3200
+Connection ~ 2600 3200
+Wire Wire Line
+	1750 2700 1450 2700
+Connection ~ 1750 2700
+Connection ~ 1450 2700
+Wire Wire Line
+	1450 2700 1100 2700
+Wire Wire Line
+	1100 2500 1450 2500
+Connection ~ 1550 2500
+Connection ~ 1450 2500
+Wire Wire Line
+	1450 2500 1550 2500
+Connection ~ 4150 2850
+Wire Wire Line
+	4150 3000 4150 2850
+Wire Wire Line
+	4150 2850 4150 2700
+Connection ~ 4150 3000
+Connection ~ 5900 5250
+Connection ~ 4150 1650
+Wire Wire Line
+	4150 1650 4150 1550
+Connection ~ 4500 5250
+Wire Wire Line
+	4350 5250 4500 5250
+Connection ~ 5550 5250
+Wire Wire Line
+	5400 5250 5550 5250
+Connection ~ 4150 2500
+Connection ~ 4150 1750
+Wire Wire Line
+	4150 1750 4150 1650
+Wire Wire Line
+	4150 1850 4150 1750
+Connection ~ 4650 5250
+Wire Wire Line
+	4500 5250 4650 5250
+Wire Wire Line
+	4650 5250 4800 5250
+Connection ~ 4150 2350
+Wire Wire Line
+	4150 2350 4150 2250
+Wire Wire Line
+	4150 2500 4150 2350
+Connection ~ 4800 5250
+Connection ~ 4150 1850
+Connection ~ 4950 5250
+Wire Wire Line
+	4800 5250 4950 5250
+Wire Wire Line
+	4950 5250 5100 5250
+Connection ~ 4150 1950
+Wire Wire Line
+	4150 1950 4150 1850
+Wire Wire Line
+	4150 2050 4150 1950
+Connection ~ 5750 5250
+Wire Wire Line
+	5550 5250 5750 5250
+Wire Wire Line
+	5750 5250 5900 5250
+Connection ~ 5100 5250
+Connection ~ 4150 2050
+Connection ~ 4150 2150
+Wire Wire Line
+	4150 2150 4150 2050
+Wire Wire Line
+	4150 2250 4150 2150
+Connection ~ 5250 5250
+Wire Wire Line
+	5100 5250 5250 5250
+Wire Wire Line
+	5250 5250 5400 5250
+Connection ~ 5400 5250
+Connection ~ 4150 2250
+$Comp
+L lpc_LPC54616J512:LPC54616J512 U1
+U 1 1 5BE7F06B
+P 4250 1450
+F 0 "U1" H 5100 1615 50  0000 C CNN
+F 1 "LPC54616J512" H 5100 1524 50  0000 C CNN
+F 2 "Package_QFP:LQFP-100_14x14mm_P0.5mm" H 4300 1300 50  0001 C CNN
+F 3 "" H 4300 1300 50  0001 C CNN
+F 4 "LPC54616J512BD100E" H 0   0   50  0001 C CNN "OP"
+F 5 "nm" H 0   0   50  0001 C CNN "Arrow"
+	1    4250 1450
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
