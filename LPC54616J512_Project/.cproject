@@ -714,7 +714,7 @@
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="com.nxp.mcuxpresso.core.datamodels">
 		<sdkName>SDK_2.x_LPC54616J512</sdkName>
-		<sdkVersion>2.6.0</sdkVersion>
+		<sdkVersion>2.7.0</sdkVersion>
 		<sdkComponents>middleware.baremetal.LPC54616;platform.drivers.lpc_adc.LPC54616;device.LPC54616_CMSIS.LPC54616;platform.Include_common.LPC54616;platform.Include_core_cm4.LPC54616;platform.drivers.clock.LPC54616;platform.drivers.common.LPC54616;platform.drivers.power.LPC54616;platform.drivers.reset.LPC54616;platform.drivers.ctimer.LPC54616;platform.drivers.flashiap.LPC54616;platform.drivers.flexcomm.LPC54616;platform.drivers.flexcomm_i2s.LPC54616;platform.drivers.lpc_gpio.LPC54616;platform.drivers.inputmux.LPC54616;platform.drivers.inputmux_connections.LPC54616;platform.drivers.flexcomm_i2c.LPC54616;device.LPC54616_startup.LPC54616;platform.drivers.flexcomm_usart.LPC54618;device.LPC54618_CMSIS.LPC54618;platform.Include_common.LPC54618;platform.Include_core_cm4.LPC54618;platform.drivers.clock.LPC54618;platform.drivers.common.LPC54618;platform.drivers.power.LPC54618;platform.drivers.reset.LPC54618;platform.drivers.flexcomm.LPC54618;platform.drivers.flexcomm_usart.LPC54616;platform.drivers.flexcomm_spi.LPC54618;platform.drivers.flexcomm_spi.LPC54616;platform.drivers.sctimer.LPC54618;platform.drivers.sctimer.LPC54616;platform.drivers.mcan.LPC54618;platform.drivers.mcan.LPC54616;platform.drivers.pint.LPC54618;platform.drivers.pint.LPC54616;</sdkComponents>
 		<package>LPC54616J512BD100</package>
 		<core>cm4</core>
